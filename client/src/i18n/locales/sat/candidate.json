@@ -1,0 +1,14 @@
+{
+  "dashboard": "Dashboard",
+  "recommendedJobs": "Recommended Jobs",
+  "appliedJobs": "Applied Jobs",
+  "savedJobs": "Saved Jobs",
+  "profile": "Profile",
+  "resume": "Resume",
+  "messages": "Messages",
+  "notifications": "Notifications",
+  "applicationStatus": "Application Status",
+  "jobAlerts": "Job Alerts",
+  "matchingProfession": "Matching your selected profession: {{profession}}",
+  "newJobsForProfession": "New jobs for {{profession}} will appear here."
+}

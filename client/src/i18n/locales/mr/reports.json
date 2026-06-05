@@ -1,0 +1,22 @@
+{
+  "title": "Reports",
+  "headings": {
+    "overview": "Overview",
+    "applications": "Applications",
+    "jobs": "Jobs",
+    "users": "Users",
+    "topProfessions": "Top Job Professions"
+  },
+  "chartLabels": {
+    "candidates": "Candidates",
+    "recruiters": "Recruiters",
+    "jobs": "Jobs",
+    "applications": "Applications",
+    "hired": "Hired",
+    "rejected": "Rejected"
+  },
+  "summary": "Report Summary",
+  "export": "Export Report",
+  "saveSnapshot": "Save Snapshot",
+  "snapshotSaved": "Report snapshot saved"
+}

@@ -1,0 +1,97 @@
+{
+  "title": "Notifications",
+  "all": "All",
+  "unread": "Unread",
+  "markAllRead": "Mark all as read",
+  "markAsRead": "Mark as read",
+  "delete": "Delete notification",
+  "loading": "Loading notifications...",
+  "emptyTitle": "No notifications yet",
+  "emptyDescription": "Updates will appear here when something happens.",
+  "noNotifications": "No notifications",
+  "caughtUp": "You are all caught up. New updates will appear here automatically.",
+  "viewAll": "View all notifications",
+  "close": "Close notifications",
+  "unreadCount": "{{count}} unread",
+  "summary": "{{unread}} unread • {{total}} total",
+  "clearConfirm": "Clear all notifications? This cannot be undone.",
+  "categories": {
+    "applications": "Applications",
+    "status": "Status",
+    "interviews": "Interviews",
+    "messages": "Messages",
+    "recruiter": "Recruiter",
+    "jobs": "Jobs",
+    "rejected": "Rejected",
+    "system": "System"
+  },
+  "applicationStatusChanged": "Your application status changed to {{status}}.",
+  "interviewScheduled": "Interview scheduled for {{date}}.",
+  "messageReceived": "New message from {{sender}}.",
+  "types": {
+    "job_applied": {
+      "title": "New application received",
+      "message": "{{candidateName}} applied for {{jobTitle}}."
+    },
+    "application_status_changed": {
+      "title": "Application status updated",
+      "message": "Your application status changed to {{status}}."
+    },
+    "interview_scheduled": {
+      "title": "Interview scheduled",
+      "message": "Interview scheduled for {{date}}."
+    },
+    "message_received": {
+      "title": "New message",
+      "message": "New message from {{sender}}."
+    },
+    "recruiter_approved": {
+      "title": "Recruiter approved",
+      "message": "{{companyName}} has been approved."
+    },
+    "job_approved": {
+      "title": "Job approved",
+      "message": "{{jobTitle}} is now live."
+    },
+    "job_rejected": {
+      "title": "Job rejected",
+      "message": "{{jobTitle}} was rejected."
+    },
+    "subscription_purchased": {
+      "title": "Subscription purchased",
+      "message": "Your subscription is active."
+    },
+    "subscription_cancelled": {
+      "title": "Subscription cancelled",
+      "message": "Your subscription was cancelled."
+    },
+    "subscription_expiring_soon": {
+      "title": "Subscription expiring soon",
+      "message": "Your subscription expires soon."
+    },
+    "subscription_expired": {
+      "title": "Subscription expired",
+      "message": "Your subscription has expired."
+    },
+    "subscription_limit_80": {
+      "title": "80% job post limit used",
+      "message": "You have used most of your monthly job posts."
+    },
+    "subscription_limit_reached": {
+      "title": "Job post limit reached",
+      "message": "Your monthly job posting limit is over."
+    },
+    "subscription_payment_failed": {
+      "title": "Payment failed",
+      "message": "We could not verify your subscription payment."
+    },
+    "subscription_upgraded": {
+      "title": "Plan upgraded",
+      "message": "Your new plan is active."
+    },
+    "system_alert": {
+      "title": "System alert",
+      "message": "{{message}}"
+    }
+  }
+}

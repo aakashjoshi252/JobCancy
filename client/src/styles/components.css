@@ -1,0 +1,576 @@
+/* ============================================
+   JOB PORTAL SPECIFIC COMPONENTS
+   Pure CSS - No @apply with custom classes
+   ============================================ */
+
+/* Job Listing Card */
+.job-listing {
+  /* Card base styles */
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid rgb(229 231 235);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s;
+  
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.dark .job-listing {
+  background-color: rgb(17 24 39);
+  border-color: rgb(31 41 55);
+}
+
+@media (min-width: 768px) {
+  .job-listing {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.job-listing:hover {
+  border-color: rgb(147 197 253);
+}
+
+.dark .job-listing:hover {
+  border-color: rgb(29 78 216);
+}
+
+.job-listing-header {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.job-company-logo {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.75rem;
+  object-fit: cover;
+  border: 2px solid rgb(229 231 235);
+}
+
+.dark .job-company-logo {
+  border-color: rgb(55 65 81);
+}
+
+.job-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgb(17 24 39);
+  transition: color 0.2s;
+}
+
+.job-title:hover {
+  color: rgb(37 99 235);
+}
+
+.dark .job-title {
+  color: rgb(249 250 251);
+}
+
+.dark .job-title:hover {
+  color: rgb(147 197 253);
+}
+
+.job-company {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgb(55 65 81);
+}
+
+.dark .job-company {
+  color: rgb(209 213 219);
+}
+
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: rgb(75 85 99);
+}
+
+.dark .job-meta {
+  color: rgb(156 163 175);
+}
+
+.job-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.job-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.job-tag {
+  /* Badge primary styles */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: rgb(219 234 254);
+  color: rgb(29 78 216);
+}
+
+.dark .job-tag {
+  background-color: rgb(30 58 138 / 0.3);
+  color: rgb(147 197 253);
+}
+
+.job-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Application Card */
+.application-card {
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid rgb(229 231 235);
+  box-shadow: var(--shadow-soft);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dark .application-card {
+  background-color: rgb(17 24 39);
+  border-color: rgb(31 41 55);
+}
+
+.application-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+
+.application-status.pending {
+  background-color: rgb(254 243 199);
+  color: rgb(146 64 14);
+}
+
+.dark .application-status.pending {
+  background-color: rgb(120 53 15 / 0.3);
+  color: rgb(253 224 71);
+}
+
+.application-status.reviewing {
+  background-color: rgb(219 234 254);
+  color: rgb(30 64 175);
+}
+
+.dark .application-status.reviewing {
+  background-color: rgb(30 58 138 / 0.3);
+  color: rgb(147 197 253);
+}
+
+.application-status.accepted {
+  background-color: rgb(220 252 231);
+  color: rgb(22 101 52);
+}
+
+.dark .application-status.accepted {
+  background-color: rgb(20 83 45 / 0.3);
+  color: rgb(134 239 172);
+}
+
+.application-status.rejected {
+  background-color: rgb(254 226 226);
+  color: rgb(153 27 27);
+}
+
+.dark .application-status.rejected {
+  background-color: rgb(127 29 29 / 0.3);
+  color: rgb(252 165 165);
+}
+
+/* Profile Card */
+.profile-card {
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid rgb(229 231 235);
+  box-shadow: var(--shadow-soft);
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dark .profile-card {
+  background-color: rgb(17 24 39);
+  border-color: rgb(31 41 55);
+}
+
+.profile-avatar {
+  width: 8rem;
+  height: 8rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 4px solid rgb(59 130 246);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+.dark .profile-avatar {
+  border-color: rgb(37 99 235);
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(17 24 39);
+}
+
+.dark .profile-name {
+  color: rgb(249 250 251);
+}
+
+.profile-role {
+  color: rgb(75 85 99);
+}
+
+.dark .profile-role {
+  color: rgb(156 163 175);
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgb(229 231 235);
+}
+
+.dark .profile-stats {
+  border-color: rgb(31 41 55);
+}
+
+.profile-stat {
+  text-align: center;
+}
+
+.profile-stat-value {
+  font-size: 1.875rem;
+  font-weight: 700;
+  background: linear-gradient(to right, rgb(37 99 235), rgb(147 51 234));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.profile-stat-label {
+  font-size: 0.875rem;
+  color: rgb(75 85 99);
+}
+
+.dark .profile-stat-label {
+  color: rgb(156 163 175);
+}
+
+/* Search Bar */
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+  padding: 0.5rem;
+}
+
+.dark .search-bar {
+  background-color: rgb(17 24 39);
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: rgb(17 24 39);
+}
+
+.dark .search-input {
+  color: rgb(243 244 246);
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: rgb(156 163 175);
+}
+
+.search-button {
+  /* Button primary styles */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  background-color: rgb(37 99 235);
+  color: white;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: rgb(29 78 216);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* Filter Pills */
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-pill {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: rgb(243 244 246);
+  color: rgb(55 65 81);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.dark .filter-pill {
+  background-color: rgb(31 41 55);
+  color: rgb(209 213 219);
+}
+
+.filter-pill:hover {
+  background-color: rgb(219 234 254);
+  color: rgb(29 78 216);
+}
+
+.dark .filter-pill:hover {
+  background-color: rgb(23 37 84);
+  color: rgb(147 197 253);
+}
+
+.filter-pill.active {
+  background-color: rgb(37 99 235);
+  color: white;
+}
+
+.dark .filter-pill.active {
+  background-color: rgb(59 130 246);
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: rgb(229 231 235);
+}
+
+.dark .timeline::before {
+  background-color: rgb(31 41 55);
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  background-color: rgb(37 99 235);
+  border: 4px solid white;
+}
+
+.dark .timeline-dot {
+  background-color: rgb(59 130 246);
+  border-color: rgb(3 7 18);
+}
+
+.timeline-content {
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid rgb(229 231 235);
+  box-shadow: var(--shadow-soft);
+  padding: 1rem;
+}
+
+.dark .timeline-content {
+  background-color: rgb(17 24 39);
+  border-color: rgb(31 41 55);
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.empty-state-icon {
+  width: 6rem;
+  height: 6rem;
+  margin-bottom: 1.5rem;
+  color: rgb(209 213 219);
+}
+
+.dark .empty-state-icon {
+  color: rgb(55 65 81);
+}
+
+.empty-state-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: rgb(17 24 39);
+}
+
+.dark .empty-state-title {
+  color: rgb(243 244 246);
+}
+
+.empty-state-description {
+  color: rgb(75 85 99);
+  margin-bottom: 2rem;
+  max-width: 28rem;
+}
+
+.dark .empty-state-description {
+  color: rgb(156 163 175);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-item {
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid rgb(229 231 235);
+  box-shadow: var(--shadow-soft);
+  padding: 1.5rem;
+}
+
+.dark .stat-item {
+  background-color: rgb(17 24 39);
+  border-color: rgb(31 41 55);
+}
+
+.stat-item.primary {
+  background: linear-gradient(to bottom right, rgb(239 246 255), rgb(219 234 254));
+}
+
+.dark .stat-item.primary {
+  background: linear-gradient(to bottom right, rgb(23 37 84), rgb(30 58 138));
+}
+
+.stat-item.success {
+  background: linear-gradient(to bottom right, rgb(240 253 244), rgb(220 252 231));
+}
+
+.dark .stat-item.success {
+  background: linear-gradient(to bottom right, rgb(20 83 45), rgb(21 128 61));
+}
+
+.stat-item.warning {
+  background: linear-gradient(to bottom right, rgb(255 251 235), rgb(254 243 199));
+}
+
+.dark .stat-item.warning {
+  background: linear-gradient(to bottom right, rgb(120 53 15), rgb(146 64 14));
+}
+
+.stat-item.danger {
+  background: linear-gradient(to bottom right, rgb(254 242 242), rgb(254 226 226));
+}
+
+.dark .stat-item.danger {
+  background: linear-gradient(to bottom right, rgb(127 29 29), rgb(153 27 27));
+}
+
+.stat-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.stat-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(75 85 99);
+}
+
+.dark .stat-label {
+  color: rgb(156 163 175);
+}

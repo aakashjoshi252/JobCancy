@@ -1,0 +1,15 @@
+{
+  "title": "Applications",
+  "applicationStatus": "Application Status",
+  "applicant": "Applicant",
+  "candidate": "Candidate",
+  "recruiter": "Recruiter",
+  "resume": "Resume",
+  "coverLetter": "Cover Letter",
+  "submittedOn": "Submitted On",
+  "updateStatus": "Update Status",
+  "alreadySubmitted": "Application already submitted",
+  "noApplications": "No applications found",
+  "pendingReview": "Pending Review",
+  "totalApplications": "Total Applications"
+}

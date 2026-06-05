@@ -1,0 +1,65 @@
+{
+  "title": "सूचनाएं",
+  "all": "सभी",
+  "unread": "अपठित",
+  "markAllRead": "सभी को पढ़ा हुआ चिह्नित करें",
+  "markAsRead": "पढ़ा हुआ चिह्नित करें",
+  "delete": "Delete notification",
+  "loading": "Loading notifications...",
+  "emptyTitle": "अभी कोई सूचना नहीं",
+  "emptyDescription": "Updates will appear here when something happens.",
+  "noNotifications": "No notifications",
+  "caughtUp": "You are all caught up. New updates will appear here automatically.",
+  "viewAll": "सभी सूचनाएं देखें",
+  "close": "Close notifications",
+  "unreadCount": "{{count}} unread",
+  "summary": "{{unread}} unread • {{total}} total",
+  "clearConfirm": "Clear all notifications? This cannot be undone.",
+  "categories": {
+    "applications": "Applications",
+    "status": "Status",
+    "interviews": "Interviews",
+    "messages": "Messages",
+    "recruiter": "Recruiter",
+    "jobs": "Jobs",
+    "rejected": "Rejected",
+    "system": "System"
+  },
+  "applicationStatusChanged": "Your application status changed to {{status}}.",
+  "interviewScheduled": "Interview scheduled for {{date}}.",
+  "messageReceived": "New message from {{sender}}.",
+  "types": {
+    "job_applied": {
+      "title": "New application received",
+      "message": "{{candidateName}} applied for {{jobTitle}}."
+    },
+    "application_status_changed": {
+      "title": "Application status updated",
+      "message": "Your application status changed to {{status}}."
+    },
+    "interview_scheduled": {
+      "title": "Interview scheduled",
+      "message": "Interview scheduled for {{date}}."
+    },
+    "message_received": {
+      "title": "New message",
+      "message": "New message from {{sender}}."
+    },
+    "recruiter_approved": {
+      "title": "Recruiter approved",
+      "message": "{{companyName}} has been approved."
+    },
+    "job_approved": {
+      "title": "Job approved",
+      "message": "{{jobTitle}} is now live."
+    },
+    "job_rejected": {
+      "title": "Job rejected",
+      "message": "{{jobTitle}} was rejected."
+    },
+    "system_alert": {
+      "title": "System alert",
+      "message": "{{message}}"
+    }
+  }
+}

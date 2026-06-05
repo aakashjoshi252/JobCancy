@@ -1,0 +1,21 @@
+{
+  "unauthorized": "कृपया जारी रखने के लिए लॉगिन करें।",
+  "forbidden": "आपको यह कार्रवाई करने की अनुमति नहीं है।",
+  "serverError": "सर्वर त्रुटि। कृपया बाद में फिर प्रयास करें।",
+  "invalidCredentials": "ईमेल या पासवर्ड अमान्य है।",
+  "emailAlreadyExists": "यह ईमेल पहले से पंजीकृत है।",
+  "profileUpdateFailed": "प्रोफाइल अपडेट असफल रहा।",
+  "jobNotFound": "नौकरी नहीं मिली।",
+  "applicationAlreadySubmitted": "आप पहले ही इस नौकरी के लिए आवेदन कर चुके हैं।",
+  "uploadFailed": "अपलोड असफल रहा।",
+  "networkError": "Network error. Please check your connection.",
+  "unexpected": "An unexpected error occurred.",
+  "unableToUploadAttachment": "Unable to upload attachment.",
+  "unableToDownloadAttachment": "Unable to download attachment.",
+  "failedToFetchNotifications": "Failed to fetch notifications",
+  "failedToFetchUnreadCount": "Failed to fetch unread count",
+  "failedToMarkNotificationRead": "Failed to mark notification as read",
+  "failedToMarkAllNotificationsRead": "Failed to mark all notifications as read",
+  "failedToDeleteNotification": "Failed to delete notification",
+  "failedToClearNotifications": "Failed to clear notifications"
+}

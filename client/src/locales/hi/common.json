@@ -1,0 +1,33 @@
+{
+  "fields": {
+    "username": "यूजरनेम",
+    "email": "ईमेल",
+    "emailAddress": "ईमेल पता",
+    "password": "पासवर्ड",
+    "phone": "फोन",
+    "phoneNumber": "फोन नंबर",
+    "subject": "विषय",
+    "message": "संदेश",
+    "fullName": "पूरा नाम",
+    "role": "भूमिका चुनें",
+    "jobProfession": "जॉब प्रोफेशन"
+  },
+  "placeholders": {
+    "email": "अपना ईमेल दर्ज करें",
+    "password": "अपना पासवर्ड दर्ज करें",
+    "username": "अपना यूजरनेम दर्ज करें",
+    "phone": "10 अंकों का फोन नंबर दर्ज करें",
+    "fullName": "अपना पूरा नाम दर्ज करें",
+    "message": "अपना संदेश यहां लिखें...",
+    "jobProfession": "जैसे ज्वेलरी डिजाइनर"
+  },
+  "actions": {
+    "submit": "सबमिट",
+    "subscribe": "सब्सक्राइब",
+    "send": "भेजें",
+    "cancel": "रद्द करें",
+    "save": "सेव करें",
+    "edit": "संपादित करें",
+    "delete": "हटाएं"
+  }
+}

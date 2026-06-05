@@ -1,0 +1,9 @@
+node_modules/
+logs/
+coverage/
+uploads/
+.env
+.env.*
+!.env.example
+!.env.production.example
+npm-debug.log*

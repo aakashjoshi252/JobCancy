@@ -1,0 +1,33 @@
+{
+  "fields": {
+    "username": "Username",
+    "email": "Email",
+    "emailAddress": "Email Address",
+    "password": "Password",
+    "phone": "Phone",
+    "phoneNumber": "Phone Number",
+    "subject": "Subject",
+    "message": "Message",
+    "fullName": "Full Name",
+    "role": "Select Role",
+    "jobProfession": "Job Profession"
+  },
+  "placeholders": {
+    "email": "Enter your email",
+    "password": "Enter your password",
+    "username": "Enter your username",
+    "phone": "Enter 10-digit phone number",
+    "fullName": "Enter your full name",
+    "message": "Write your message here...",
+    "jobProfession": "e.g. Jewelry Designer"
+  },
+  "actions": {
+    "submit": "Submit",
+    "subscribe": "Subscribe",
+    "send": "Send",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete"
+  }
+}

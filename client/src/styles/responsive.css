@@ -1,0 +1,348 @@
+/* ============================================
+   RESPONSIVE DESIGN UTILITIES
+   Pure CSS - No @apply directives
+   ============================================ */
+
+/* App-wide responsive safeguards */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+img,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  flex-shrink: 0;
+}
+
+input,
+select,
+textarea,
+button {
+  max-width: 100%;
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+a,
+button,
+td,
+th,
+li {
+  overflow-wrap: anywhere;
+}
+
+table {
+  width: 100%;
+}
+
+.overflow-x-auto,
+.responsive-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+.page-shell {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .page-shell {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-shell {
+    padding: 2rem;
+  }
+}
+
+/* Mobile Menu */
+@media (max-width: 768px) {
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(0);
+    transition: transform 0.3s;
+  }
+
+  .dark .mobile-menu {
+    background-color: rgb(3 7 18);
+  }
+
+  .mobile-menu.closed {
+    transform: translateX(-100%);
+  }
+
+  .mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background-color: rgb(0 0 0 / 0.5);
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s;
+  }
+}
+
+/* Container Responsive */
+.container-responsive {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-responsive {
+    max-width: 640px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-responsive {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-responsive {
+    max-width: 1024px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-responsive {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container-responsive {
+    max-width: 1536px;
+  }
+}
+
+/* Hide on Mobile */
+@media (max-width: 767px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+/* Hide on Desktop */
+@media (min-width: 768px) {
+  .hide-desktop {
+    display: none;
+  }
+}
+
+/* Responsive Text Sizes */
+.responsive-heading {
+  font-size: clamp(1.75rem, 6vw, 2rem);
+  line-height: 1.15;
+}
+
+@media (min-width: 768px) {
+  .responsive-heading {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-heading {
+    font-size: 3rem;
+    line-height: 1.15;
+  }
+}
+
+/* Responsive Grid */
+.responsive-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .responsive-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Small device polish */
+@media (max-width: 640px) {
+  .page-shell {
+    padding: 0.75rem;
+  }
+
+  .card,
+  .job-card,
+  .job-listing,
+  .application-card,
+  .profile-card,
+  .stat-item,
+  .timeline-content,
+  .modal-content {
+    border-radius: 0.75rem;
+    padding: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 0.625rem 1rem;
+    white-space: normal;
+  }
+
+  .btn-icon {
+    width: auto;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .search-button,
+  .job-actions {
+    width: 100%;
+  }
+
+  .job-actions {
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+
+  .job-actions > * {
+    flex: 1 1 100%;
+  }
+
+  .job-meta {
+    gap: 0.5rem;
+  }
+
+  .profile-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+  }
+
+  .empty-state {
+    padding: 2.5rem 1rem;
+  }
+
+  .empty-state-icon {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .modal {
+    align-items: flex-end;
+    padding: 0.5rem;
+  }
+
+  .modal-content {
+    max-height: calc(100dvh - 1rem);
+    overflow-y: auto;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-grid {
+    gap: 1rem;
+  }
+
+  .responsive-heading {
+    font-size: 1.6rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .print-hidden {
+    display: none !important;
+  }
+
+  .print-page-break {
+    page-break-after: always;
+  }
+
+  .print-avoid-break {
+    page-break-inside: avoid;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .card {
+    border: 1px solid #000;
+    box-shadow: none;
+  }
+}

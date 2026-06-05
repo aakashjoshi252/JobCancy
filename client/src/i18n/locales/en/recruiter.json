@@ -1,0 +1,16 @@
+{
+  "dashboard": "Dashboard",
+  "companyProfile": "Company Profile",
+  "postJob": "Post Job",
+  "manageJobs": "Manage Jobs",
+  "subscription": "Subscription",
+  "applicants": "Applicants",
+  "interviews": "Interviews",
+  "messages": "Messages",
+  "analytics": "Analytics",
+  "settings": "Settings",
+  "postedJobs": "Posted Jobs",
+  "recentApplications": "Recent Applications",
+  "interviewScheduler": "Interview Scheduler",
+  "atsBoard": "ATS Board"
+}

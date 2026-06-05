@@ -1,0 +1,102 @@
+{
+  "title": "Subscription",
+  "subtitle": "Manage job posting access and billing.",
+  "currentPlan": "Current Plan",
+  "plan": "Plan",
+  "validUntil": "Valid Until",
+  "status": "Status",
+  "usage": "Usage",
+  "monthlyUsage": "Monthly usage",
+  "remainingPosts": "{{count}} posts remaining",
+  "totalUsed": "{{count}} total posts",
+  "usageUnavailable": "Usage appears after a plan is active.",
+  "noActivePlan": "No active subscription. Choose a plan to post jobs.",
+  "choosePlan": "Choose Plan",
+  "unlimitedPosts": "Unlimited posts",
+  "jobsPerMonth": "{{count}} jobs/month",
+  "durationYear": "{{count}} year",
+  "durationMonths": "{{count}} month",
+  "buyPlan": "Buy Plan",
+  "upgrade": "Upgrade",
+  "renew": "Renew",
+  "processing": "Processing...",
+  "cancelPlan": "Cancel Plan",
+  "cancelConfirm": "Cancel your active subscription?",
+  "cancelled": "Subscription cancelled",
+  "cancelFailed": "Unable to cancel subscription",
+  "billingHistory": "Billing History",
+  "amount": "Amount",
+  "paymentStatus": "Payment Status",
+  "orderId": "Order ID",
+  "date": "Date",
+  "noBillingHistory": "No billing history yet.",
+  "checkoutTitle": "Job Placement Platform",
+  "checkoutUnavailable": "Payment checkout is unavailable",
+  "paymentVerified": "Subscription activated",
+  "paymentFailed": "Payment verification failed",
+  "orderFailed": "Unable to start payment",
+  "loadFailed": "Unable to load subscription",
+  "beforePostTitle": "Subscription required",
+  "beforePostBody": "Choose a subscription plan before posting jobs.",
+  "limitOverTitle": "Job post limit reached",
+  "limitOverBody": "Your monthly job posting limit is over. Upgrade or renew to continue.",
+  "viewPlans": "View Plans",
+  "postsRemaining": "{{count}} posts remaining this month",
+  "unlimitedUntil": "Unlimited posts until {{date}}",
+  "statusLabels": {
+    "active": "Active",
+    "expired": "Expired",
+    "cancelled": "Cancelled",
+    "pending": "Pending",
+    "created": "Created",
+    "paid": "Paid",
+    "failed": "Failed"
+  },
+  "plans": {
+    "Basic": {
+      "name": "Basic"
+    },
+    "Standard": {
+      "name": "Standard"
+    },
+    "Premium": {
+      "name": "Premium"
+    },
+    "Starter": {
+      "name": "Starter"
+    },
+    "Growth": {
+      "name": "Growth"
+    },
+    "Business": {
+      "name": "Business"
+    },
+    "Enterprise": {
+      "name": "Enterprise"
+    }
+  },
+  "admin": {
+    "title": "Subscriptions",
+    "subtitle": "Revenue, recruiter plans, payment transactions, and usage audit trail.",
+    "revenue": "Revenue",
+    "mrr": "Monthly Revenue",
+    "active": "Active",
+    "expired": "Expired",
+    "paymentFailures": "Payment Failures",
+    "plans": "Plans",
+    "subscribers": "Subscribers",
+    "transactions": "Transactions",
+    "usageLogs": "Usage Logs",
+    "createPlan": "Create Plan",
+    "editPlan": "Edit Plan",
+    "disable": "Disable",
+    "enable": "Enable",
+    "savePlan": "Save Plan",
+    "subscriptions": "Subscriptions",
+    "recruiter": "Recruiter",
+    "endDate": "End Date",
+    "jobsUsed": "Jobs Used",
+    "manualStatus": "Manual Status",
+    "export": "Export CSV"
+  }
+}

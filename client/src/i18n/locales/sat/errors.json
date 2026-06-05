@@ -1,0 +1,21 @@
+{
+  "unauthorized": "Please log in to continue.",
+  "forbidden": "You do not have permission to perform this action.",
+  "serverError": "Server error. Please try again later.",
+  "invalidCredentials": "Invalid email or password.",
+  "emailAlreadyExists": "This email is already registered.",
+  "profileUpdateFailed": "Profile update failed.",
+  "jobNotFound": "Job not found.",
+  "applicationAlreadySubmitted": "You have already submitted an application for this job.",
+  "uploadFailed": "Upload failed.",
+  "networkError": "Network error. Please check your connection.",
+  "unexpected": "An unexpected error occurred.",
+  "unableToUploadAttachment": "Unable to upload attachment.",
+  "unableToDownloadAttachment": "Unable to download attachment.",
+  "failedToFetchNotifications": "Failed to fetch notifications",
+  "failedToFetchUnreadCount": "Failed to fetch unread count",
+  "failedToMarkNotificationRead": "Failed to mark notification as read",
+  "failedToMarkAllNotificationsRead": "Failed to mark all notifications as read",
+  "failedToDeleteNotification": "Failed to delete notification",
+  "failedToClearNotifications": "Failed to clear notifications"
+}

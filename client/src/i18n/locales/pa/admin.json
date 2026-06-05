@@ -1,0 +1,16 @@
+{
+  "dashboard": "Dashboard",
+  "manageCandidates": "Manage Candidates",
+  "manageRecruiters": "Manage Recruiters",
+  "manageJobs": "Manage Jobs",
+  "manageCompanies": "Manage Companies",
+  "applications": "Applications",
+  "reports": "Reports",
+  "analytics": "Analytics",
+  "settings": "Settings",
+  "jobProfessions": "Job Professions",
+  "approve": "Approve",
+  "reject": "Reject",
+  "dashboardStats": "Dashboard Stats",
+  "generatedReport": "Generated Report"
+}

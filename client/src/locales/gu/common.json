@@ -1,0 +1,33 @@
+{
+  "fields": {
+    "username": "યૂઝરનેમ",
+    "email": "ઈમેલ",
+    "emailAddress": "ઈમેલ સરનામું",
+    "password": "પાસવર્ડ",
+    "phone": "ફોન",
+    "phoneNumber": "ફોન નંબર",
+    "subject": "વિષય",
+    "message": "સંદેશ",
+    "fullName": "પૂરું નામ",
+    "role": "ભૂમિકા પસંદ કરો",
+    "jobProfession": "જોબ પ્રોફેશન"
+  },
+  "placeholders": {
+    "email": "તમારું ઈમેલ દાખલ કરો",
+    "password": "તમારો પાસવર્ડ દાખલ કરો",
+    "username": "તમારું યૂઝરનેમ દાખલ કરો",
+    "phone": "10 અંકનો ફોન નંબર દાખલ કરો",
+    "fullName": "તમારું પૂરું નામ દાખલ કરો",
+    "message": "તમારો સંદેશ અહીં લખો...",
+    "jobProfession": "દા.ત. જ્વેલરી ડિઝાઇનર"
+  },
+  "actions": {
+    "submit": "સબમિટ",
+    "subscribe": "સબ્સ્ક્રાઇબ",
+    "send": "મોકલો",
+    "cancel": "રદ કરો",
+    "save": "સેવ કરો",
+    "edit": "સંપાદિત કરો",
+    "delete": "કાઢી નાખો"
+  }
+}

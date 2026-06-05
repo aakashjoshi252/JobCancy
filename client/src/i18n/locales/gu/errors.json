@@ -1,0 +1,21 @@
+{
+  "unauthorized": "કૃપા કરીને આગળ વધવા માટે લોગિન કરો.",
+  "forbidden": "તમને આ કાર્યવાહી કરવાની પરવાનગી નથી.",
+  "serverError": "સર્વર ભૂલ. કૃપા કરીને પછી ફરી પ્રયાસ કરો.",
+  "invalidCredentials": "ઈમેલ અથવા પાસવર્ડ અમાન્ય છે.",
+  "emailAlreadyExists": "આ ઈમેલ પહેલેથી નોંધાયેલ છે.",
+  "profileUpdateFailed": "Profile update failed.",
+  "jobNotFound": "Job not found.",
+  "applicationAlreadySubmitted": "You have already submitted an application for this job.",
+  "uploadFailed": "અપલોડ નિષ્ફળ.",
+  "networkError": "Network error. Please check your connection.",
+  "unexpected": "An unexpected error occurred.",
+  "unableToUploadAttachment": "Unable to upload attachment.",
+  "unableToDownloadAttachment": "Unable to download attachment.",
+  "failedToFetchNotifications": "Failed to fetch notifications",
+  "failedToFetchUnreadCount": "Failed to fetch unread count",
+  "failedToMarkNotificationRead": "Failed to mark notification as read",
+  "failedToMarkAllNotificationsRead": "Failed to mark all notifications as read",
+  "failedToDeleteNotification": "Failed to delete notification",
+  "failedToClearNotifications": "Failed to clear notifications"
+}
