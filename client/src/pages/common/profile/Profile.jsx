@@ -43,13 +43,13 @@ export default function Profile() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 px-4">
-      <div className="bg-white shadow-xl rounded-2xl p-8 border border-gray-100 relative">
+    <div className="mx-auto mt-4 max-w-4xl px-3 sm:mt-10 sm:px-4">
+      <div className="relative rounded-2xl border border-gray-100 bg-white p-4 shadow-xl sm:p-8">
 
         {/* EDIT PROFILE BUTTON */}
         <button
           onClick={() => navigate(profileEditPath)}
-          className="absolute top-6 right-6 bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition shadow-md hover:shadow-lg"
+          className="mb-5 inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white shadow-md transition hover:bg-blue-700 hover:shadow-lg sm:absolute sm:right-6 sm:top-6 sm:mb-0 sm:w-auto"
         >
           Edit Profile
         </button>
@@ -57,11 +57,11 @@ export default function Profile() {
         {/* ------------------ RECRUITER VIEW ------------------ */}
         {role === "recruiter" && (
           <>
-            <div className="flex items-center gap-6 mb-8">
-              <div className="group relative">
+            <div className="mb-8 flex flex-col items-center gap-5 text-center sm:flex-row sm:items-center sm:gap-6 sm:pr-36 sm:text-left">
+              <div className="group relative shrink-0">
                 <UserAvatar
                   user={user}
-                  className="h-28 w-28 border-4 border-blue-100 text-3xl shadow-md"
+                  className="h-24 w-24 border-4 border-blue-100 text-2xl shadow-md sm:h-28 sm:w-28 sm:text-3xl"
                 />
                 <button
                   type="button"
@@ -77,13 +77,13 @@ export default function Profile() {
                   </span>
                 )}
               </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-800">{user.username}</h1>
-                <p className="text-gray-600 flex items-center gap-2 mt-1">
+              <div className="min-w-0">
+                <h1 className="break-words text-2xl font-bold text-gray-800 sm:text-3xl">{user.username}</h1>
+                <p className="mt-1 flex min-w-0 items-center justify-center gap-2 text-gray-600 sm:justify-start">
                   <VscOrganization className="text-blue-500" />
-                  {user.email}
+                  <span className="truncate">{user.email}</span>
                 </p>
-                <div className="flex items-center gap-2 mt-2">
+                <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
                   <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold">
                     Recruiter
                   </span>
@@ -164,16 +164,16 @@ export default function Profile() {
               </div>
             ) : (
               <>
-                <div className="flex items-center gap-6 mb-6">
+                <div className="mb-6 flex flex-col items-center gap-4 text-center sm:flex-row sm:gap-6 sm:text-left">
                   {company.uploadLogo && (
                     <img
                       src={getMediaUrl(company.uploadLogo)}
                       alt="Company Logo"
-                      className="w-20 h-20 object-contain border rounded-xl p-2 bg-white"
+                      className="h-20 w-20 shrink-0 rounded-xl border bg-white object-contain p-2"
                     />
                   )}
-                  <div>
-                    <h4 className="text-xl font-semibold text-gray-800">{company.companyName}</h4>
+                  <div className="min-w-0">
+                    <h4 className="break-words text-xl font-semibold text-gray-800">{company.companyName}</h4>
                     <p className="text-gray-600">{company.industry}</p>
                   </div>
                 </div>
@@ -214,11 +214,11 @@ export default function Profile() {
         {/* ------------------ CANDIDATE VIEW ------------------ */}
         {role === "candidate" && (
           <>
-            <div className="flex items-center gap-6 mb-8">
-              <div className="group relative">
+            <div className="mb-8 flex flex-col items-center gap-5 text-center sm:flex-row sm:items-center sm:gap-6 sm:pr-36 sm:text-left">
+              <div className="group relative shrink-0">
                 <UserAvatar
                   user={user}
-                  className="h-28 w-28 border-4 border-blue-100 text-3xl shadow-md"
+                  className="h-24 w-24 border-4 border-blue-100 text-2xl shadow-md sm:h-28 sm:w-28 sm:text-3xl"
                 />
                 <button
                   type="button"
@@ -234,13 +234,13 @@ export default function Profile() {
                   </span>
                 )}
               </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-800">{user.username}</h1>
-                <p className="text-gray-600 flex items-center gap-2 mt-1">
+              <div className="min-w-0">
+                <h1 className="break-words text-2xl font-bold text-gray-800 sm:text-3xl">{user.username}</h1>
+                <p className="mt-1 flex min-w-0 items-center justify-center gap-2 text-gray-600 sm:justify-start">
                   <FaEnvelope className="text-blue-500" />
-                  {user.email}
+                  <span className="truncate">{user.email}</span>
                 </p>
-                <div className="flex flex-wrap items-center gap-2 mt-2">
+                <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
                   <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold">
                     Candidate
                   </span>
@@ -312,7 +312,7 @@ export default function Profile() {
             {/* Resume Section */}
             <hr className="my-8 border-t-2 border-gray-100" />
             
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">Resume Information</h3>
+            <h3 className="mb-6 text-xl font-bold text-gray-800 sm:text-2xl">Resume Information</h3>
             
             {!resume ? (
               <div className="text-center py-8 bg-gray-50 rounded-lg">

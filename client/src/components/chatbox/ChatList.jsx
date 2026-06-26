@@ -153,16 +153,16 @@ const ChatList = ({ onSelectChat, selectedChatId, onStartNewChat }) => {
   );
 
   return (
-    <div className="flex flex-col h-full bg-white overflow-hidden shadow-xl">
+    <div className="flex h-full min-h-0 flex-col overflow-hidden bg-white shadow-xl">
       {/* Header */}
-      <div className="flex-shrink-0 px-5 py-6 bg-gradient-to-r from-[#1A3D63] to-[#1e4d7a]">
-        <div className="flex items-center justify-between mb-5">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-white/20 backdrop-blur-sm rounded-xl">
+      <div className="flex-shrink-0 bg-gradient-to-r from-[#1A3D63] to-[#1e4d7a] px-4 py-4 sm:px-5 sm:py-6">
+        <div className="mb-4 flex items-center justify-between gap-3 sm:mb-5">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="shrink-0 rounded-xl bg-white/20 p-2.5 backdrop-blur-sm">
               <HiChatAlt2 className="text-white text-2xl" />
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-white tracking-tight">{t("title")}</h2>
+            <div className="min-w-0">
+              <h2 className="truncate text-xl font-bold tracking-tight text-white sm:text-2xl">{t("title")}</h2>
               <p className="text-blue-100 text-sm mt-0.5">
                 {t("conversationCount", { count: chats.length, role: peerRole })}
               </p>
@@ -172,7 +172,7 @@ const ChatList = ({ onSelectChat, selectedChatId, onStartNewChat }) => {
           {/* New Chat Button */}
           <button
             onClick={onStartNewChat}
-            className="p-2.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-xl transition-all duration-200 group"
+            className="group inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/20 p-2.5 backdrop-blur-sm transition-all duration-200 hover:bg-white/30"
             title={t("selectPeerToStart", { role: peerRole })}
           >
             <HiUserAdd className="text-white text-xl group-hover:scale-110 transition-transform" />
@@ -193,7 +193,7 @@ const ChatList = ({ onSelectChat, selectedChatId, onStartNewChat }) => {
       </div>
 
       {/* Chat List */}
-      <div className="flex-1 overflow-y-auto bg-gray-50">
+      <div className="min-h-0 flex-1 overflow-y-auto bg-gray-50">
         {loading ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center space-y-3">
@@ -233,10 +233,18 @@ const ChatList = ({ onSelectChat, selectedChatId, onStartNewChat }) => {
               
               return (
                 <div
+                  role="button"
+                  tabIndex={0}
                   key={_id}
                   onClick={() => handleSelectChat(chat)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      handleSelectChat(chat);
+                    }
+                  }}
                   className={`
-                    relative flex items-center gap-4 px-5 py-4 cursor-pointer transition-all duration-200
+                    group relative flex w-full cursor-pointer items-center gap-3 px-4 py-4 text-left transition-all duration-200 sm:gap-4 sm:px-5
                     ${isSelected 
                       ? "bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-600" 
                       : "bg-white hover:bg-gray-50"
@@ -257,9 +265,9 @@ const ChatList = ({ onSelectChat, selectedChatId, onStartNewChat }) => {
                   </div>
 
                   {/* Chat info */}
-                  <div className="flex-1 min-w-0">
+                  <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <div className="flex items-center gap-2">
+                      <div className="flex min-w-0 items-center gap-2">
                         <p className={`font-semibold truncate ${isSelected ? "text-blue-700" : "text-gray-900"}`}>
                           {otherUser?.username || t("unknownUser")}
                         </p>
@@ -267,7 +275,7 @@ const ChatList = ({ onSelectChat, selectedChatId, onStartNewChat }) => {
                           <HiBadgeCheck className="text-blue-600 text-base flex-shrink-0" />
                         )}
                       </div>
-                      <div className="flex items-center gap-1 flex-shrink-0 ml-2">
+                      <div className="ms-2 flex flex-shrink-0 items-center gap-1">
                         <span className="text-xs text-gray-400">
                           {getTimeDisplay(updatedAt)}
                         </span>

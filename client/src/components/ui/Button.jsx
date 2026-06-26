@@ -8,8 +8,8 @@ const variants = {
 };
 
 const sizes = {
-  sm: "h-9 px-3 text-sm",
-  md: "h-10 px-4 text-sm",
+  sm: "min-h-11 px-3 text-sm",
+  md: "min-h-11 px-4 text-sm",
   lg: "h-12 px-5 text-base",
 };
 
@@ -20,7 +20,7 @@ const Button = forwardRef(
       type={type}
       disabled={disabled || isLoading}
       className={[
-        "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60",
+        "inline-flex min-w-0 items-center justify-center gap-2 rounded-lg font-medium leading-tight transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60",
         variants[variant] ?? variants.primary,
         sizes[size] ?? sizes.md,
         className,

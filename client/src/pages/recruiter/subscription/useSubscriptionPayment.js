@@ -123,8 +123,8 @@ export default function useSubscriptionPayment({ onVerified } = {}) {
 
             try {
               await subscriptionApi.post("/payment-failed", payload);
-            } catch (error) {
-              console.warn("Unable to record Razorpay failure:", error);
+            } catch {
+              // Continue the user-facing payment failure flow even if audit recording fails.
             }
 
             toast.error(message);

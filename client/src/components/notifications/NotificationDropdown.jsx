@@ -52,7 +52,8 @@ const NotificationDropdown = ({ onClose }) => {
   return (
     <div
       ref={dropdownRef}
-      className="absolute right-0 z-50 mt-2 flex max-h-[80vh] w-[min(24rem,calc(100vw-1rem))] flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl"
+      className="absolute z-50 mt-2 flex max-h-[80dvh] w-[min(24rem,calc(100vw-1rem))] flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl"
+      style={{ insetInlineEnd: 0 }}
     >
       <div className="border-b border-gray-100 p-4">
         <div className="mb-3 flex items-center justify-between gap-3">

@@ -50,8 +50,8 @@ export default function LanguageSwitcher({ compact = false, className = "" }) {
         aria-label={t("language.changeLanguage")}
         onClick={() => setOpen((current) => !current)}
         className={[
-          "inline-flex h-10 items-center justify-between gap-2 rounded-lg border border-gray-300 bg-white px-3 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-blue-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-100",
-          compact ? "min-w-[132px]" : "min-w-[190px]",
+          "inline-flex h-10 max-w-full items-center justify-between gap-2 rounded-lg border border-gray-300 bg-white px-3 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-blue-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-100",
+          compact ? "min-w-0 sm:min-w-[132px]" : "min-w-[190px]",
         ].join(" ")}
       >
         <span className="inline-flex min-w-0 items-center gap-2">
@@ -91,7 +91,7 @@ export default function LanguageSwitcher({ compact = false, className = "" }) {
                   aria-selected={isSelected}
                   onClick={() => selectLanguage(item.code)}
                   className={[
-                    "flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-left transition",
+                    "flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-start transition",
                     isSelected ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-gray-50",
                   ].join(" ")}
                 >

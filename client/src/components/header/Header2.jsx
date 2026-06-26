@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { FiBookOpen, FiBriefcase, FiHome, FiInfo, FiLogOut, FiMail, FiSettings, FiUser } from 'react-icons/fi';
@@ -21,6 +21,7 @@ const linkClass = (isActive) =>
 
 export default function Header2() {
   const { t } = useTranslation();
+  const location = useLocation();
   const user = useSelector((state) => state.auth.user);
   const { logout, isLoggingOut } = useLogout();
 
@@ -62,6 +63,11 @@ export default function Header2() {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    setMenuOpen(false);
+    setProfileMenuOpen(false);
+  }, [location.pathname, location.search]);
+
   const requestLogout = () => {
     setProfileMenuOpen(false);
     setMenuOpen(false);
@@ -100,7 +106,7 @@ export default function Header2() {
           {/* Right side actions */}
           <div className="ml-auto flex items-center gap-2 sm:gap-3">
             {user && (
-              <div className="hidden sm:block rounded-lg border border-gray-200 bg-white">
+              <div className="rounded-lg border border-gray-200 bg-white">
                 <NotificationBell />
               </div>
             )}
@@ -118,7 +124,10 @@ export default function Header2() {
                 </button>
 
                 {profileMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden animate-fadeIn">
+                  <div
+                    className="absolute mt-2 w-[min(16rem,calc(100vw-1rem))] bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden animate-fadeIn"
+                    style={{ insetInlineEnd: 0 }}
+                  >
                     <div className="p-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
                       <p className="font-semibold truncate">{username}</p>
                       <p className="text-sm text-blue-100 truncate">{user.email}</p>
@@ -169,8 +178,9 @@ export default function Header2() {
 
         {/* Mobile menu drawer */}
         <div
-          className={`md:hidden fixed inset-x-0 top-14 bottom-0 bg-gray-900/95 backdrop-blur-sm transition-all duration-300 ${
-            menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          aria-hidden={!menuOpen}
+          className={`md:hidden fixed inset-x-0 top-[3.5rem] bottom-0 z-50 bg-gray-900/95 backdrop-blur-sm transition-all duration-300 ${
+            menuOpen ? 'visible opacity-100 pointer-events-auto' : 'invisible opacity-0 pointer-events-none'
           }`}
         >
           <div className="h-full overflow-y-auto px-4 py-5 pb-20">
@@ -225,7 +235,7 @@ export default function Header2() {
                 </button>
               </div>
             ) : (
-              <div className="mt-6 grid grid-cols-2 gap-2">
+              <div className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <NavLink
                   to="/login"
                   onClick={() => setMenuOpen(false)}

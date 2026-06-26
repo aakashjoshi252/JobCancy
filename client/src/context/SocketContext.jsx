@@ -40,9 +40,7 @@ const getSocketURL = () => {
     return resolveSocketOrigin(configuredApiUrl);
   }
 
-  return import.meta.env.PROD
-    ? "https://jobs-backend-ur12.onrender.com"
-    : window.location.origin;
+  return window.location.origin;
 };
 
 export const SocketProvider = ({ children }) => {
@@ -68,7 +66,7 @@ export const SocketProvider = ({ children }) => {
     if (permission === "granted") {
       const notification = new Notification(title, {
         body: body,
-        icon: icon || "/logo192.png",
+        icon: icon || "/logo.png",
         silent: false,
       });
       
@@ -112,7 +110,6 @@ export const SocketProvider = ({ children }) => {
         }
       });
 
-      // Connection handlers
       newSocket.on("connect", () => {
         socketLog("Connected to socket server, ID:", newSocket.id);
         setIsConnected(true);
@@ -147,7 +144,6 @@ export const SocketProvider = ({ children }) => {
         newSocket.emit("userOnline");
       });
 
-      // User status handlers (matching your backend)
       newSocket.on("userStatusChange", ({ userId, status }) => {
         socketLog(`User ${userId} is now ${status}`);
         setOnlineUsers(prev => {
@@ -159,26 +155,21 @@ export const SocketProvider = ({ children }) => {
         });
       });
 
-      // Get online users list
       newSocket.on("onlineUsers", (users) => {
         socketLog("Online users:", users);
         setOnlineUsers(users || []);
       });
 
-      // Message error handler
       newSocket.on("messageError", (error) => {
         socketWarn("Message error:", error);
-        // You can show a toast notification here
       });
 
-      // Message sent confirmation
       newSocket.on("messageSent", ({ success, messageId, timestamp }) => {
         if (success) {
           socketLog("Message sent successfully:", messageId);
         }
       });
 
-      // Joined chat confirmation
       newSocket.on("joinedChat", ({ chatId, success }) => {
         if (success) {
           socketLog("Joined chat:", chatId);

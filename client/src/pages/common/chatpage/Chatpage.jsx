@@ -63,14 +63,14 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="h-screen bg-gray-100 overflow-hidden">
-      <div className="container mx-auto h-full max-w-7xl px-4 py-6">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden h-full flex">
+    <div className="chat-route-shell h-full min-h-[calc(100dvh-4rem)] overflow-hidden bg-gray-100">
+      <div className="mx-auto h-full max-w-7xl px-0 py-0 sm:px-4 sm:py-4 lg:py-6">
+        <div className="flex h-full min-h-0 overflow-hidden rounded-none bg-white shadow-2xl sm:rounded-2xl">
           {/* Chat List Sidebar */}
           {!showCandidatesList && (
             <div className={`
               ${isMobileView ? (showChatList ? "w-full" : "hidden") : "w-96"}
-              border-r border-gray-200 flex-shrink-0
+              min-w-0 flex-shrink-0 border-r border-gray-200
             `}>
               <ChatList 
                 onSelectChat={handleSelectChat} 
@@ -84,7 +84,7 @@ const ChatPage = () => {
           {showCandidatesList && (
             <div className={`
               ${isMobileView ? "w-full" : "w-96"}
-              border-r border-gray-200 flex-shrink-0
+              min-w-0 flex-shrink-0 border-r border-gray-200
             `}>
               <AvailableCandidates 
                 onSelectCandidate={handleSelectChat}
@@ -95,21 +95,22 @@ const ChatPage = () => {
           
           {/* Chat Box */}
           <div className={`
-            flex-1 flex flex-col
+            min-w-0 flex-1 flex-col
+            ${isMobileView && (showChatList || showCandidatesList) ? "hidden" : "flex"}
             ${isMobileView && !showChatList && !showCandidatesList ? "w-full" : ""}
           `}>
             {selectedChat ? (
               <ChatBox chat={selectedChat} onBack={handleBack} />
             ) : (
-              <div className="flex-1 flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50/30">
-                <div className="text-center space-y-4">
-                  <div className="w-32 h-32 mx-auto bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center shadow-lg">
-                    <svg className="w-16 h-16 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex min-h-0 flex-1 items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50/30 p-4">
+                <div className="max-w-sm space-y-4 text-center">
+                  <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-lg sm:h-32 sm:w-32">
+                    <svg className="h-12 w-12 text-blue-500 sm:h-16 sm:w-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-800">{t("chatWithRole", { role: peerLabel })}</h2>
+                    <h2 className="text-xl font-bold text-gray-800 sm:text-2xl">{t("chatWithRole", { role: peerLabel })}</h2>
                     <p className="text-gray-500 mt-2">
                       {showCandidatesList 
                         ? t("selectPeerToStart", { role: peerLabel.toLowerCase() }) 

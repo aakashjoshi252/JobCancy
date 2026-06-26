@@ -9,9 +9,15 @@ const cleanEnvValue = (value, fallback = "") => (value || fallback).split("#")[0
 const trimTrailingSlash = (value) => cleanEnvValue(value).replace(/\/+$/, "");
 
 const API_VERSION = "/api/v1";
-const PRODUCTION_API_URL = "https://jobs-backend-ur12.onrender.com/api/v1";
+const PRODUCTION_API_URL = API_VERSION;
 const DEVELOPMENT_API_URL = API_VERSION;
 const DEBUG_MODE = import.meta.env.VITE_DEBUG_MODE === "true";
+const apiDebugLog = (...args) => {
+  if (DEBUG_MODE) console.log(...args);
+};
+const apiDebugError = (...args) => {
+  if (DEBUG_MODE) console.error(...args);
+};
 
 const normalizeApiBaseUrl = (value) => {
   const cleaned = trimTrailingSlash(value);
@@ -70,9 +76,7 @@ const createApiInstance = (baseURL, apiName) => {
       const language = getPersistedLanguage();
       config.headers["Accept-Language"] = language;
       config.headers["X-Language"] = language;
-      if (DEBUG_MODE) {
-        console.log(`[${apiName}] ${config.method?.toUpperCase()} ${config.url}`);
-      }
+      apiDebugLog(`[${apiName}] ${config.method?.toUpperCase()} ${config.url}`);
       return config;
     },
     (error) => Promise.reject(error)
@@ -82,9 +86,9 @@ const createApiInstance = (baseURL, apiName) => {
   instance.interceptors.response.use(
     (response) => response,
     (error) => {
-      if (DEBUG_MODE && error.response) {
-        console.error(`[${apiName}] ${error.response.status}: ${error.config?.url}`);
-        console.error("Error details:", error.response.data);
+      if (error.response) {
+        apiDebugError(`[${apiName}] ${error.response.status}: ${error.config?.url}`);
+        apiDebugError("Error details:", error.response.data);
       }
       
       if (error.response?.status === 401 && !error.config?.skipAuthRedirect) {
@@ -260,10 +264,10 @@ export const handleApiError = (error, customMessage = null) => {
 export const checkApiHealth = async () => {
   try {
     const response = await axios.get(`${SERVER_BASE_URL}/health`, { timeout: 5000 });
-    if (DEBUG_MODE) console.log("API Health: OK");
+    apiDebugLog("API Health: OK");
     return { success: true, data: response.data };
   } catch (error) {
-    if (DEBUG_MODE) console.error("API Health: Server down");
+    apiDebugError("API Health: Server down");
     return { success: false, error: error.message };
   }
 };
@@ -271,11 +275,9 @@ export const checkApiHealth = async () => {
 // ===========================
 //  Startup Log
 // ===========================
-if (DEBUG_MODE) {
-  console.log(`API Ready: ${API_BASE_URL}`);
-  console.log(`API Version: ${API_VERSION}`);
-  console.log(`Environment: ${import.meta.env.MODE}`);
-}
+apiDebugLog(`API Ready: ${API_BASE_URL}`);
+apiDebugLog(`API Version: ${API_VERSION}`);
+apiDebugLog(`Environment: ${import.meta.env.MODE}`);
 
 // Export base configs for advanced use
 export { BASE_URL, SERVER_BASE_URL, API_BASE_URL, API_VERSION };

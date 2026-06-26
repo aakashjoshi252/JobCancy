@@ -20,6 +20,7 @@ export default function DashboardLayout({ role }) {
   const [logoutOpen, setLogoutOpen] = useState(false);
   const { logout, isLoggingOut } = useLogout();
   const resolvedRole = role || user?.role || "candidate";
+  const isChatRoute = location.pathname.endsWith("/chat") || location.pathname.endsWith("/messages");
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -66,7 +67,7 @@ export default function DashboardLayout({ role }) {
   }, [dispatch, resolvedRole, resume, user?._id]);
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-950">
+    <div className="min-h-screen overflow-x-hidden bg-gray-100 text-gray-950">
       <LocalizedMeta />
       <Sidebar
         role={resolvedRole}
@@ -83,7 +84,14 @@ export default function DashboardLayout({ role }) {
           onMenuClick={() => setMobileMenuOpen(true)}
           onLogoutRequest={() => setLogoutOpen(true)}
         />
-        <main className="mx-auto min-w-0 w-full max-w-[1600px] px-3 py-4 sm:px-5 sm:py-5 lg:px-8 lg:py-6">
+        <main
+          className={[
+            "mx-auto min-w-0 w-full",
+            isChatRoute
+              ? "h-[calc(100dvh-4rem)] max-w-none overflow-hidden p-0"
+              : "max-w-[1600px] px-3 py-4 sm:px-5 sm:py-5 lg:px-8 lg:py-6",
+          ].join(" ")}
+        >
           <Outlet />
         </main>
       </div>

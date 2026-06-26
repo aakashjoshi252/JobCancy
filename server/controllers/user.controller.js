@@ -2,6 +2,7 @@ const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const generateToken = require("../utils/generateToken");
 const nodemailer = require("nodemailer");
+const logger = require("../utils/logger");
 
 const {
   uploadProfileImageToCloudinary,
@@ -92,7 +93,7 @@ const deleteCloudinaryImage = async (publicId) => {
   try {
     await deleteFromCloudinary(publicId);
   } catch (error) {
-    console.error("Error deleting Cloudinary profile image:", error);
+    logger.error(`Error deleting Cloudinary profile image: ${error.message}`, { stack: error.stack });
   }
 };
 
@@ -291,7 +292,7 @@ const userController = {
         data: userResponse,
       });
     } catch (error) {
-      console.error("Error creating user:", error);
+      logger.error(`Error creating user: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -375,7 +376,7 @@ const userController = {
         token,
       });
     } catch (error) {
-      console.error("Login error:", error);
+      logger.error(`Login error: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -418,7 +419,7 @@ const userController = {
         data: usersWithAvatars,
       });
     } catch (error) {
-      console.error("Error fetching users:", error);
+      logger.error(`Error fetching users: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -452,7 +453,7 @@ const userController = {
         },
       });
     } catch (error) {
-      console.error("Error fetching logged in user:", error);
+      logger.error(`Error fetching logged in user: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -507,7 +508,7 @@ const userController = {
       if (previousProfileImage) await removeStoredProfileImage(previousProfileImage);
       return sendUpdatedUser(res, user, "Profile updated successfully");
     } catch (error) {
-      console.error("Error updating own profile:", error);
+      logger.error(`Error updating own profile: ${error.message}`, { stack: error.stack });
 
       return res.status(error.name === "ValidationError" ? 400 : 500).json({
         success: false,
@@ -550,7 +551,7 @@ const userController = {
 
       return sendUpdatedUser(res, user, "Profile image updated successfully");
     } catch (error) {
-      console.error("Error uploading profile image:", error);
+      logger.error(`Error uploading profile image: ${error.message}`, { stack: error.stack });
 
       return res.status(500).json({
         success: false,
@@ -587,7 +588,7 @@ const userController = {
 
       return sendUpdatedUser(res, user, "Profile image removed successfully");
     } catch (error) {
-      console.error("Error deleting profile image:", error);
+      logger.error(`Error deleting profile image: ${error.message}`, { stack: error.stack });
 
       return res.status(500).json({
         success: false,
@@ -691,7 +692,7 @@ const userController = {
         data: updateUser.toJSON(),
       });
     } catch (error) {
-      console.error("Error updating user:", error);
+      logger.error(`Error updating user: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -730,7 +731,7 @@ const userController = {
         data: deletedUser,
       });
     } catch (error) {
-      console.error("Error deleting user:", error);
+      logger.error(`Error deleting user: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -783,7 +784,7 @@ const userController = {
 
       return sendUpdatedUser(res, user, "Profile picture uploaded successfully");
     } catch (error) {
-      console.error("Error uploading profile picture:", error);
+      logger.error(`Error uploading profile picture: ${error.message}`, { stack: error.stack });
 
       return res.status(500).json({
         success: false,
@@ -826,7 +827,7 @@ const userController = {
 
       return sendUpdatedUser(res, user, "Profile picture deleted successfully");
     } catch (error) {
-      console.error("Error deleting profile picture:", error);
+      logger.error(`Error deleting profile picture: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Failed to delete profile picture",
@@ -863,7 +864,7 @@ const userController = {
         },
       });
     } catch (error) {
-      console.error("Error fetching profile picture:", error);
+      logger.error(`Error fetching profile picture: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Failed to fetch profile picture",
@@ -926,7 +927,7 @@ const userController = {
         message: "Email verified successfully",
       });
     } catch (error) {
-      console.error("Error verifying email:", error);
+      logger.error(`Error verifying email: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -994,7 +995,7 @@ const userController = {
         message: "OTP resent successfully",
       });
     } catch (error) {
-      console.error("Error resending OTP:", error);
+      logger.error(`Error resending OTP: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -1056,7 +1057,7 @@ const userController = {
         message: "If an account exists, a reset code has been sent.",
       });
     } catch (error) {
-      console.error("Error sending password reset OTP:", error);
+      logger.error(`Error sending password reset OTP: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -1103,7 +1104,7 @@ const userController = {
         message: "Password reset successfully",
       });
     } catch (error) {
-      console.error("Error resetting password:", error);
+      logger.error(`Error resetting password: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -1161,7 +1162,7 @@ const userController = {
         message: "Password changed successfully",
       });
     } catch (error) {
-      console.error("Error changing password:", error);
+      logger.error(`Error changing password: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -1178,7 +1179,7 @@ const userController = {
       data: recruiters,
     });
   } catch (error) {
-    console.log(error);
+    logger.error(`Error fetching recruiters: ${error.message}`, { stack: error.stack });
     res.status(500).json({
       success: false,
       message: "Server Error",

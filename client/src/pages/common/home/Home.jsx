@@ -330,20 +330,13 @@ export default function Home() {
   };
 
   const handleCompanyClick = (companyId, companyName) => {
-    // Validate companyId
     if (companyId && typeof companyId === 'string' && companyId.trim() !== '') {
-      // Check if it's a valid MongoDB ObjectId (24 hex chars)
       const isValidMongoId = /^[0-9a-fA-F]{24}$/.test(companyId);
-
-      // Check if it's a numeric ID
       const isValidNumericId = /^\d+$/.test(companyId);
 
       if (isValidMongoId || isValidNumericId) {
-        // Valid ID format, navigate to company page
         navigate(`/company/${companyId}`);
       } else {
-        // Generated ID or invalid format, navigate to companies list with search param
-        console.warn('Invalid company ID format, navigating to companies list');
         if (companyName) {
           navigate(`/companies?search=${encodeURIComponent(companyName)}`);
         } else {
@@ -351,8 +344,6 @@ export default function Home() {
         }
       }
     } else {
-      // No valid ID, navigate to companies list page
-      console.warn('No valid company ID provided');
       navigate('/companies');
     }
   };
@@ -572,7 +563,6 @@ export default function Home() {
               <StatBox label="Companies" value={stats.companies} />
               <StatBox label="Active Candidates" value={stats.candidates} />
               <StatBox label="Active Recruiters" value={stats.recruiter} />
-              {/* {console.log("Jobs Count API:", jobsCountRes.data)} */}
             </>
           )}
         </div>

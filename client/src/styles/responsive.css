@@ -26,6 +26,7 @@ body {
 body {
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  overscroll-behavior-x: none;
 }
 
 img,
@@ -45,6 +46,54 @@ textarea,
 button {
   max-width: 100%;
   font: inherit;
+}
+
+main,
+section,
+article,
+aside,
+nav,
+header,
+footer,
+form,
+fieldset {
+  min-width: 0;
+}
+
+button,
+[role="button"],
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+select,
+textarea {
+  min-height: 44px;
+}
+
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+button,
+a,
+label,
+select,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+}
+
+select {
+  text-overflow: ellipsis;
+}
+
+input[type="file"] {
+  min-height: auto;
 }
 
 p,
@@ -70,6 +119,21 @@ table {
 .overflow-x-auto,
 .responsive-scroll {
   -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+}
+
+.overflow-x-auto > table {
+  width: 100%;
+}
+
+.overflow-x-auto > table th,
+.overflow-x-auto > table td {
+  vertical-align: top;
+}
+
+.responsive-table-hint {
+  position: relative;
 }
 
 .page-shell {
@@ -89,6 +153,66 @@ table {
 @media (min-width: 1024px) {
   .page-shell {
     padding: 2rem;
+  }
+}
+
+/* Fluid content primitives used by pages that still have local Tailwind markup. */
+.responsive-section {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.responsive-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.responsive-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.responsive-actions > * {
+  min-width: 0;
+}
+
+.responsive-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .responsive-section {
+    padding-inline: 1.5rem;
+  }
+
+  .responsive-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .responsive-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-section {
+    padding-inline: 2rem;
+  }
+
+  .responsive-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .responsive-card-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -310,6 +434,64 @@ table {
   .table td {
     padding: 0.75rem;
   }
+
+  .modal,
+  [role="dialog"] {
+    padding: 0.5rem;
+  }
+
+  .dropdown,
+  [role="menu"],
+  [role="listbox"] {
+    max-width: calc(100vw - 1rem);
+  }
+
+  .grid.grid-cols-2,
+  .grid.grid-cols-3,
+  .grid.grid-cols-4,
+  .grid.grid-cols-5,
+  .grid.grid-cols-6,
+  .grid.grid-cols-8 {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .flex-row.mobile-stack,
+  .responsive-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .responsive-actions > button,
+  .responsive-actions > a,
+  .responsive-actions > .btn {
+    width: 100%;
+  }
+
+  .overflow-x-auto {
+    margin-inline: -0.25rem;
+    padding-inline: 0.25rem;
+  }
+
+  .overflow-x-auto > table {
+    min-width: 42rem;
+  }
+
+  .blog-prose {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  .blog-prose h1 {
+    font-size: 1.8rem;
+  }
+
+  .blog-prose h2 {
+    font-size: 1.45rem;
+  }
+
+  .blog-prose h3 {
+    font-size: 1.2rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -320,6 +502,104 @@ table {
   .responsive-heading {
     font-size: 1.6rem;
   }
+
+  .card,
+  .job-card,
+  .job-listing,
+  .application-card,
+  .profile-card,
+  .stat-item {
+    box-shadow: 0 8px 24px -18px rgb(15 23 42 / 0.35);
+  }
+
+  .profile-avatar {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .profile-name {
+    font-size: 1.25rem;
+  }
+
+  .profile-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Chat and keyboard-safe mobile behavior */
+.chat-route-shell {
+  min-height: calc(100dvh - 4rem);
+}
+
+@media (max-width: 1023px) {
+  .chat-container,
+  .chatbox-container,
+  .chat-list-container {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .message-input-container,
+  .chatbox-container form {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .message-bubble {
+    max-width: 92%;
+  }
+}
+
+@media (max-width: 360px) {
+  .chat-avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .message-bubble {
+    max-width: 95%;
+  }
+}
+
+/* RTL responsive fixes for common icon-inside-input patterns. */
+html[dir="rtl"] .left-3,
+html[dir="rtl"] .left-4,
+html[dir="rtl"] .left-3\.5 {
+  left: auto;
+}
+
+html[dir="rtl"] .left-3 {
+  right: 0.75rem;
+}
+
+html[dir="rtl"] .left-4 {
+  right: 1rem;
+}
+
+html[dir="rtl"] .left-3\.5 {
+  right: 0.875rem;
+}
+
+html[dir="rtl"] .pl-10 {
+  padding-left: 1rem;
+  padding-right: 2.5rem;
+}
+
+html[dir="rtl"] .pl-12 {
+  padding-left: 1rem;
+  padding-right: 3rem;
+}
+
+html[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+html[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+html[dir="rtl"] .border-l-4 {
+  border-left-width: 0;
+  border-right-width: 4px;
 }
 
 /* Print Styles */

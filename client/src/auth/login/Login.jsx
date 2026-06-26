@@ -45,8 +45,8 @@ export default function Login() {
           withCredentials: true,
         });
         latestUser = profileRes.data?.data?.user || profileRes.data?.user || user;
-      } catch (profileErr) {
-        console.warn("Unable to refresh profile after login:", profileErr);
+      } catch {
+        // Continue with the login response profile if the refresh request fails.
       }
 
       // Dispatch login success with the freshest profile data and token.

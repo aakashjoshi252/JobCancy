@@ -28,7 +28,7 @@ export default function ProfileDropdown({ user, onLogoutRequest }) {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="flex h-11 max-w-[15rem] items-center gap-2 rounded-lg border border-gray-200 bg-white px-2 text-left shadow-sm transition hover:border-gray-300 hover:bg-gray-50"
+        className="flex h-11 max-w-[11rem] items-center gap-2 rounded-lg border border-gray-200 bg-white px-2 text-left shadow-sm transition hover:border-gray-300 hover:bg-gray-50 sm:max-w-[15rem]"
         aria-expanded={open}
         aria-haspopup="menu"
       >
@@ -43,7 +43,8 @@ export default function ProfileDropdown({ user, onLogoutRequest }) {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 top-[calc(100%+0.65rem)] z-40 w-64 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-xl"
+          className="absolute top-[calc(100%+0.65rem)] z-40 w-[min(16rem,calc(100vw-1rem))] overflow-hidden rounded-lg border border-gray-200 bg-white shadow-xl"
+          style={{ insetInlineEnd: 0 }}
         >
           <div className="border-b border-gray-100 bg-gray-50 px-4 py-3">
             <p className="truncate text-sm font-semibold text-gray-950">{displayName}</p>

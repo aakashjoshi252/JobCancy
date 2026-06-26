@@ -492,17 +492,6 @@ process.on('unhandledRejection', (reason, promise) => {
 
 /* ================= START SERVER ================= */
 server.listen(port, '0.0.0.0', () => {
-//   console.log(`
-// ╭${'─'.repeat(63)}╮
-// │ 🚀 Job Placements Portal API Server Started${' '.repeat(17)}│
-// ├${'─'.repeat(63)}┤
-// Local server URL omitted from disabled startup banner.
-// │ 🔧 Environment: ${nodeEnv.toUpperCase()}${' '.repeat(39 - nodeEnv.length)}│
-// │ 📊 Database:    ${dbStatus}${' '.repeat(40 - dbStatus.length)}│
-// │ 🔌 Socket.IO:   Enabled${' '.repeat(35)}│
-// ╰${'─'.repeat(63)}╯
-// `);
-
   logger.info(`Server started on port ${port}`);
 });
 

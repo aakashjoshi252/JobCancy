@@ -56,22 +56,24 @@ const AvailableCandidates = ({ onSelectCandidate, onBack }) => {
   );
 
   return (
-    <div className="flex flex-col h-full bg-white overflow-hidden">
+    <div className="flex h-full min-h-0 flex-col overflow-hidden bg-white">
       {/* Header */}
-      <div className="flex-shrink-0 px-5 py-6 bg-gradient-to-r from-[#1A3D63] to-[#1e4d7a]">
-        <div className="flex items-center gap-3 mb-5">
+      <div className="flex-shrink-0 bg-gradient-to-r from-[#1A3D63] to-[#1e4d7a] px-4 py-4 sm:px-5 sm:py-6">
+        <div className="mb-4 flex items-center gap-3 sm:mb-5">
           <button
+            type="button"
             onClick={onBack}
-            className="p-2 hover:bg-white/20 rounded-xl transition-all duration-200"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white transition-all duration-200 hover:bg-white/20"
+            aria-label={t("backToChats", { defaultValue: "Back to chats" })}
           >
             <HiArrowLeft className="text-white text-xl" />
           </button>
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-white/20 backdrop-blur-sm rounded-xl">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="shrink-0 rounded-xl bg-white/20 p-2.5 backdrop-blur-sm">
               <HiUserAdd className="text-white text-2xl" />
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-white tracking-tight">{t("newChat")}</h2>
+            <div className="min-w-0">
+              <h2 className="truncate text-xl font-bold tracking-tight text-white sm:text-2xl">{t("newChat")}</h2>
               <p className="text-blue-100 text-sm mt-0.5">
                 {t("selectPeerToStart", { role: peerLabel })}
               </p>
@@ -93,7 +95,7 @@ const AvailableCandidates = ({ onSelectCandidate, onBack }) => {
       </div>
 
       {/* Candidates List */}
-      <div className="flex-1 overflow-y-auto bg-gray-50">
+      <div className="min-h-0 flex-1 overflow-y-auto bg-gray-50">
         {loading ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center space-y-3">
@@ -119,9 +121,17 @@ const AvailableCandidates = ({ onSelectCandidate, onBack }) => {
           <div className="divide-y divide-gray-100">
             {filteredCandidates.map((candidate) => (
               <div
+                role="button"
+                tabIndex={0}
                 key={candidate._id}
                 onClick={() => handleSelectCandidate(candidate)}
-                className="flex items-center gap-4 px-5 py-4 cursor-pointer bg-white hover:bg-blue-50 transition-all duration-200 group"
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    handleSelectCandidate(candidate);
+                  }
+                }}
+                className="group flex cursor-pointer items-center gap-3 bg-white px-4 py-4 text-left transition-all duration-200 hover:bg-blue-50 sm:gap-4 sm:px-5"
               >
                 {/* Avatar */}
                 <div className="relative flex-shrink-0">
@@ -129,9 +139,9 @@ const AvailableCandidates = ({ onSelectCandidate, onBack }) => {
                 </div>
 
                 {/* Candidate Info */}
-                <div className="flex-1 min-w-0">
+                <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <div className="flex items-center gap-2">
+                    <div className="flex min-w-0 items-center gap-2">
                       <p className="font-semibold text-gray-900 truncate group-hover:text-blue-600 transition-colors">
                         {candidate.username}
                       </p>
@@ -155,8 +165,8 @@ const AvailableCandidates = ({ onSelectCandidate, onBack }) => {
                 </div>
 
                 {/* Start Chat Button */}
-                <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button className="px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-1">
+                <div className="hidden flex-shrink-0 opacity-0 transition-opacity group-hover:opacity-100 sm:block">
+                  <button type="button" className="flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-sm text-white transition-colors hover:bg-blue-700">
                     <HiUserAdd className="text-sm" />
                     <span>{t("title")}</span>
                   </button>

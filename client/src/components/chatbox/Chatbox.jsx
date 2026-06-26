@@ -328,21 +328,23 @@ const ChatBox = ({ chat, onBack }) => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-gradient-to-br from-gray-50 to-blue-50/30">
+    <div className="flex h-full min-h-0 flex-col bg-gradient-to-br from-gray-50 to-blue-50/30">
       {/* Header */}
       <div className="sticky top-0 z-20 flex-shrink-0 bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 shadow-xl">
-        <div className="flex items-center gap-3 px-4 sm:px-6 py-3">
+        <div className="flex items-center gap-3 px-3 py-3 sm:px-6">
           <button
+            type="button"
             onClick={onBack}
-            className="lg:hidden p-2 hover:bg-white/20 rounded-xl transition-all duration-200"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-white transition-all duration-200 hover:bg-white/20 lg:hidden"
+            aria-label={t("backToChats", { defaultValue: "Back to chats" })}
           >
             <HiArrowLeft className="text-white text-xl" />
           </button>
 
-          <div className="relative group cursor-pointer">
+          <div className="group relative shrink-0 cursor-pointer">
             <UserAvatar
               user={otherUser}
-              className="h-12 w-12 border border-white/20 text-lg shadow-lg transition-transform duration-200 group-hover:scale-105"
+              className="h-10 w-10 border border-white/20 text-base shadow-lg transition-transform duration-200 group-hover:scale-105 sm:h-12 sm:w-12 sm:text-lg"
             />
             {isOtherUserOnline && (
               <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full animate-pulse" />
@@ -350,7 +352,7 @@ const ChatBox = ({ chat, onBack }) => {
           </div>
 
           <div className="flex-1 min-w-0">
-            <p className="font-semibold text-white text-lg truncate">
+            <p className="truncate text-base font-semibold text-white sm:text-lg">
               {otherUser?.username}
             </p>
             <p className="text-xs text-blue-200">
@@ -374,8 +376,10 @@ const ChatBox = ({ chat, onBack }) => {
           {/* Options Menu */}
           <div className="relative">
             <button
+              type="button"
               onClick={() => setShowOptions(!showOptions)}
-              className="p-2 hover:bg-white/20 rounded-xl transition-all duration-200"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-white transition-all duration-200 hover:bg-white/20"
+              aria-label={t("chatOptions", { defaultValue: "Chat options" })}
             >
               <HiDotsVertical className="text-white text-xl" />
             </button>
@@ -383,7 +387,10 @@ const ChatBox = ({ chat, onBack }) => {
             {showOptions && (
               <>
                 <div className="fixed inset-0 z-10" onClick={() => setShowOptions(false)} />
-                <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-2xl z-20 overflow-hidden border border-gray-100">
+                <div
+                  className="absolute top-full z-20 mt-2 w-[min(14rem,calc(100vw-1rem))] overflow-hidden rounded-xl border border-gray-100 bg-white shadow-2xl"
+                  style={{ insetInlineEnd: 0 }}
+                >
                   <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-all text-gray-700">
                     <HiUserCircle className="text-blue-500 text-lg" />
                     <span className="text-sm">{t("viewProfile")}</span>
@@ -407,7 +414,7 @@ const ChatBox = ({ chat, onBack }) => {
       {/* Messages */}
       <div
         ref={messagesContainerRef}
-        className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 space-y-6"
+        className="min-h-0 flex-1 space-y-6 overflow-y-auto px-3 py-4 sm:px-6"
         style={{
           scrollBehavior: "smooth",
           backgroundImage: "radial-gradient(circle at 10px 10px, rgba(0,0,0,0.02) 2px, transparent 2px)",
@@ -455,7 +462,7 @@ const ChatBox = ({ chat, onBack }) => {
                     key={msg._id || idx}
                     className={`flex ${isOwn ? "justify-end" : "justify-start"}`}
                   >
-                    <div className={`max-w-[85%] sm:max-w-[75%] md:max-w-[65%] lg:max-w-[55%] group`}>
+                    <div className="group max-w-[92%] sm:max-w-[75%] md:max-w-[65%] lg:max-w-[55%]">
                       {!isOwn && (
                         <p className="text-xs text-gray-500 mb-1 ml-1">{senderName}</p>
                       )}
@@ -473,7 +480,7 @@ const ChatBox = ({ chat, onBack }) => {
                           <button
                             type="button"
                             onClick={() => attachmentUrl && setPreviewImage({ url: attachmentUrl, name: msg.attachment.originalName })}
-                            className="mt-3 block overflow-hidden rounded-xl border border-white/20 bg-white/10"
+                            className="mt-3 block max-w-full overflow-hidden rounded-xl border border-white/20 bg-white/10"
                           >
                             {attachmentUrl ? (
                               <img
@@ -490,7 +497,7 @@ const ChatBox = ({ chat, onBack }) => {
                           <button
                             type="button"
                             onClick={() => openAttachmentDownload(msg)}
-                            className={`mt-3 flex items-center gap-3 rounded-xl border p-3 text-left transition ${
+                            className={`mt-3 flex max-w-full items-center gap-3 rounded-xl border p-3 text-left transition ${
                               isOwn
                                 ? "border-white/20 bg-white/10 text-white hover:bg-white/20"
                                 : "border-gray-200 bg-gray-50 text-gray-800 hover:bg-gray-100"
@@ -529,7 +536,7 @@ const ChatBox = ({ chat, onBack }) => {
       {/* Typing Indicator */}
       {isTyping && (
         <div className="flex-shrink-0 px-4 sm:px-6 py-2">
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-gray-100">
+          <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-gray-100 bg-white/80 px-4 py-2 shadow-sm backdrop-blur-sm">
             <div className="flex gap-1">
               <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
               <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
@@ -554,9 +561,9 @@ const ChatBox = ({ chat, onBack }) => {
       {/* Input Area */}
       <form
         onSubmit={sendMessage}
-        className="flex-shrink-0 bg-white border-t border-gray-200 px-4 sm:px-6 py-4 shadow-lg"
+        className="flex-shrink-0 border-t border-gray-200 bg-white px-3 py-3 shadow-lg sm:px-6 sm:py-4"
       >
-        <div className="flex items-end gap-2">
+        <div className="flex min-w-0 items-end gap-2">
           <input
             ref={fileInputRef}
             type="file"
@@ -574,7 +581,7 @@ const ChatBox = ({ chat, onBack }) => {
             <HiPaperClip className="text-xl" />
           </button>
           {/* Text Input */}
-          <div className="flex-1 relative">
+          <div className="relative min-w-0 flex-1">
             <textarea
               ref={textareaRef}
               value={text}
@@ -588,7 +595,7 @@ const ChatBox = ({ chat, onBack }) => {
               placeholder={t("typeMessage")}
               rows={1}
               disabled={!isConnected}
-              className="w-full px-4 py-3 pr-12 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all bg-gray-50 hover:bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full resize-none rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 pr-12 transition-all hover:bg-white focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:bg-gray-100"
               style={{
                 minHeight: "48px",
                 maxHeight: "120px",
@@ -604,7 +611,8 @@ const ChatBox = ({ chat, onBack }) => {
           <button
             type="submit"
             disabled={(!text.trim() && !selectedFile) || isSending || isUploading || !isConnected}
-            className="p-3.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:scale-105 active:scale-95"
+            className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 p-3.5 text-white shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+            aria-label={t("sendMessage", { defaultValue: "Send message" })}
           >
             <HiPaperAirplane className={`text-xl ${isSending ? "animate-pulse" : ""}`} />
           </button>
@@ -652,7 +660,7 @@ const ChatBox = ({ chat, onBack }) => {
                 <HiX className="text-xl" />
               </button>
             </div>
-            <img src={previewImage.url} alt={previewImage.name} className="max-h-[85vh] rounded-2xl bg-white object-contain shadow-2xl" />
+            <img src={previewImage.url} alt={previewImage.name} className="max-h-[85dvh] max-w-full rounded-2xl bg-white object-contain shadow-2xl" />
           </div>
         </div>
       )}

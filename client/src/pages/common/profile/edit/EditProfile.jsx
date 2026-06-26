@@ -195,16 +195,17 @@ export default function EditProfile() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 px-4">
-      <div className="bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h2 className="text-3xl font-bold text-gray-800">Edit Profile</h2>
+    <div className="mx-auto mt-4 max-w-3xl px-3 sm:mt-10 sm:px-4">
+      <div className="rounded-2xl border border-gray-100 bg-white p-4 shadow-xl sm:p-8">
+        <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <h2 className="text-2xl font-bold text-gray-800 sm:text-3xl">Edit Profile</h2>
             <p className="text-gray-600 mt-1">Update your personal information</p>
           </div>
           <button
+            type="button"
             onClick={() => navigate(-1)}
-            className="px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition"
+            className="inline-flex w-full items-center justify-center rounded-lg px-4 py-2 text-gray-600 transition hover:bg-gray-100 hover:text-gray-800 sm:w-auto"
           >
             Cancel
           </button>
@@ -293,7 +294,7 @@ export default function EditProfile() {
                       </div>
                     </div>
 
-                    <div className="flex shrink-0 flex-wrap gap-2">
+                    <div className="flex shrink-0 flex-col gap-2 sm:flex-row sm:flex-wrap">
                       <button
                         type="button"
                         onClick={() => imageInputRef.current?.click()}
@@ -429,7 +430,7 @@ export default function EditProfile() {
               <FaLock className="text-gray-500" />
               <p className="text-sm font-medium text-gray-600">Account Information</p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
               <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium capitalize">
                 {role}
               </span>
@@ -438,11 +439,11 @@ export default function EditProfile() {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-4 pt-4">
+          <div className="flex flex-col-reverse gap-3 pt-4 sm:flex-row sm:gap-4">
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-blue-600 text-white py-3 rounded-xl text-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="flex-1 rounded-xl bg-blue-600 py-3 text-base font-semibold text-white shadow-lg transition hover:bg-blue-700 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50 sm:text-lg"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -460,7 +461,7 @@ export default function EditProfile() {
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="px-8 py-3 border border-gray-300 rounded-xl text-lg font-semibold hover:bg-gray-50 transition"
+              className="rounded-xl border border-gray-300 px-8 py-3 text-base font-semibold transition hover:bg-gray-50 sm:text-lg"
             >
               Cancel
             </button>
