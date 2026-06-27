@@ -1,13 +1,13 @@
 {
   "app": {
-    "name": "Jobs_Placements"
+    "name": "JewelCancy"
   },
   "seo": {
-    "defaultTitle": "Jobs Placements",
-    "defaultDescription": "Find jobs, companies, and hiring tools for jewelry professionals."
+    "defaultTitle": "JewelCancy | Jewellery Recruitment Platform",
+    "defaultDescription": "India's premium recruitment platform for the Jewellery Industry."
   },
   "common": {
-    "loading": "लोड हो रहा है...",
+    "loading": "Loading JewelCancy...",
     "updatingResults": "परिणाम अपडेट हो रहे हैं...",
     "tryAgain": "फिर कोशिश करें",
     "refreshPage": "पेज रीफ्रेश करें",
@@ -111,26 +111,26 @@
   },
   "header": {
     "news": [
-      "ज्वेलरी डिजाइन में नई नौकरियां - अभी आवेदन करें!",
-      "इस सप्ताह 500+ कंपनियां भर्ती कर रही हैं",
-      "गोल्डस्मिथ और CAD डिजाइनरों के लिए विशेष भर्ती अभियान",
-      "ज्वेलरी प्रोफेशनल्स के लिए रिमोट नौकरियां उपलब्ध",
-      "प्लेसमेंट सफलता कहानियां - 1000+ उम्मीदवार चयनित",
-      "आगामी भर्ती कार्यक्रम - रजिस्टर करें"
+      "New jewellery jobs added - apply now!",
+      "Trusted recruiters hiring skilled jewellery professionals",
+      "Special hiring drive for goldsmiths and CAD designers",
+      "Remote opportunities for jewellery professionals",
+      "JewelCancy success stories - skilled candidates placed",
+      "Upcoming hiring events - register now"
     ],
     "logoutConfirm": "क्या आप वाकई लॉगआउट करना चाहते हैं?"
   },
   "footer": {
-    "aboutTitle": "हमारे बारे में",
-    "aboutText": "Jobs_Placements 1995 से नौकरी चाहने वालों की सेवा कर रहा है। हम कामगारों को बेहतर नौकरियों से जोड़ने के लिए प्रतिबद्ध हैं।",
+    "aboutTitle": "About JewelCancy",
+    "aboutText": "Connecting Skilled Jewellery Professionals with Trusted Recruiters",
     "quickLinks": "त्वरित लिंक",
     "customerService": "ग्राहक सेवा",
     "connect": "हमसे जुड़ें",
     "faqs": "सामान्य प्रश्न",
     "privacyPolicy": "गोपनीयता नीति",
     "blogs": "ब्लॉग",
-    "address": "123 Company Street\nLiterary City, LC 12345\nफोन: (123) 456-7890",
-    "copyright": "© {{year}} Jobs_Placements. सर्वाधिकार सुरक्षित."
+    "address": "Support: support@jewelcancy.com\nWebsite: www.jewelcancy.com",
+    "copyright": "© 2026 JewelCancy. All Rights Reserved."
   },
   "sidebar": {
     "toggleMenu": "मेन्यू टॉगल करें",
@@ -146,7 +146,8 @@
     "myResume": "मेरा रिज्यूमे",
     "createResume": "रिज्यूमे बनाएं",
     "findJobs": "नौकरियां खोजें",
-    "myApplications": "मेरे आवेदन"
+    "myApplications": "मेरे आवेदन",
+    "brand": "JewelCancy"
   },
   "company": {
     "topCompanies": "शीर्ष कंपनियां",

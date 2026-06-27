@@ -1,0 +1,29 @@
+{
+  "name": "JewelCancy",
+  "short_name": "JewelCancy",
+  "description": "India's premium recruitment platform for the Jewellery Industry.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f766e",
+  "categories": [
+    "business",
+    "productivity",
+    "jobs"
+  ],
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

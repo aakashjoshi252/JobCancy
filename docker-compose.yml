@@ -1,4 +1,4 @@
-name: job-placements
+name: jewelcancy
 
 services:
   frontend:
@@ -12,8 +12,8 @@ services:
         VITE_RAZORPAY_KEY_ID: ${VITE_RAZORPAY_KEY_ID:-}
         VITE_SUPPORT_EMAIL: ${VITE_SUPPORT_EMAIL:-support@jewelcancy.com}
         VITE_DEBUG_MODE: ${VITE_DEBUG_MODE:-false}
-    image: ${DOCKER_IMAGE_PREFIX:-job-placements}/frontend:${IMAGE_TAG:-latest}
-    container_name: job-placements-frontend
+    image: ${DOCKER_IMAGE_PREFIX:-jewelcancy}/frontend:${IMAGE_TAG:-latest}
+    container_name: jewelcancy-frontend
     restart: unless-stopped
     ports:
       - "${FRONTEND_PORT:-80}:8080"
@@ -39,10 +39,11 @@ services:
       context: ./server
       dockerfile: Dockerfile
       target: production
-    image: ${DOCKER_IMAGE_PREFIX:-job-placements}/backend:${IMAGE_TAG:-latest}
-    container_name: job-placements-backend
+    image: ${DOCKER_IMAGE_PREFIX:-jewelcancy}/backend:${IMAGE_TAG:-latest}
+    container_name: jewelcancy-backend
     restart: unless-stopped
     environment:
+      APP_NAME: ${APP_NAME:-JewelCancy}
       NODE_ENV: production
       PORT: 3000
       MONGODB_URI: ${MONGODB_URI:-mongodb://mongodb:27017/jobplacements}
@@ -108,7 +109,7 @@ services:
 
   mongodb:
     image: mongo:7.0
-    container_name: job-placements-mongodb
+    container_name: jewelcancy-mongodb
     restart: unless-stopped
     expose:
       - "27017"

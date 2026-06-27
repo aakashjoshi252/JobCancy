@@ -83,6 +83,7 @@ services:
     container_name: jewelcancy-backend
     restart: unless-stopped
     environment:
+      APP_NAME: ${APP_NAME:-JewelCancy}
       NODE_ENV: production
       PORT: 3000
       MONGODB_URI: ${MONGODB_URI:-mongodb://mongodb:27017/jobplacements}

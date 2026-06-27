@@ -9,8 +9,7 @@ const cleanEnvValue = (value, fallback = "") => (value || fallback).split("#")[0
 const trimTrailingSlash = (value) => cleanEnvValue(value).replace(/\/+$/, "");
 
 const API_VERSION = "/api/v1";
-const PRODUCTION_API_URL = API_VERSION;
-const DEVELOPMENT_API_URL = API_VERSION;
+const DEFAULT_API_URL = "http://localhost:3000/api/v1";
 const DEBUG_MODE = import.meta.env.VITE_DEBUG_MODE === "true";
 const apiDebugLog = (...args) => {
   if (DEBUG_MODE) console.log(...args);
@@ -35,9 +34,7 @@ const isUnsafeProductionUrl = (value) => import.meta.env.PROD && !isRelativeUrl(
 
 const configuredApiUrl = cleanEnvValue(import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL);
 const selectedApiUrl = configuredApiUrl && !isUnsafeProductionUrl(configuredApiUrl) ? configuredApiUrl : "";
-const API_BASE_URL = normalizeApiBaseUrl(
-  selectedApiUrl || (import.meta.env.PROD ? PRODUCTION_API_URL : DEVELOPMENT_API_URL)
-);
+const API_BASE_URL = normalizeApiBaseUrl(selectedApiUrl || DEFAULT_API_URL);
 const SERVER_BASE_URL = trimTrailingSlash(API_BASE_URL).replace(/(?:\/api\/v1)+$/i, "");
 const BASE_URL = SERVER_BASE_URL;
 

@@ -1,10 +1,10 @@
 {
   "app": {
-    "name": "Jobs Placements"
+    "name": "JewelCancy"
   },
   "seo": {
-    "defaultTitle": "Jobs Placements",
-    "defaultDescription": "Find jobs, companies, and hiring tools for jewelry professionals."
+    "defaultTitle": "JewelCancy | Jewellery Recruitment Platform",
+    "defaultDescription": "India's premium recruitment platform for the Jewellery Industry."
   },
   "language": {
     "label": "भाषा",
@@ -13,7 +13,7 @@
     "searchPlaceholder": "भाषा खोजें"
   },
   "common": {
-    "loading": "लोड हो रहा है...",
+    "loading": "Loading JewelCancy...",
     "updatingResults": "Updating results...",
     "tryAgain": "फिर कोशिश करें",
     "retry": "Retry",
@@ -134,28 +134,29 @@
   },
   "header": {
     "news": [
-      "New Jobs Added in Jewelry Design - Apply Now!",
-      "500+ Companies Hiring This Week",
-      "Special Hiring Drive for Goldsmiths & CAD Designers",
-      "Remote Jobs Available for Jewelry Professionals",
-      "Placement Success Stories - 1000+ Candidates Placed",
-      "Upcoming Hiring Events - Register Now"
+      "New jewellery jobs added - apply now!",
+      "Trusted recruiters hiring skilled jewellery professionals",
+      "Special hiring drive for goldsmiths and CAD designers",
+      "Remote opportunities for jewellery professionals",
+      "JewelCancy success stories - skilled candidates placed",
+      "Upcoming hiring events - register now"
     ],
     "logoutConfirm": "Are you sure you want to logout?"
   },
   "footer": {
-    "aboutTitle": "About Us",
-    "aboutText": "Jobs Placements helps jewelry professionals find trusted opportunities and helps recruiters hire faster.",
+    "aboutTitle": "About JewelCancy",
+    "aboutText": "Connecting Skilled Jewellery Professionals with Trusted Recruiters",
     "quickLinks": "Quick Links",
     "customerService": "Customer Service",
     "connect": "Connect With Us",
     "faqs": "FAQs",
     "privacyPolicy": "Privacy Policy",
     "blogs": "Blogs",
-    "copyright": "© {{year}} Jobs Placements. All rights reserved."
+    "copyright": "© 2026 JewelCancy. All Rights Reserved.",
+    "address": "Support: support@jewelcancy.com\nWebsite: www.jewelcancy.com"
   },
   "sidebar": {
-    "brand": "Job Placement",
+    "brand": "JewelCancy",
     "toggleMenu": "Toggle menu",
     "closeMenu": "Close dashboard menu",
     "openMenu": "Open dashboard menu",

@@ -58,7 +58,7 @@ export default function useSubscriptionPayment({ onVerified } = {}) {
           key: checkoutKey,
           amount: order.amount,
           currency: order.currency,
-          name: "Job Placement Platform",
+          name: "JewelCancy",
           description: getPlanDisplayName(order.plan || plan),
           order_id: order.orderId,
           prefill: {

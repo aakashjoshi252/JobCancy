@@ -30,7 +30,7 @@
   "orderId": "Order ID",
   "date": "Date",
   "noBillingHistory": "No billing history yet.",
-  "checkoutTitle": "Job Placement Platform",
+  "checkoutTitle": "JewelCancy Platform",
   "checkoutUnavailable": "Payment checkout is unavailable",
   "paymentVerified": "Subscription activated",
   "paymentFailed": "Payment verification failed",

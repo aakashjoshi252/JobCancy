@@ -87,7 +87,7 @@ module.exports = {
       user: 'ubuntu', // SSH user
       host: ['your-server-ip'], // Server IP(s)
       ref: 'origin/main',
-      repo: 'git@github.com:aakashjoshi252/Jobs_placements.git',
+      repo: 'git@github.com:aakashjoshi252/jewelcancy.git',
       path: '/var/www/jobs-placements',
       'ssh_options': 'StrictHostKeyChecking=no',
       'post-deploy': 'cd server && npm install && pm2 reload ecosystem.config.js --env production',

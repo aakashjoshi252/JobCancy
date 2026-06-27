@@ -1,11 +1,11 @@
-# Career Vista - MERN Stack Job Placement Platform
+# JewelCancy - MERN Stack Jewellery Recruitment Platform
 
 ## Cover Page
 
 | Field | Details |
 | --- | --- |
-| Project Name | Career Vista - Job Placement and Recruitment Platform |
-| Subtitle | AI-powered MERN Stack Job Placement, Recruitment, Subscription, and Career Management System |
+| Project Name | JewelCancy - Jewellery Recruitment and Hiring Platform |
+| Subtitle | AI-powered MERN Stack Jewellery Recruitment, Hiring, Subscription, and Career Management System |
 | Developer Name | Aakash Joshi |
 | Project Type | Full Stack Web Application |
 | Technology Stack | React.js, Vite, Node.js, Express.js, MongoDB, Socket.IO, Redux Toolkit, JWT, Cloudinary, Razorpay |
@@ -17,11 +17,11 @@
 
 ## 1. Project Introduction
 
-Career Vista is a full stack job placement and recruitment platform built using the MERN stack. The platform connects candidates, recruiters, and administrators through a single digital ecosystem where candidates can search and apply for jobs, recruiters can manage hiring workflows, and admins can control the overall platform operations.
+JewelCancy is a full stack jewellery recruitment and hiring platform built using the MERN stack. The platform connects candidates, recruiters, and administrators through a single digital ecosystem where candidates can search and apply for jobs, recruiters can manage hiring workflows, and admins can control the overall platform operations.
 
 The system was created to solve the common problems found in manual and scattered recruitment workflows. Candidates often struggle to find suitable jobs, track applications, manage resumes, and communicate with recruiters. Recruiters need a structured way to post jobs, manage applicants, schedule interviews, and monitor hiring performance. Administrators need tools to manage users, subscriptions, revenue, blogs, reports, and platform quality.
 
-Career Vista brings these workflows into one platform with role-based access, real-time chat, notifications, resume management, subscription-based recruiter job posting, blog publishing, multi-language UI support, and analytics.
+JewelCancy brings these workflows into one platform with role-based access, real-time chat, notifications, resume management, subscription-based recruiter job posting, blog publishing, multi-language UI support, and analytics.
 
 ### Target Users
 
@@ -37,7 +37,7 @@ Career Vista brings these workflows into one platform with role-based access, re
 
 ### Main Aim
 
-The main aim of Career Vista is to provide a modern, scalable, secure, and user-friendly recruitment platform that simplifies job placement workflows for candidates, recruiters, and administrators.
+The main aim of JewelCancy is to provide a modern, scalable, secure, and user-friendly recruitment platform that simplifies jewellery recruitment workflows for candidates, recruiters, and administrators.
 
 ### Business Goals
 
@@ -233,7 +233,7 @@ The main aim of Career Vista is to provide a modern, scalable, secure, and user-
 
 ## 6. System Architecture
 
-Career Vista follows a modular MERN architecture. The frontend is built with React and Vite, while the backend is built with Express.js and MongoDB. The backend follows an MVC-style pattern with separate route, controller, service, middleware, model, and utility layers.
+JewelCancy follows a modular MERN architecture. The frontend is built with React and Vite, while the backend is built with Express.js and MongoDB. The backend follows an MVC-style pattern with separate route, controller, service, middleware, model, and utility layers.
 
 ### High-Level Architecture
 
@@ -902,7 +902,7 @@ Recommended accessibility practices:
 
 ## 12. Real-Time Features
 
-Socket.IO powers the real-time layer of Career Vista.
+Socket.IO powers the real-time layer of JewelCancy.
 
 ### Socket.IO Implementation
 
@@ -1007,7 +1007,7 @@ Blog cover images and inline images can be uploaded to Cloudinary for optimized 
 
 ## 15. Multi-Language System
 
-Career Vista uses react-i18next for multi-language UI support.
+JewelCancy uses react-i18next for multi-language UI support.
 
 ### react-i18next Setup
 
@@ -1084,7 +1084,7 @@ Users can switch language from the UI. The selected language can be persisted in
 
 ## 17. Remaining Features and Future Scope
 
-Career Vista has strong scope for AI and automation improvements.
+JewelCancy has strong scope for AI and automation improvements.
 
 ### AI Job Recommendations
 
@@ -1290,13 +1290,13 @@ Important production checklist:
 
 ## 21. Conclusion
 
-Career Vista is a complete MERN stack job placement and recruitment platform designed for real-world career and hiring workflows. It supports candidates, recruiters, and administrators with dedicated dashboards, secure authentication, job posting, applications, resumes, interviews, chat, notifications, blogs, subscriptions, payments, analytics, and multi-language support.
+JewelCancy is a complete MERN stack jewellery recruitment and hiring platform designed for real-world career and hiring workflows. It supports candidates, recruiters, and administrators with dedicated dashboards, secure authentication, job posting, applications, resumes, interviews, chat, notifications, blogs, subscriptions, payments, analytics, and multi-language support.
 
 The technical implementation follows a modular full stack architecture with React and Vite on the frontend, Express and Node.js on the backend, MongoDB for persistence, Socket.IO for real-time communication, Cloudinary for uploads, Razorpay for payments, and JWT for secure access.
 
-The platform is useful for placement agencies, colleges, training institutes, recruiters, startups, and job portals. Its subscription system makes it suitable for commercial deployment, while its architecture allows future expansion into AI-powered job matching, resume analysis, interview assistance, analytics, mobile apps, and chatbot features.
+The platform is useful for placement agencies, colleges, training institutes, recruiters, startups, and recruitment platforms. Its subscription system makes it suitable for commercial deployment, while its architecture allows future expansion into AI-powered job matching, resume analysis, interview assistance, analytics, mobile apps, and chatbot features.
 
-Overall, Career Vista is a scalable and production-oriented project suitable for internship submission, final year project documentation, client presentation, and portfolio showcase.
+Overall, JewelCancy is a scalable and production-oriented project suitable for internship submission, final year project documentation, client presentation, and portfolio showcase.
 
 ---
 
@@ -1358,7 +1358,7 @@ VITE_DEBUG_MODE=true
 ### Folder Structure Overview
 
 ```text
-Jobs_placements/
+jewelcancy/
   client/
     src/
       api/

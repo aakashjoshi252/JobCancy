@@ -1,6 +1,7 @@
 import { IoJournal } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import logo from '../../../public/jewelCancy_logo.png';
 
 export default function Header() {
   const { t } = useTranslation();
@@ -20,8 +21,8 @@ export default function Header() {
             
             {/* Logo */}
             <div className="flex items-center gap-2 text-lg sm:text-xl font-bold">
-              <div className="bg-white p-1.5 rounded-lg shadow-lg">
-                <IoJournal className="text-lg sm:text-xl text-indigo-600" />
+              <div className="bg-white  rounded-lg shadow-lg">
+                <img src={logo} alt="logo" className="w-10 h-10 rounded-full object-cover" />
               </div>
 
               <span className="bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent font-extrabold tracking-wide">

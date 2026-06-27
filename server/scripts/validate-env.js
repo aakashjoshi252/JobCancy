@@ -37,6 +37,8 @@ const envSchema = Joi.object({
   SMTP_PORT: Joi.number().allow('').optional(),
   SMTP_USER: Joi.string().allow('').optional(),
   SMTP_PASS: Joi.string().allow('').optional(),
+  SMTP_FROM: Joi.string().allow('').optional(),
+  FROM_EMAIL: Joi.string().allow('').optional(),
   EMAIL_USER: Joi.string().allow('').optional(),
   EMAIL_PASS: Joi.string().allow('').optional(),
   

@@ -1,4 +1,4 @@
-name: job-placements-dev
+name: jewelcancy-dev
 
 services:
   frontend:
@@ -6,13 +6,14 @@ services:
       context: ./client
       dockerfile: Dockerfile
       target: development
-    image: job-placements/frontend:dev
-    container_name: job-placements-frontend-dev
+    image: jewelcancy/frontend:dev
+    container_name: jewelcancy-frontend-dev
     restart: unless-stopped
     environment:
       VITE_API_URL: ${DEV_VITE_API_URL:-http://localhost:5000}
       VITE_SOCKET_URL: ${DEV_VITE_SOCKET_URL:-http://localhost:5000}
       VITE_RAZORPAY_KEY_ID: ${VITE_RAZORPAY_KEY_ID:-}
+      VITE_SUPPORT_EMAIL: ${VITE_SUPPORT_EMAIL:-support@jewelcancy.com}
       VITE_DEBUG_MODE: ${DEV_VITE_DEBUG_MODE:-true}
       CHOKIDAR_USEPOLLING: 'true'
       WATCHPACK_POLLING: 'true'
@@ -33,10 +34,11 @@ services:
       context: ./server
       dockerfile: Dockerfile
       target: development
-    image: job-placements/backend:dev
-    container_name: job-placements-backend-dev
+    image: jewelcancy/backend:dev
+    container_name: jewelcancy-backend-dev
     restart: unless-stopped
     environment:
+      APP_NAME: ${APP_NAME:-JewelCancy}
       NODE_ENV: development
       PORT: 5000
       MONGODB_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME:-jobs_admin}:${MONGO_INITDB_ROOT_PASSWORD:-changeThisMongoPassword}@mongodb:27017/${MONGO_INITDB_DATABASE:-jobplacements}?authSource=admin
@@ -46,6 +48,7 @@ services:
       CLIENT_URL: ${DEV_CLIENT_URL:-http://localhost:5173}
       FRONTEND_URL: ${DEV_FRONTEND_URL:-http://localhost:5173}
       DEV_ALLOWED_ORIGINS: ${DEV_ALLOWED_ORIGINS:-http://localhost:5173,http://127.0.0.1:5173,http://localhost:80}
+      SUPPORT_EMAIL: ${SUPPORT_EMAIL:-support@jewelcancy.com}
       CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-}
       CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-}
       CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-}
@@ -91,7 +94,7 @@ services:
 
   mongodb:
     image: mongo:7.0
-    container_name: job-placements-mongodb-dev
+    container_name: jewelcancy-mongodb-dev
     restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-jobs_admin}

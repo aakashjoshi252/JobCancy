@@ -45,7 +45,7 @@ const AdminDashboard = () => {
     <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">JewelCancy Admin Dashboard</h1>
         <p className="text-gray-600 mt-2">Manage your platform from one place</p>
       </div>
 

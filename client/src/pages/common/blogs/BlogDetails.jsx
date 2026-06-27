@@ -174,7 +174,7 @@ export default function BlogDetails() {
     const description = blog.seo?.metaDescription || blog.excerpt || blog.description;
     const image = coverImage;
 
-    document.title = `${title} | Jobs Placements Blog`;
+    document.title = `${title} | JewelCancy Blog`;
     setMetaTag('meta[name="description"]', {
       identity: { name: "description" },
       values: { content: description },
@@ -229,7 +229,7 @@ export default function BlogDetails() {
       },
       publisher: {
         "@type": "Organization",
-        name: "Jobs Placements",
+        name: "JewelCancy",
       },
       mainEntityOfPage: articleUrl,
     });

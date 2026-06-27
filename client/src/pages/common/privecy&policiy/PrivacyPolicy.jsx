@@ -7,7 +7,7 @@ export default function PrivacyPolicy() {
       </h1>
 
       <p className="mb-6 text-gray-700">
-        Welcome to our Job Placement Platform! We are committed to protecting your personal information and
+        Welcome to JewelCancy! We are committed to protecting your personal information and
         your right to privacy. This Privacy Policy explains how we collect, use, and safeguard your data.
       </p>
 
@@ -80,7 +80,7 @@ export default function PrivacyPolicy() {
         </h2>
         <p>
           If you have questions about our Privacy Policy, please contact us at: <br />
-          <strong className="text-blue-700">support@jobplacement.com</strong>
+          <strong className="text-blue-700">support@jewelcancy.com</strong>
         </p>
       </section>
 

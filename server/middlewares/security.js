@@ -53,6 +53,29 @@ const authLimiter = rateLimit({
   },
 });
 
+const verificationLimiter = rateLimit({
+  windowMs: (process.env.VERIFICATION_RATE_LIMIT_WINDOW || 15) * 60 * 1000,
+  max: process.env.VERIFICATION_RATE_LIMIT_MAX_REQUESTS || 20,
+  message: {
+    success: false,
+    code: 'VERIFICATION_RATE_LIMITED',
+    message: 'Too many verification attempts. Please try again later.',
+    retryAfter: '15 minutes',
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+  skipSuccessfulRequests: true,
+  skip: (req) => req.method === 'OPTIONS',
+  handler: (req, res) => {
+    logger.warn(`Verification rate limit exceeded for IP: ${req.ip} on ${req.path}`);
+    res.status(429).json({
+      success: false,
+      code: 'VERIFICATION_RATE_LIMITED',
+      message: 'Too many verification attempts. Please try again later.',
+      retryAfter: Math.ceil(req.rateLimit.resetTime - Date.now()) / 1000,
+    });
+  },
+});
 const chatUploadLimiter = rateLimit({
   windowMs: (process.env.CHAT_UPLOAD_RATE_WINDOW || 15) * 60 * 1000,
   max: process.env.CHAT_UPLOAD_RATE_MAX || 30,
@@ -86,6 +109,7 @@ const paymentLimiter = rateLimit({
 module.exports = {
   limiter,
   authLimiter,
+  verificationLimiter,
   chatUploadLimiter,
   paymentLimiter,
 };

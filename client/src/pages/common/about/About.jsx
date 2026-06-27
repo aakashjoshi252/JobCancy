@@ -71,7 +71,7 @@ export default function About() {
     {
       name: "Amit Patel",
       role: "HR Manager at Krishna Jewellers",
-      content: "JobPlacements transformed our hiring process. We found our best designers within days!",
+      content: "JewelCancy transformed our hiring process. We found our best designers within days!",
       rating: 5,
       image: "https://randomuser.me/api/portraits/men/52.jpg"
     },
@@ -135,7 +135,7 @@ export default function About() {
             <GiJewelCrown className="text-6xl text-yellow-300" />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            About <span className="text-yellow-300">JobPlacements</span>
+            About <span className="text-yellow-300">JewelCancy</span>
           </h1>
           <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
             Revolutionizing jewelry industry recruitment through innovation, 
@@ -206,9 +206,9 @@ export default function About() {
             <div className="grid md:grid-cols-2 gap-12">
               <div>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                  Founded in 2020, <span className="font-semibold text-blue-600">JobPlacements</span> emerged 
+                  Founded in 2020, <span className="font-semibold text-blue-600">JewelCancy</span> emerged 
                   from a simple observation: the jewelry industry needed a specialized platform for recruitment. 
-                  Generic job portals weren't addressing the unique needs of jewelers, designers, and craftspeople.
+                  Generic recruitment platforms weren't addressing the unique needs of jewelers, designers, and craftspeople.
                 </p>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                   Today, we've grown into India's leading jewelry-specific hiring platform, connecting 
@@ -391,7 +391,7 @@ export default function About() {
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl shadow-xl p-12">
             <h2 className="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>
             <p className="text-lg text-blue-100 mb-8">
-              Join thousands of professionals and companies already using JobPlacements
+              Join thousands of jewellery professionals and trusted recruiters already using JewelCancy
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -412,7 +412,7 @@ export default function About() {
             <div className="mt-8 pt-8 border-t border-blue-400 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
               <div className="flex items-center justify-center gap-2">
                 <MdEmail className="text-xl" />
-                <span>support@jobplacements.com</span>
+                <span>support@jewelcancy.com</span>
               </div>
               <div className="flex items-center justify-center gap-2">
                 <FaBuilding className="text-xl" />
@@ -420,7 +420,7 @@ export default function About() {
               </div>
               <div className="flex items-center justify-center gap-2">
                 <FaGlobe className="text-xl" />
-                <span>www.jobplacements.com</span>
+                <span>www.jewelcancy.com</span>
               </div>
             </div>
           </div>

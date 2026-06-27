@@ -1,7 +1,7 @@
 {
-  "name": "job-placements-server",
+  "name": "jewelcancy-backend",
   "version": "1.0.0",
-  "description": "Job Placements Portal API Server",
+  "description": "JewelCancy Backend API Server",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -27,20 +27,21 @@
     "logs:errors": "tail -f logs/error.log",
     "security:audit": "npm audit --production",
     "security:fix": "npm audit fix",
-    "docker:build": "docker build -t job-placements-api .",
-    "docker:run": "docker run -p 3000:3000 --env-file .env job-placements-api",
+    "docker:build": "docker build -t jewelcancy-backend .",
+    "docker:run": "docker run -p 3000:3000 --env-file .env jewelcancy-backend",
     "docker:compose:up": "docker-compose up -d",
     "docker:compose:down": "docker-compose down",
-    "pm2:start": "pm2 start server.js --name jobs-api --max-memory-restart 500M",
-    "pm2:stop": "pm2 stop jobs-api",
-    "pm2:restart": "pm2 restart jobs-api",
-    "pm2:logs": "pm2 logs jobs-api",
+    "pm2:start": "pm2 start server.js --name jewelcancy-api --max-memory-restart 500M",
+    "pm2:stop": "pm2 stop jewelcancy-api",
+    "pm2:restart": "pm2 restart jewelcancy-api",
+    "pm2:logs": "pm2 logs jewelcancy-api",
     "pm2:monit": "pm2 monit"
   },
   "keywords": [
-    "jobs",
-    "placements",
+    "jewelcancy",
+    "jewellery",
     "recruitment",
+    "hiring",
     "api",
     "nodejs",
     "express",
@@ -51,7 +52,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aakashjoshi252/Jobs_placements.git"
+    "url": "https://github.com/aakashjoshi252/jewelcancy.git"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

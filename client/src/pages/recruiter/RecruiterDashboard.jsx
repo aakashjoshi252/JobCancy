@@ -315,7 +315,7 @@ export default function RecruiterDashboard() {
                 )}
 
                 {showUserName ? (
-                  <>Welcome back, {loggedUser?.username || "User"}!</>
+                  <>Welcome to JewelCancy Recruiter Portal</>
                 ) : (
                   <>{company?.companyName || "Recruiter"}</>
                 )}

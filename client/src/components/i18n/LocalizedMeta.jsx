@@ -12,9 +12,9 @@ export default function LocalizedMeta() {
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
-    const title = t("seo.defaultTitle", { defaultValue: "Jobs Placements" });
+    const title = t("seo.defaultTitle", { defaultValue: "JewelCancy | Jewellery Recruitment Platform" });
     const description = t("seo.defaultDescription", {
-      defaultValue: "Find jobs, companies, and hiring tools for jewelry professionals.",
+      defaultValue: "India's premium recruitment platform for the Jewellery Industry.",
     });
 
     document.title = title;

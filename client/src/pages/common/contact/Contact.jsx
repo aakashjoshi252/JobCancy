@@ -71,8 +71,8 @@ export default function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             { icon: <MdPhone className="text-3xl" />, title: t("cards.call"), content: "+91 1800-123-4567", sub: t("cards.hours") },
-            { icon: <MdEmail className="text-3xl" />, title: t("cards.email"), content: "support@jobplacements.com", sub: t("cards.support") },
-            { icon: <MdLocationOn className="text-3xl" />, title: t("cards.visit"), content: "123 JobPlacements Lane", sub: t("cards.city") }
+            { icon: <MdEmail className="text-3xl" />, title: t("cards.email"), content: "support@jewelcancy.com", sub: t("cards.support") },
+            { icon: <MdLocationOn className="text-3xl" />, title: t("cards.visit"), content: "www.jewelcancy.com", sub: t("cards.city") }
           ].map((item, index) => (
             <div key={index} className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition group">
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-600 transition">
@@ -228,7 +228,7 @@ export default function Contact() {
                   <div className="flex items-center gap-4">
                     <FaEnvelope className="text-xl" />
                     <div>
-                      <p className="font-medium">support@jobplacements.com</p>
+                      <p className="font-medium">support@jewelcancy.com</p>
                       <p className="text-blue-100 text-sm">{t("office.emailLabel")}</p>
                     </div>
                   </div>

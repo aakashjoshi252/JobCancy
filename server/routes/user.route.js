@@ -2,7 +2,7 @@ const express = require("express");
 const userRoute = express.Router();
 const userController = require("../controllers/user.controller.js");
 const { protect, isAdmin } = require("../middlewares/auth.middleware.js");
-const { authLimiter } = require("../middlewares/security");
+const { authLimiter, verificationLimiter } = require("../middlewares/security");
 const {
   uploadProfileImage,
   handleMulterError,
@@ -21,8 +21,10 @@ userRoute.post("/change-password", protect, userController.changePassword);
 // =========================
 // EMAIL VERIFICATION ROUTES
 // =========================
-userRoute.post("/verify-email", authLimiter, userController.verifyEmail);   // Verify OTP
-userRoute.post("/resend-otp", authLimiter, userController.resendOTP);       // Resend OTP
+userRoute.post("/verify-email", verificationLimiter, userController.verifyEmail); // Verify OTP
+userRoute.post("/verifyEmail", verificationLimiter, userController.verifyEmail);  // Legacy alias
+userRoute.post("/resend-otp", verificationLimiter, userController.resendOTP);     // Resend OTP
+userRoute.post("/resendOtp", verificationLimiter, userController.resendOTP);      // Legacy alias
 
 // =========================
 // USER ROUTES

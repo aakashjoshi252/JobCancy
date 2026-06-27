@@ -46,7 +46,7 @@ const CandidateDashboard = () => {
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Candidate Dashboard</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Welcome to JewelCancy</h1>
         <p className="text-gray-600 mt-2">Track your applications and discover new opportunities</p>
       </div>
 

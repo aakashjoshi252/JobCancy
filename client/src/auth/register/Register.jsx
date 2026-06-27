@@ -128,29 +128,42 @@ const filteredProfessions = jobProfessions.filter((profession) =>
     onSubmit: async (values, { resetForm, setFieldError }) => {
       setLoading(true);
       try {
+        const normalizedEmail = values.email.trim().toLowerCase();
         const payload = {
-          username: values.username,
-          email: values.email,
+          username: values.username.trim(),
+          email: normalizedEmail,
           password: values.password,
-          phone: values.phone,
+          phone: values.phone.trim(),
           role: values.role,
         };
 
         if (values.role === "candidate") {
-          payload.jobProfession = values.jobProfession;
+          payload.jobProfession = values.jobProfession.trim();
         }
 
-        await userApi.post("/register", payload);
+        const response = await userApi.post("/register", payload);
+        const responseData = response.data?.data || {};
+        const devOtp = responseData.devOtp;
 
-        localStorage.setItem("verifyEmail", values.email);
+        localStorage.setItem("verifyEmail", normalizedEmail);
+        if (devOtp) {
+          localStorage.setItem("verifyEmailDevOtp", devOtp);
+        } else {
+          localStorage.removeItem("verifyEmailDevOtp");
+        }
 
         setSuccessMsg(t("register.success"));
 
         resetForm();
         setShowJobProfession(false);
 
-        navigate("/email-verify");
-
+        navigate(`/email-verify?email=${encodeURIComponent(normalizedEmail)}`, {
+          state: {
+            email: normalizedEmail,
+            devOtp,
+            emailDelivery: responseData.emailDelivery,
+          },
+        });
       } catch (error) {
         const msg = translateApiError(error, t, "unexpected") || t("register.failed");
         if (error.response?.data?.data) {

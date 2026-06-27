@@ -208,7 +208,7 @@ export const getCoverImage = (blog) =>
   blog?.coverImage?.url || blog?.image || fallbackCoverImage;
 
 export const getAuthorName = (blog) =>
-  blog?.authorId?.username || blog?.author?.username || blog?.companyId?.companyName || "Jobs Placements";
+  blog?.authorId?.username || blog?.author?.username || blog?.companyId?.companyName || "JewelCancy";
 
 export const getAuthorAvatar = (blog) =>
   blog?.authorId?.profileImage?.url ||

@@ -76,12 +76,27 @@ const parseOriginList = (value = "") =>
     .map((origin) => origin.trim())
     .filter(Boolean);
 
+const defaultDevelopmentOrigins = [
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+];
+
+const defaultProductionOrigins = [
+  "https://jobcancy.onrender.com",
+  "https://www.jewelcancy.com",
+  "https://jewelcancy.com",
+];
+
 const developmentOrigins = nodeEnv === "production"
   ? []
-  : parseOriginList(process.env.DEV_ALLOWED_ORIGINS || process.env.CLIENT_URL);
+  : [
+      ...defaultDevelopmentOrigins,
+      ...parseOriginList(process.env.DEV_ALLOWED_ORIGINS || process.env.CLIENT_URL),
+    ];
 
 const allowedOrigins = [
   ...developmentOrigins,
+  ...defaultProductionOrigins,
   process.env.CLIENT_URL,
   process.env.FRONTEND_URL,
   process.env.PRODUCTION_URL,
@@ -93,11 +108,24 @@ const normalizeOrigin = (origin) => origin?.replace(/\/$/, "");
 
 const normalizedAllowedOrigins = [...new Set(allowedOrigins.map(normalizeOrigin))];
 
-const isOriginAllowed = (origin) => {
-  if (!origin) return true;
-  return normalizedAllowedOrigins.includes(normalizeOrigin(origin));
+const isDevelopmentLanOrigin = (origin) => {
+  if (nodeEnv === "production" || !origin) return false;
+
+  try {
+    const { hostname, protocol } = new URL(origin);
+    const isHttp = protocol === "http:" || protocol === "https:";
+    const isLocalHost = hostname === "localhost" || hostname === "127.0.0.1";
+    const isLanHost = /^192\.168\.\d{1,3}\.\d{1,3}$/.test(hostname);
+    return isHttp && (isLocalHost || isLanHost);
+  } catch (_error) {
+    return false;
+  }
 };
 
+const isOriginAllowed = (origin) => {
+  if (!origin) return true;
+  return normalizedAllowedOrigins.includes(normalizeOrigin(origin)) || isDevelopmentLanOrigin(origin);
+};
 const corsOriginHandler = (origin, callback) => {
   if (isOriginAllowed(origin)) {
     return callback(null, true);
@@ -191,7 +219,7 @@ app.use('/api', limiter);
 app.get('/', (req, res) => {
   res.status(200).json({
     success: true,
-    message: 'Job Placements Portal API',
+    message: 'JewelCancy API',
     version: '1.0.0',
     environment: nodeEnv,
     timestamp: new Date().toISOString(),

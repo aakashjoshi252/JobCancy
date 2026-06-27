@@ -60,9 +60,67 @@ const createMailTransporter = () => {
   });
 };
 
-const getMailFrom = (name = "Job Placements") => {
-  const fromEmail = process.env.FROM_EMAIL || process.env.EMAIL_USER || process.env.SMTP_USER;
-  return `"${name}" <${fromEmail}>`;
+const APP_NAME = process.env.APP_NAME || "JewelCancy";
+const SUPPORT_EMAIL = process.env.SUPPORT_EMAIL || "support@jewelcancy.com";
+const WEBSITE_URL = (process.env.FRONTEND_URL || process.env.CLIENT_URL || "https://www.jewelcancy.com").replace(/\/$/, "");
+
+const getEmailFooter = () => `
+  <hr style="border: 1px solid #e5e7eb; margin: 20px 0;">
+  <p style="color: #374151; font-size: 13px; margin: 0 0 4px;">Need help?</p>
+  <p style="color: #2563eb; font-size: 13px; margin: 0;">${SUPPORT_EMAIL}</p>
+  <p style="color: #2563eb; font-size: 13px; margin: 4px 0 0;">${WEBSITE_URL.replace(/^https?:\/\//, "")}</p>
+  <p style="color: #6b7280; font-size: 12px;">&copy; 2026 ${APP_NAME}. All Rights Reserved.</p>
+`;
+
+const getMailFrom = (name = APP_NAME) => {
+  const fromEmail = process.env.SMTP_FROM || process.env.FROM_EMAIL || process.env.EMAIL_USER || process.env.SMTP_USER;
+  return `"${name}" <${fromEmail || SUPPORT_EMAIL}>`;
+};
+
+const isProduction = () => process.env.NODE_ENV === "production";
+const normalizeEmail = (email = "") => String(email || "").trim().toLowerCase();
+const normalizeOtp = (otp = "") => String(otp || "").trim();
+const getSubmittedOtp = (body = {}) => normalizeOtp(body.otp ?? body.verificationCode ?? body.code);
+const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
+
+const getNumberEnv = (name, fallback) => {
+  const value = Number(process.env[name]);
+  return Number.isFinite(value) && value > 0 ? value : fallback;
+};
+
+const getVerificationOtpMinutes = () => getNumberEnv("EMAIL_VERIFICATION_OTP_MINUTES", 10);
+const getPasswordResetOtpMinutes = () => getNumberEnv("PASSWORD_RESET_OTP_MINUTES", 10);
+const getOtpExpiryDate = (minutes) => new Date(Date.now() + minutes * 60 * 1000);
+
+const sendMailSafely = async (mailOptions, context = "email") => {
+  try {
+    const transporter = createMailTransporter();
+    await transporter.sendMail(mailOptions);
+    return { sent: true };
+  } catch (error) {
+    logger.error(`Failed to send ${context}: ${error.message}`, { stack: error.stack });
+    return { sent: false, error: error.message };
+  }
+};
+
+const getEmailDeliveryData = (mailResult, otp) => {
+  const data = {
+    emailDelivery: {
+      sent: Boolean(mailResult?.sent),
+    },
+  };
+
+  if (!mailResult?.sent) {
+    data.emailDelivery.message = isProduction()
+      ? "Email delivery failed. Please contact support or try resend OTP."
+      : mailResult?.error || "Email delivery failed.";
+
+    if (!isProduction()) {
+      data.devOtp = otp;
+    }
+  }
+
+  return data;
 };
 
 const emptyProfileImage = () => ({
@@ -172,9 +230,19 @@ const userController = {
   createUser: async (req, res) => {
     try {
       const { username, email, password, role, phone, jobProfession } = req.body;
+      const normalizedUsername = String(username || "").trim();
+      const normalizedEmail = normalizeEmail(email);
+      const normalizedPhone = String(phone || "").trim();
+      const normalizedRole = String(role || "").trim();
+      const normalizedJobProfession = String(jobProfession || "").trim();
 
-      // Validate required fields
-      const requiredFields = { username, email, password, role, phone };
+      const requiredFields = {
+        username: normalizedUsername,
+        email: normalizedEmail,
+        password,
+        role: normalizedRole,
+        phone: normalizedPhone,
+      };
       const missingFields = Object.entries(requiredFields)
         .filter(([_, value]) => !value)
         .map(([key]) => key);
@@ -182,99 +250,91 @@ const userController = {
       if (missingFields.length > 0) {
         return res.status(400).json({
           success: false,
-          message: `Missing required fields: ${missingFields.join(', ')}`,
+          code: "MISSING_FIELDS",
+          message: `Missing required fields: ${missingFields.join(", ")}`,
         });
       }
 
-      // Validate role
-      if (!["candidate", "recruiter"].includes(role)) {
+      if (!["candidate", "recruiter"].includes(normalizedRole)) {
         return res.status(400).json({
           success: false,
+          code: "INVALID_ROLE",
           message: "Invalid role. Public registration supports candidate or recruiter accounts only",
         });
       }
 
-      // Validate jobProfession for candidates
-      if (role === "candidate" && !jobProfession) {
+      if (normalizedRole === "candidate" && !normalizedJobProfession) {
         return res.status(400).json({
           success: false,
+          code: "JOB_PROFESSION_REQUIRED",
           message: "Job profession is required for candidates",
         });
       }
 
-      // Validate phone number format (10 digits)
       const phoneRegex = /^[0-9]{10}$/;
-      if (!phoneRegex.test(phone)) {
+      if (!phoneRegex.test(normalizedPhone)) {
         return res.status(400).json({
           success: false,
+          code: "INVALID_PHONE",
           message: "Please provide a valid 10-digit phone number",
         });
       }
 
-      // Check existing user
       const existUser = await User.findOne({
-        $or: [{ email }, { phone }]
+        $or: [{ email: normalizedEmail }, { phone: normalizedPhone }],
       }).select("+email +phone");
 
       if (existUser) {
-        const field = existUser.email === email ? "email" : "phone";
+        const field = existUser.email === normalizedEmail ? "email" : "phone";
         return res.status(409).json({
           success: false,
+          code: "USER_ALREADY_EXISTS",
           message: `User with this ${field} already exists.`,
+          data: field,
         });
       }
 
-      // Hash password
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
+      const otp = generateOtp();
+      const otpMinutes = getVerificationOtpMinutes();
 
-      // Generate OTP
-      const otp = Math.floor(100000 + Math.random() * 900000).toString();
-
-      // Create user data object
       const userData = {
-        username: username.trim(),
-        email: email.toLowerCase().trim(),
+        username: normalizedUsername,
+        email: normalizedEmail,
         password: hashedPassword,
-        role,
-        phone: phone.trim(),
+        role: normalizedRole,
+        phone: normalizedPhone,
         isEmailVerified: false,
         emailVerificationOTP: otp,
-        emailVerificationOTPExpires: Date.now() + 5 * 60 * 1000, // 5 min
+        emailVerificationOTPExpires: getOtpExpiryDate(otpMinutes),
       };
 
-      // Add jobProfession only for candidates
-      if (role === "candidate") {
-        userData.jobProfession = jobProfession.trim();
+      if (normalizedRole === "candidate") {
+        userData.jobProfession = normalizedJobProfession;
       }
 
-      // Create user
       const newUser = await User.create(userData);
 
-      // Send email (OTP)
-      const transporter = createMailTransporter();
-
-      await transporter.sendMail({
-        from: getMailFrom("Job Placements"),
-        to: email,
-        subject: "Email Verification OTP",
+      const mailResult = await sendMailSafely({
+        from: getMailFrom(),
+        to: normalizedEmail,
+        subject: "Welcome to JewelCancy",
         html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #2563eb;">Welcome to Job Placements!</h2>
-          <h3>Hello ${username},</h3>
+          <h2 style="color: #2563eb;">Welcome to JewelCancy!</h2>
+          <h3>Hello ${normalizedUsername},</h3>
           <p>Thank you for registering. Please verify your email address using the OTP below:</p>
           <div style="background-color: #f3f4f6; padding: 20px; text-align: center; border-radius: 8px; margin: 20px 0;">
             <h1 style="font-size: 36px; letter-spacing: 5px; color: #2563eb; margin: 0;">${otp}</h1>
           </div>
-          <p>This OTP is valid for <strong>5 minutes</strong>.</p>
+          <p>This OTP is valid for <strong>${otpMinutes} minutes</strong>.</p>
           <p>If you didn't create an account, please ignore this email.</p>
-          <hr style="border: 1px solid #e5e7eb; margin: 20px 0;">
-          <p style="color: #6b7280; font-size: 12px;">&copy; 2024 Job Placements. All rights reserved.</p>
+          ${getEmailFooter()}
         </div>
       `,
-      });
+      }, "registration verification OTP");
 
-      // Prepare response (exclude sensitive data)
       const userResponse = {
         _id: newUser._id,
         username: newUser.username,
@@ -288,19 +348,25 @@ const userController = {
 
       return res.status(201).json({
         success: true,
-        message: "User registered successfully. Please verify your email.",
-        data: userResponse,
+        message: mailResult.sent
+          ? "User registered successfully. Please verify your email."
+          : "User registered successfully, but the verification email could not be sent. Please use resend OTP or contact support.",
+        data: {
+          ...userResponse,
+          user: userResponse,
+          ...getEmailDeliveryData(mailResult, otp),
+        },
       });
     } catch (error) {
       logger.error(`Error creating user: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
+        code: "INTERNAL_SERVER_ERROR",
         message: "Internal server error",
-        error: error.message,
+        error: isProduction() ? undefined : error.message,
       });
     }
   },
-
   loginUser: async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -879,40 +945,55 @@ const userController = {
 
   verifyEmail: async (req, res) => {
     try {
-      const { email, otp } = req.body;
+      const email = normalizeEmail(req.body.email);
+      const submittedOtp = getSubmittedOtp(req.body);
 
-      if (!email || !otp) {
+      if (!email || !submittedOtp) {
         return res.status(400).json({
           success: false,
+          code: "EMAIL_OTP_REQUIRED",
           message: "Email and OTP are required",
         });
       }
 
-      const user = await User.findOne({ email: email.toLowerCase().trim() })
+      const user = await User.findOne({ email })
         .select("+emailVerificationOTP +emailVerificationOTPExpires");
 
       if (!user) {
         return res.status(404).json({
           success: false,
+          code: "USER_NOT_FOUND",
           message: "User not found",
         });
       }
 
       if (user.isEmailVerified) {
-        return res.status(400).json({
-          success: false,
+        return res.status(200).json({
+          success: true,
+          code: "EMAIL_ALREADY_VERIFIED",
           message: "Email already verified",
+          data: {},
         });
       }
 
-      if (
-        !user.emailVerificationOTP ||
-        user.emailVerificationOTP !== otp ||
-        user.emailVerificationOTPExpires < Date.now()
-      ) {
+      const storedOtp = normalizeOtp(user.emailVerificationOTP);
+      const expiresAt = user.emailVerificationOTPExpires
+        ? new Date(user.emailVerificationOTPExpires).getTime()
+        : 0;
+
+      if (!storedOtp || storedOtp !== submittedOtp) {
         return res.status(400).json({
           success: false,
-          message: "Invalid or expired OTP",
+          code: "INVALID_OTP",
+          message: "Invalid verification code",
+        });
+      }
+
+      if (!expiresAt || expiresAt < Date.now()) {
+        return res.status(400).json({
+          success: false,
+          code: "OTP_EXPIRED",
+          message: "Verification code has expired. Please request a new OTP.",
         });
       }
 
@@ -925,11 +1006,13 @@ const userController = {
       return res.status(200).json({
         success: true,
         message: "Email verified successfully",
+        data: {},
       });
     } catch (error) {
       logger.error(`Error verifying email: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
+        code: "INTERNAL_SERVER_ERROR",
         message: "Internal server error",
       });
     }
@@ -937,20 +1020,22 @@ const userController = {
 
   resendOTP: async (req, res) => {
     try {
-      const { email } = req.body;
+      const email = normalizeEmail(req.body.email);
 
       if (!email) {
         return res.status(400).json({
           success: false,
+          code: "EMAIL_REQUIRED",
           message: "Email is required",
         });
       }
 
-      const user = await User.findOne({ email: email.toLowerCase().trim() });
+      const user = await User.findOne({ email });
 
       if (!user) {
         return res.status(404).json({
           success: false,
+          code: "USER_NOT_FOUND",
           message: "User not found",
         });
       }
@@ -958,108 +1043,113 @@ const userController = {
       if (user.isEmailVerified) {
         return res.status(400).json({
           success: false,
+          code: "EMAIL_ALREADY_VERIFIED",
           message: "Email already verified",
         });
       }
 
-      // Generate new OTP
-      const otp = Math.floor(100000 + Math.random() * 900000).toString();
-
+      const otp = generateOtp();
+      const otpMinutes = getVerificationOtpMinutes();
       user.emailVerificationOTP = otp;
-      user.emailVerificationOTPExpires = Date.now() + 5 * 60 * 1000; // 5 minutes
+      user.emailVerificationOTPExpires = getOtpExpiryDate(otpMinutes);
 
       await user.save();
 
-      // Send Email
-      const transporter = createMailTransporter();
-
-      await transporter.sendMail({
-        from: getMailFrom("Career Vista"),
+      const mailResult = await sendMailSafely({
+        from: getMailFrom(),
         to: email,
-        subject: "Resend OTP - Email Verification",
+        subject: "Welcome to JewelCancy",
         html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #2563eb;">Career Vista</h2>
+          <h2 style="color: #2563eb;">JewelCancy</h2>
           <h3>Hello ${user.username},</h3>
           <p>Your new OTP for email verification is:</p>
           <div style="background-color: #f3f4f6; padding: 20px; text-align: center; border-radius: 8px; margin: 20px 0;">
             <h1 style="font-size: 36px; letter-spacing: 5px; color: #2563eb; margin: 0;">${otp}</h1>
           </div>
-          <p>This OTP is valid for <strong>5 minutes</strong>.</p>
+          <p>This OTP is valid for <strong>${otpMinutes} minutes</strong>.</p>
+          ${getEmailFooter()}
         </div>
       `,
-      });
+      }, "email verification OTP resend");
 
       return res.status(200).json({
         success: true,
-        message: "OTP resent successfully",
+        message: mailResult.sent
+          ? "OTP resent successfully"
+          : "OTP regenerated, but the email could not be sent. Please try again or contact support.",
+        data: getEmailDeliveryData(mailResult, otp),
       });
     } catch (error) {
       logger.error(`Error resending OTP: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
+        code: "INTERNAL_SERVER_ERROR",
         message: "Internal server error",
       });
     }
   },
-
   // ============================================
   // PASSWORD MANAGEMENT
   // ============================================
 
   forgotPassword: async (req, res) => {
     try {
-      const { email } = req.body;
+      const email = normalizeEmail(req.body.email);
 
       if (!email) {
         return res.status(400).json({
           success: false,
+          code: "EMAIL_REQUIRED",
           message: "Email is required",
         });
       }
 
-      const user = await User.findOne({ email: email.toLowerCase().trim() });
+      const user = await User.findOne({ email });
 
       if (!user) {
         return res.status(200).json({
           success: true,
           message: "If an account exists, a reset code has been sent.",
+          data: {},
         });
       }
 
-      const otp = Math.floor(100000 + Math.random() * 900000).toString();
+      const otp = generateOtp();
+      const otpMinutes = getPasswordResetOtpMinutes();
       user.passwordResetOTP = otp;
-      user.passwordResetOTPExpires = Date.now() + 10 * 60 * 1000;
+      user.passwordResetOTPExpires = getOtpExpiryDate(otpMinutes);
       await user.save();
 
-      const transporter = createMailTransporter();
-
-      await transporter.sendMail({
-        from: getMailFrom("Job Placements"),
+      const mailResult = await sendMailSafely({
+        from: getMailFrom(),
         to: user.email,
-        subject: "Password Reset OTP",
+        subject: "JewelCancy Password Reset OTP",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #2563eb;">Job Placements</h2>
+            <h2 style="color: #2563eb;">JewelCancy</h2>
             <h3>Hello ${user.username},</h3>
             <p>Use the OTP below to reset your password.</p>
             <div style="background-color: #f3f4f6; padding: 20px; text-align: center; border-radius: 8px; margin: 20px 0;">
               <h1 style="font-size: 36px; letter-spacing: 5px; color: #2563eb; margin: 0;">${otp}</h1>
             </div>
-            <p>This OTP is valid for <strong>10 minutes</strong>.</p>
+            <p>This OTP is valid for <strong>${otpMinutes} minutes</strong>.</p>
             <p>If you did not request this, you can safely ignore this email.</p>
+            ${getEmailFooter()}
           </div>
         `,
-      });
+      }, "password reset OTP");
 
       return res.status(200).json({
         success: true,
         message: "If an account exists, a reset code has been sent.",
+        data: getEmailDeliveryData(mailResult, otp),
       });
     } catch (error) {
       logger.error(`Error sending password reset OTP: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
+        code: "INTERNAL_SERVER_ERROR",
         message: "Internal server error",
       });
     }
@@ -1067,11 +1157,14 @@ const userController = {
 
   resetPassword: async (req, res) => {
     try {
-      const { email, otp, password } = req.body;
+      const email = normalizeEmail(req.body.email);
+      const submittedOtp = getSubmittedOtp(req.body);
+      const { password } = req.body;
 
-      if (!email || !otp || !password) {
+      if (!email || !submittedOtp || !password) {
         return res.status(400).json({
           success: false,
+          code: "EMAIL_OTP_PASSWORD_REQUIRED",
           message: "Email, OTP, and password are required",
         });
       }
@@ -1079,17 +1172,32 @@ const userController = {
       if (password.length < 6) {
         return res.status(400).json({
           success: false,
+          code: "PASSWORD_TOO_SHORT",
           message: "Password must be at least 6 characters long",
         });
       }
 
-      const user = await User.findOne({ email: email.toLowerCase().trim() })
+      const user = await User.findOne({ email })
         .select("+password +passwordResetOTP +passwordResetOTPExpires");
 
-      if (!user || user.passwordResetOTP !== otp || user.passwordResetOTPExpires < Date.now()) {
+      const storedOtp = normalizeOtp(user?.passwordResetOTP);
+      const expiresAt = user?.passwordResetOTPExpires
+        ? new Date(user.passwordResetOTPExpires).getTime()
+        : 0;
+
+      if (!user || !storedOtp || storedOtp !== submittedOtp) {
         return res.status(400).json({
           success: false,
-          message: "Invalid or expired OTP",
+          code: "INVALID_OTP",
+          message: "Invalid verification code",
+        });
+      }
+
+      if (!expiresAt || expiresAt < Date.now()) {
+        return res.status(400).json({
+          success: false,
+          code: "OTP_EXPIRED",
+          message: "Verification code has expired. Please request a new OTP.",
         });
       }
 
@@ -1102,16 +1210,17 @@ const userController = {
       return res.status(200).json({
         success: true,
         message: "Password reset successfully",
+        data: {},
       });
     } catch (error) {
       logger.error(`Error resetting password: ${error.message}`, { stack: error.stack });
       return res.status(500).json({
         success: false,
+        code: "INTERNAL_SERVER_ERROR",
         message: "Internal server error",
       });
     }
   },
-
   changePassword: async (req, res) => {
     try {
       const { currentPassword, newPassword } = req.body;

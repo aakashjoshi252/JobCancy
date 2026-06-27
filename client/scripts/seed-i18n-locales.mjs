@@ -16,10 +16,10 @@ const deepMerge = (base, override) => {
 };
 
 const baseCommon = {
-  app: { name: "Jobs Placements" },
+  app: { name: "JewelCancy" },
   seo: {
-    defaultTitle: "Jobs Placements",
-    defaultDescription: "Find jobs, companies, and hiring tools for jewelry professionals.",
+    defaultTitle: "JewelCancy | Jewellery Recruitment Platform",
+    defaultDescription: "India's premium recruitment platform for the Jewellery Industry.",
   },
   language: {
     label: "Language",
@@ -28,7 +28,7 @@ const baseCommon = {
     searchPlaceholder: "Search language",
   },
   common: {
-    loading: "Loading...",
+    loading: "Loading JewelCancy...",
     updatingResults: "Updating results...",
     tryAgain: "Try again",
     retry: "Retry",
@@ -159,18 +159,18 @@ const baseCommon = {
     logoutConfirm: "Are you sure you want to logout?",
   },
   footer: {
-    aboutTitle: "About Us",
-    aboutText: "Jobs Placements helps jewelry professionals find trusted opportunities and helps recruiters hire faster.",
+    aboutTitle: "About JewelCancy",
+    aboutText: "Connecting Skilled Jewellery Professionals with Trusted Recruiters",
     quickLinks: "Quick Links",
     customerService: "Customer Service",
     connect: "Connect With Us",
     faqs: "FAQs",
     privacyPolicy: "Privacy Policy",
     blogs: "Blogs",
-    copyright: "© {{year}} Jobs Placements. All rights reserved.",
+    copyright: "© {{year}} JewelCancy. All rights reserved.",
   },
   sidebar: {
-    brand: "Job Placement",
+    brand: "JewelCancy",
     toggleMenu: "Toggle menu",
     closeMenu: "Close dashboard menu",
     openMenu: "Open dashboard menu",
@@ -225,12 +225,12 @@ const baseCommon = {
 
 const baseAuth = {
   login: {
-    title: "Welcome Back",
+    title: "Welcome Back to JewelCancy",
     forgotPassword: "Forgot Password?",
     submit: "Login",
     submitting: "Logging in...",
     noAccount: "Don't have an account?",
-    createAccount: "Create Account",
+    createAccount: "Create Your JewelCancy Account",
     errors: {
       noUser: "Login failed - no user data received",
       invalidCredentials: "Invalid email or password",
@@ -250,15 +250,15 @@ const baseAuth = {
     backToLogin: "Back to login",
   },
   register: {
-    title: "Create Account",
+    title: "Create Your JewelCancy Account",
     submit: "Register",
     submitting: "Creating Account...",
     success: "OTP sent to your email. Please verify.",
     failed: "Registration failed",
     alreadyHaveAccount: "Already have an account?",
     passwordHint: "Password must be at least 6 characters",
-    candidateRole: "Candidate (Job Seeker)",
-    recruiterRole: "Recruiter (Employer)",
+    candidateRole: "Candidate (Find Jewellery Jobs)",
+    recruiterRole: "Recruiter (Hire Skilled Jewellery Professionals)",
     selectRolePlaceholder: "Select Role",
     professionNote: "Please ensure that the job profession you enter is accurate and up to date, as it will be visible to recruiters. Once registered, this field cannot be changed.",
     termsPrefix: "I accept the",

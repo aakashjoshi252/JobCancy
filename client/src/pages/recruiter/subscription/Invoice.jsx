@@ -33,7 +33,7 @@ export default function SubscriptionInvoice() {
   const receiptText = useMemo(() => {
     if (!transaction) return "";
     return [
-      "Job Placement Platform - Subscription Receipt",
+      "JewelCancy - Subscription Receipt",
       `Receipt: ${transaction.receipt || transaction._id}`,
       `Plan: ${transaction.planId?.planName || "-"}`,
       `Amount: ${formatCurrency(transaction.amount)}`,
