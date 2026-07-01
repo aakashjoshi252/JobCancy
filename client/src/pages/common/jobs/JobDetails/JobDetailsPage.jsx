@@ -173,8 +173,8 @@ export default function JobDetailsPage() {
                 copySuccess={copySuccess}
             />
 
-            <div className="max-w-7xl mx-auto px-4 py-8">
-                <div className="flex flex-col lg:flex-row gap-6">
+            <div className="mx-auto w-full max-w-7xl px-3 py-4 sm:px-4 sm:py-6 lg:py-8">
+                <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
                     {/* Left Sidebar */}
                     <JobListingSidebar
                         filteredJobs={filteredJobs}
@@ -190,7 +190,7 @@ export default function JobDetailsPage() {
                     />
 
                     {/* Right Side - Job Details */}
-                    <div className="lg:w-3/5">
+                    <div className="min-w-0 lg:w-3/5">
                         {selectedJob ? (
                             <JobDetailsContent
                                 job={selectedJob}
@@ -229,7 +229,7 @@ function ShareModal({ isOpen, onClose, onCopyLink, copySuccess }) {
 
     return (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
-            <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl transform transition-all animate-slideUp">
+            <div className="max-h-[calc(100dvh-1rem)] w-full max-w-md overflow-y-auto rounded-lg bg-white p-4 shadow-2xl transition-all animate-slideUp sm:p-6">
                 <div className="flex justify-between items-center mb-4">
                     <h3 className="text-xl font-bold text-gray-900">Share this job</h3>
                     <button
@@ -242,16 +242,16 @@ function ShareModal({ isOpen, onClose, onCopyLink, copySuccess }) {
                 </div>
 
                 <div className="mb-6">
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
                         <input
                             type="text"
                             value={window.location.href}
                             readOnly
-                            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition"
+                            className="min-w-0 flex-1 rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-sm outline-none transition focus:ring-2 focus:ring-blue-500"
                         />
                         <button
                             onClick={onCopyLink}
-                            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all transform hover:scale-105 ${copySuccess
+                            className={`w-full rounded-lg px-4 py-2 text-sm font-medium transition-all sm:w-auto ${copySuccess
                                     ? 'bg-green-600 text-white'
                                     : 'bg-blue-600 text-white hover:bg-blue-700'
                                 }`}
@@ -292,8 +292,8 @@ function JobListingSidebar({
     onJobSelect, onToggleSave, formatSalary, getDaysAgo, isAuthenticated
 }) {
     return (
-        <div className="lg:w-2/5">
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden sticky top-24 transition-all hover:shadow-xl">
+        <div className="min-w-0 lg:w-2/5">
+            <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg transition-all hover:shadow-xl lg:sticky lg:top-24">
                 <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
                     <div className="relative">
                         <input
@@ -307,7 +307,7 @@ function JobListingSidebar({
                     </div>
                 </div>
 
-                <div className="h-[calc(100vh-320px)] overflow-y-auto">
+                <div className="max-h-[22rem] overflow-y-auto lg:h-[calc(100dvh-320px)] lg:max-h-none">
                     {filteredJobs.length > 0 ? (
                         filteredJobs.map((job) => (
                             <JobListItem
@@ -431,12 +431,12 @@ function JobDetailsContent({
     return (
         <div className="space-y-6">
             {/* Main Job Card */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden transition-all hover:shadow-xl">
-                <div className="p-8">
+            <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg transition-all hover:shadow-xl">
+                <div className="p-4 sm:p-6 lg:p-8">
                     {/* Header */}
-                    <div className="flex justify-between items-start mb-6">
-                        <div className="flex-1">
-                            <h1 className="text-3xl font-bold text-gray-900 mb-3">
+                    <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                        <div className="min-w-0 flex-1">
+                            <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
                                 {job.title}
                             </h1>
                             <div className="flex items-center gap-3 flex-wrap">
@@ -472,7 +472,7 @@ function JobDetailsContent({
                     </div>
 
                     {/* Quick Info Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                    <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
                         <InfoCard icon={<HiBriefcase />} label="Employment" value={job.empType || 'Full-time'} color="blue" />
                         <InfoCard icon={<HiAcademicCap />} label="Experience" value={job.experience || 'Fresher'} color="green" />
                         <InfoCard icon={<HiUsers />} label="Openings" value={job.openings || 1} color="purple" />
@@ -589,16 +589,16 @@ function SalarySection({ salaryParts }) {
     };
 
     return (
-        <div className="bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50 p-6 rounded-xl mb-8 border border-blue-100">
+        <div className="mb-8 rounded-lg border border-blue-100 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50 p-4 sm:p-6">
             <p className="text-sm text-gray-700 mb-4 flex items-center gap-2 font-semibold">
                 <HiCurrencyDollar className="text-blue-600 text-lg" />
                 Salary Package
             </p>
             <div className="space-y-3">
                 {salaryParts.map((part, idx) => (
-                    <div key={idx} className="flex items-center justify-between">
+                    <div key={idx} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                         <span className="text-sm text-gray-700 font-medium">{part.label}:</span>
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-2">
                             <span className="text-lg font-bold text-blue-600">{part.range}</span>
                             <span className={`text-xs px-2.5 py-1 rounded-full font-semibold ${typeColors[part.type] || 'bg-gray-100 text-gray-700'}`}>
                                 {part.label}
@@ -701,7 +701,7 @@ function ApplyButton({ onClick, disabled = false, label = "Apply for this Positi
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`w-full py-4 rounded-lg font-bold text-lg transition-all shadow-lg ${
+            className={`w-full rounded-lg py-3 text-base font-bold shadow-lg transition-all sm:py-4 sm:text-lg ${
                 disabled
                     ? "bg-gray-300 text-gray-600 cursor-not-allowed"
                     : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl transform hover:scale-[1.02]"
@@ -714,7 +714,7 @@ function ApplyButton({ onClick, disabled = false, label = "Apply for this Positi
 
 function CompanySection({ companyName, companyId, companyEmail, companyWebsite, companyAddress, companyDescription, onViewDetails }) {
     return (
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8 transition-all hover:shadow-xl">
+        <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-lg transition-all hover:shadow-xl sm:p-6 lg:p-8">
             <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <VscOrganization className="text-blue-600" />
                 About the Company
@@ -723,7 +723,7 @@ function CompanySection({ companyName, companyId, companyEmail, companyWebsite, 
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
                     <VscOrganization className="text-4xl text-blue-600" />
                 </div>
-                <div className="flex-1">
+                <div className="min-w-0 flex-1">
                     <h4 className="font-bold text-gray-900 mb-2 text-lg">
                         {companyName}
                     </h4>
@@ -732,7 +732,7 @@ function CompanySection({ companyName, companyId, companyEmail, companyWebsite, 
                             {companyDescription}
                         </p>
                     )}
-                    <div className="flex flex-wrap gap-4 mb-4 text-sm">
+                    <div className="mb-4 flex flex-wrap gap-3 text-sm sm:gap-4">
                         {companyEmail && (
                             <a href={`mailto:${companyEmail}`} className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition">
                                 <HiMail className="text-lg" />
@@ -773,12 +773,12 @@ function CompanySection({ companyName, companyId, companyEmail, companyWebsite, 
 
 function SimilarJobsSection({ similarJobs, onSelect, formatSalary, isAuthenticated }) {
     return (
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8 transition-all hover:shadow-xl">
+        <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-lg transition-all hover:shadow-xl sm:p-6 lg:p-8">
             <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <HiSparkles className="text-yellow-500" />
                 Similar Jobs
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 {similarJobs.map((job) => (
                     <div
                         key={job._id}
@@ -810,10 +810,10 @@ function SimilarJobsSection({ similarJobs, onSelect, formatSalary, isAuthenticat
 
 function EmptyState({ onBrowse }) {
     return (
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-16 text-center animate-fadeIn">
+        <div className="rounded-lg border border-gray-200 bg-white p-6 text-center shadow-lg animate-fadeIn sm:p-10 lg:p-16">
             <GiDiamondRing className="text-7xl text-gray-300 mx-auto mb-6" />
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Select a Job to View Details</h2>
-            <p className="text-gray-600 mb-8 text-lg">
+            <h2 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl">Select a Job to View Details</h2>
+            <p className="mb-8 text-base text-gray-600 sm:text-lg">
                 Choose a job from the left panel to see detailed information
             </p>
             <button
@@ -854,16 +854,16 @@ function DetailItem({ icon: Icon, label, value, color }) {
 
 function SkeletonLoader() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 p-4">
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 p-3 sm:p-4">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col lg:flex-row gap-6">
                     {/* Sidebar Skeleton */}
-                    <div className="lg:w-2/5">
-                        <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden sticky top-24">
+                    <div className="min-w-0 lg:w-2/5">
+                        <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg lg:sticky lg:top-24">
                             <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
                                 <div className="h-10 bg-gray-200 rounded-lg animate-pulse"></div>
                             </div>
-                            <div className="h-[calc(100vh-320px)] overflow-y-auto">
+                            <div className="max-h-[22rem] overflow-y-auto lg:h-[calc(100dvh-320px)] lg:max-h-none">
                                 {[...Array(5)].map((_, idx) => (
                                     <div key={idx} className="p-5 border-b border-gray-100">
                                         <div className="mb-3">
@@ -885,14 +885,14 @@ function SkeletonLoader() {
                     </div>
 
                     {/* Main Content Skeleton */}
-                    <div className="lg:w-3/5 space-y-6">
-                        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8 animate-pulse">
+                    <div className="min-w-0 space-y-6 lg:w-3/5">
+                        <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-lg animate-pulse sm:p-6 lg:p-8">
                             <div className="h-8 bg-gray-200 rounded w-2/3 animate-pulse mb-4"></div>
                             <div className="flex gap-3 mb-6">
                                 <div className="h-6 bg-gray-100 rounded w-1/4 animate-pulse"></div>
                                 <div className="h-6 bg-gray-100 rounded w-1/5 animate-pulse"></div>
                             </div>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                            <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
                                 {[...Array(4)].map((_, idx) => (
                                     <div key={idx} className="p-4 rounded-lg border border-gray-200">
                                         <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse mb-2"></div>

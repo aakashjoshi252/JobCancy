@@ -9,13 +9,28 @@ const cleanEnvValue = (value, fallback = "") => (value || fallback).split("#")[0
 const trimTrailingSlash = (value) => cleanEnvValue(value).replace(/\/+$/, "");
 
 const API_VERSION = "/api/v1";
-const DEFAULT_API_URL = "http://localhost:3000/api/v1";
+const PRODUCTION_API_URL = "https://job-sss.onrender.com/api/v1";
+const DEFAULT_DEV_API_ORIGIN = "http://localhost:3000";
 const DEBUG_MODE = import.meta.env.VITE_DEBUG_MODE === "true";
 const apiDebugLog = (...args) => {
   if (DEBUG_MODE) console.log(...args);
 };
 const apiDebugError = (...args) => {
   if (DEBUG_MODE) console.error(...args);
+};
+
+const getRuntimeHostname = () => (typeof window !== "undefined" ? window.location.hostname : "");
+const getRuntimeProtocol = () =>
+  typeof window !== "undefined" && window.location.protocol === "https:" ? "https:" : "http:";
+const isNetworkHost = (hostname) =>
+  /^(172\.(1[6-9]|2[0-9]|3[01])\.\d{1,3}\.\d{1,3}|192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3})$/.test(hostname);
+const getDevelopmentApiOrigin = () => {
+  const hostname = getRuntimeHostname();
+  if (import.meta.env.DEV && isNetworkHost(hostname)) {
+    return `${getRuntimeProtocol()}//${hostname}:3000`;
+  }
+
+  return DEFAULT_DEV_API_ORIGIN;
 };
 
 const normalizeApiBaseUrl = (value) => {
@@ -31,12 +46,28 @@ const isRelativeUrl = (value) => value.startsWith("/");
 const isLocalUrl = (value) =>
   /^https?:\/\/(localhost|127\.0\.0\.1|192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)/i.test(value);
 const isUnsafeProductionUrl = (value) => import.meta.env.PROD && !isRelativeUrl(value) && isLocalUrl(value);
+const shouldUseRuntimeDevHost = (value) =>
+  import.meta.env.DEV && /^https?:\/\/(localhost|127\.0\.0\.1)(?::\d+)?/i.test(value || "") && isNetworkHost(getRuntimeHostname());
 
 const configuredApiUrl = cleanEnvValue(import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL);
-const selectedApiUrl = configuredApiUrl && !isUnsafeProductionUrl(configuredApiUrl) ? configuredApiUrl : "";
-const API_BASE_URL = normalizeApiBaseUrl(selectedApiUrl || DEFAULT_API_URL);
+const selectedApiUrl =
+  configuredApiUrl && !isUnsafeProductionUrl(configuredApiUrl)
+    ? shouldUseRuntimeDevHost(configuredApiUrl)
+      ? getDevelopmentApiOrigin()
+      : configuredApiUrl
+    : "";
+const defaultApiUrl = import.meta.env.PROD ? PRODUCTION_API_URL : `${getDevelopmentApiOrigin()}${API_VERSION}`;
+const API_BASE_URL = normalizeApiBaseUrl(selectedApiUrl || defaultApiUrl);
 const SERVER_BASE_URL = trimTrailingSlash(API_BASE_URL).replace(/(?:\/api\/v1)+$/i, "");
 const BASE_URL = SERVER_BASE_URL;
+const configuredSocketUrl = cleanEnvValue(import.meta.env.VITE_SOCKET_URL);
+const selectedSocketUrl =
+  configuredSocketUrl && !isUnsafeProductionUrl(configuredSocketUrl)
+    ? shouldUseRuntimeDevHost(configuredSocketUrl)
+      ? getDevelopmentApiOrigin()
+      : configuredSocketUrl
+    : "";
+const SOCKET_BASE_URL = trimTrailingSlash(selectedSocketUrl || SERVER_BASE_URL);
 
 // ===========================
 //  Axios Common Config
@@ -192,8 +223,16 @@ export const apiHelpers = {
     updateProfileImage: (data, config) => userApi.patch("/profile-image", data, config),
     deleteProfileImage: () => userApi.delete("/profile-image"),
     changePassword: (data) => userApi.post("/change-password", data),
+    getLoginActivity: (params) => userApi.get("/login-activity", { params }),
+    getLoginHistory: (params) => userApi.get("/security/login-history", { params }),
     getNotifications: () => userApi.get("/notifications"),
     markNotificationRead: (notificationId) => userApi.patch(`/notifications/${notificationId}`),
+  },
+  loginActivity: {
+    getMine: (params) => userApi.get("/security/login-history", { params }),
+    getAdmin: (params) => adminApi.get("/login-activity", { params }),
+    getAdminByUser: (userId, params) => adminApi.get(`/login-activity/${userId}`, { params }),
+    delete: (activityId) => adminApi.delete(`/login-activity/${activityId}`),
   },
   notifications: {
     list: (params) => notificationApi.get("/", { params }),
@@ -277,4 +316,4 @@ apiDebugLog(`API Version: ${API_VERSION}`);
 apiDebugLog(`Environment: ${import.meta.env.MODE}`);
 
 // Export base configs for advanced use
-export { BASE_URL, SERVER_BASE_URL, API_BASE_URL, API_VERSION };
+export { BASE_URL, SERVER_BASE_URL, SOCKET_BASE_URL, API_BASE_URL, API_VERSION };

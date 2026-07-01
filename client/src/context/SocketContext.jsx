@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, useRef, useCallback } from "react";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
+import { SOCKET_BASE_URL } from "../api/api";
 
 const SocketContext = createContext();
 const DEBUG_MODE = import.meta.env.VITE_DEBUG_MODE === "true";
@@ -17,30 +18,6 @@ export const useSocket = () => {
     throw new Error("useSocket must be used within a SocketProvider");
   }
   return context;
-};
-
-const getSocketURL = () => {
-  const configuredSocketUrl = import.meta.env.VITE_SOCKET_URL;
-  const configuredApiUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL;
-  const normalizeUrl = (url) => url?.split("#")[0].trim().replace(/(?:\/api\/v1)+\/?$/i, "").replace(/\/+$/, "");
-  const isRelativeUrl = (url) => url?.startsWith("/");
-  const isLocalUrl = (url) =>
-    /^https?:\/\/(localhost|127\.0\.0\.1|192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)/i.test(url);
-  const isUnsafeProductionUrl = (url) => import.meta.env.PROD && !isRelativeUrl(url) && isLocalUrl(url);
-  const resolveSocketOrigin = (url) => {
-    if (isRelativeUrl(url)) return window.location.origin;
-    return normalizeUrl(url);
-  };
-
-  if (configuredSocketUrl && !isUnsafeProductionUrl(configuredSocketUrl)) {
-    return resolveSocketOrigin(configuredSocketUrl);
-  }
-
-  if (configuredApiUrl && !isUnsafeProductionUrl(configuredApiUrl)) {
-    return resolveSocketOrigin(configuredApiUrl);
-  }
-
-  return window.location.origin;
 };
 
 export const SocketProvider = ({ children }) => {
@@ -94,7 +71,7 @@ export const SocketProvider = ({ children }) => {
     }
 
     try {
-      const SOCKET_URL = getSocketURL();
+      const SOCKET_URL = SOCKET_BASE_URL;
       socketLog(`Connecting to Socket.IO: ${SOCKET_URL}`);
 
       const newSocket = io(SOCKET_URL, {

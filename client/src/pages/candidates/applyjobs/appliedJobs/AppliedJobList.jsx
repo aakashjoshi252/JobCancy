@@ -110,7 +110,7 @@ export default function AppliedJobs() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-6">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">My Applications</h1>
@@ -128,7 +128,7 @@ export default function AppliedJobs() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8 pb-12">
+      <div className="mx-auto max-w-7xl px-4 py-8 pb-12 sm:px-6">
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-8">
           <StatsCard label="Total" value={stats.total} icon={<HiClipboardList />} color="blue" />

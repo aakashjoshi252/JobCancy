@@ -49,7 +49,8 @@
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/azure-blue.css",
               "node_modules/primeicons/primeicons.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/styles/responsive.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -153,7 +154,8 @@
             ],
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/azure-blue.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/styles/responsive.css"
             ]
           }
         }

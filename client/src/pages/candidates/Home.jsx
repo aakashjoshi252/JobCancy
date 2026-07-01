@@ -119,7 +119,7 @@ export default function CandidateHome() {
     <div className="jc-soft-page min-h-screen">
       {/* Header */}
       <div className="bg-[#4c0e42] text-white">
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h1 className="text-3xl font-bold mb-2">
@@ -157,7 +157,7 @@ export default function CandidateHome() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 -mt-8 pb-12">
+      <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 -mt-8">
         {/* Stats Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
           <StatCard title="Applied Jobs" value={totalApplications} icon={<HiClipboardList />} color="blue" />

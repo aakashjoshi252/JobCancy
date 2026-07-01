@@ -21,6 +21,7 @@ export default function PrivacyPolicy() {
           <li>Resume and professional information</li>
           <li>Company or employer details (for recruiters)</li>
           <li>Usage data like IP address and browser type</li>
+          <li>Security login logs such as approximate IP-based city/country, device, browser, and login time</li>
         </ul>
       </section>
 
@@ -38,6 +39,23 @@ export default function PrivacyPolicy() {
           <li>Enhancing user experience through analytics</li>
           <li>Sending notifications and service updates</li>
         </ul>
+      </section>
+
+      {/* Login Security Logs */}
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+          Login Security & Approximate Location
+        </h2>
+        <p className="mb-3">
+          To protect accounts and detect suspicious access, JewelCancy records login activity such as IP address,
+          device/browser details, login time, and approximate location based on IP address. This is not exact live GPS
+          tracking, and we do not require browser location permission for login.
+        </p>
+        <p>
+          Normal users see masked IP addresses in their account security page. Admins may view full IP addresses for
+          security investigation, audit, and abuse prevention. Login activity logs are retained only for the configured
+          security retention period.
+        </p>
       </section>
 
       {/* Data Sharing & Security */}

@@ -76,7 +76,7 @@ export default function Footer() {
           <p className="text-sm leading-6 text-[#efd5e8]">
             Get the latest hiring insights and jewelry industry updates.
           </p>
-          <form className="mt-4 flex gap-2" onSubmit={(event) => event.preventDefault()}>
+          <form className="mt-4 flex flex-col gap-2 sm:flex-row" onSubmit={(event) => event.preventDefault()}>
             <input
               type="email"
               placeholder="Enter your email"
@@ -84,7 +84,7 @@ export default function Footer() {
             />
             <button
               type="submit"
-              className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-[#5d0f51] transition hover:bg-[#fff7fb]"
+              className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-[#5d0f51] transition hover:bg-[#fff7fb] sm:w-auto"
             >
               Subscribe
             </button>

@@ -75,12 +75,13 @@ const NotificationBell = () => {
       <button
         type="button"
         onClick={() => setShowDropdown((value) => !value)}
-        className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
+        className="relative inline-flex h-11 w-11 items-center justify-center rounded-lg border border-transparent text-[#6B21A8] transition hover:border-[#E9D5FF] hover:bg-[#FFF7F3]"
         aria-label={t("title")}
+        aria-expanded={showDropdown}
       >
         <BiBell size={24} />
         {unreadCount > 0 && (
-          <span className="absolute -right-1 -top-1 inline-flex min-w-5 items-center justify-center rounded-full bg-red-600 px-1.5 py-0.5 text-[10px] font-bold leading-none text-white">
+          <span className="absolute -right-1 -top-1 inline-flex min-w-5 items-center justify-center rounded-full bg-[#DC2626] px-1.5 py-0.5 text-[10px] font-bold leading-none text-white ring-2 ring-white">
             {unreadCount > 99 ? "99+" : unreadCount}
           </span>
         )}

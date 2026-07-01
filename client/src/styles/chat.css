@@ -8,7 +8,8 @@
    ============================================ */
 
 .chat-container {
-  height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: linear-gradient(135deg, rgb(239 246 255) 0%, rgb(243 244 246) 100%);

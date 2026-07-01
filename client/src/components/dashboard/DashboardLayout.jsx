@@ -27,6 +27,13 @@ export default function DashboardLayout({ role }) {
   }, [location.pathname, location.search]);
 
   useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
     if (resolvedRole !== "recruiter" || !user?._id || company) return undefined;
 
     let active = true;

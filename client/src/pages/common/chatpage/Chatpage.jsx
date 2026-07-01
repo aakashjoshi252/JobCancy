@@ -64,7 +64,7 @@ const ChatPage = () => {
 
   return (
     <div className="chat-route-shell h-full min-h-[calc(100dvh-4rem)] overflow-hidden bg-gray-100">
-      <div className="mx-auto h-full max-w-7xl px-0 py-0 sm:px-4 sm:py-4 lg:py-6">
+      <div className="mx-auto h-full max-w-[1600px] px-0 py-0 sm:px-4 sm:py-4 lg:py-6">
         <div className="flex h-full min-h-0 overflow-hidden rounded-none bg-white shadow-2xl sm:rounded-2xl">
           {/* Chat List Sidebar */}
           {!showCandidatesList && (

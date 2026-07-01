@@ -4,13 +4,17 @@
 
 :root {
   color-scheme: light;
-  --jc-bg: #f8fafc;
+  --jc-bg: #fff7f3;
   --jc-panel: #ffffff;
-  --jc-ink: #111827;
-  --jc-muted: #64748b;
-  --jc-line: #e2e8f0;
-  --jc-brand: #0f766e;
-  --jc-brand-strong: #115e59;
+  --jc-ink: #1f2937;
+  --jc-muted: #6b7280;
+  --jc-line: #e5e7eb;
+  --jc-brand: #6b21a8;
+  --jc-brand-strong: #581c87;
+  --jc-brand-soft: #8b5cf6;
+  --jc-soft-purple: #a78bfa;
+  --jc-light-purple: #e9d5ff;
+  --jc-blush: #fde8e4;
   --jc-gold: #b7791f;
 }
 
@@ -62,6 +66,6 @@ textarea {
 }
 
 .jc-focus-ring:focus-visible {
-  outline: 3px solid rgba(20, 184, 166, 0.35);
+  outline: 3px solid rgba(139, 92, 246, 0.35);
   outline-offset: 2px;
 }

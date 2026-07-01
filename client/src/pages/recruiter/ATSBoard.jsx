@@ -291,9 +291,9 @@ const ATSBoard = () => {
 
         {/* Kanban Board */}
         <DragDropContext onDragEnd={handleDragEnd}>
-          <div className="flex gap-4 overflow-x-auto pb-6 min-h-[calc(100vh-300px)]">
+          <div className="flex min-h-[calc(100dvh-300px)] gap-4 overflow-x-auto pb-6">
             {columns.map((column) => (
-              <div key={column.id} className="flex-shrink-0 w-80">
+              <div key={column.id} className="w-[min(20rem,calc(100vw-2rem))] flex-shrink-0">
                 <div className="overflow-hidden rounded-lg border border-[#f0dce8] bg-white shadow-sm">
                   {/* Column Header */}
                   <div className={`border-b border-[#f0dce8] p-4 ${column.bgColor}`}>
@@ -314,7 +314,7 @@ const ATSBoard = () => {
                       <div
                         ref={provided.innerRef}
                         {...provided.droppableProps}
-                        className={`p-3 min-h-[500px] transition-colors ${
+                        className={`min-h-[60dvh] p-3 transition-colors lg:min-h-[500px] ${
                           snapshot.isDraggingOver ? 'bg-[#fff7fb]' : ''
                         }`}
                       >
@@ -443,7 +443,7 @@ const ATSBoard = () => {
                 </button>
               </div>
 
-              <div className="p-6 space-y-6">
+              <div className="space-y-6 p-4 sm:p-6">
                 {/* Contact Information */}
                 <div className="bg-gray-50 rounded-lg p-4 border border-gray-100">
                   <h3 className="font-semibold text-gray-900 mb-3 text-sm flex items-center gap-2">
@@ -529,7 +529,7 @@ const ATSBoard = () => {
               </div>
 
               {/* Modal Footer */}
-              <div className="sticky bottom-0 bg-gray-50 border-t border-gray-200 px-6 py-4 flex justify-end gap-3 rounded-b-xl">
+              <div className="sticky bottom-0 flex flex-col gap-3 border-t border-gray-200 bg-gray-50 px-4 py-4 sm:flex-row sm:justify-end sm:px-6">
                 <button
                   onClick={() => setSelectedApplication(null)}
                   className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition font-medium"
@@ -565,7 +565,7 @@ function ATSSkeleton() {
         </div>
         <div className="flex gap-4 overflow-x-auto">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="flex-shrink-0 w-80">
+            <div key={i} className="w-[min(20rem,calc(100vw-2rem))] flex-shrink-0">
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div className="p-4 bg-gray-100 border-b border-gray-200">
                   <div className="h-5 bg-gray-200 rounded w-24"></div>

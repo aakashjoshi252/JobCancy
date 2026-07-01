@@ -400,8 +400,8 @@ export default function JobPost() {
 
   if (!company) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-20">
-        <div className="max-w-md w-full bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
+      <div className="flex min-h-screen items-center justify-center bg-gray-50 px-3 py-10 sm:px-4 sm:py-20">
+        <div className="w-full max-w-md rounded-lg border border-gray-200 bg-white p-5 text-center shadow-sm sm:p-8">
           <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
             <GiDiamondRing className="w-10 h-10 text-white" />
           </div>
@@ -420,7 +420,7 @@ export default function JobPost() {
 
   if (subscriptionLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-20">
+      <div className="flex min-h-screen items-center justify-center bg-gray-50 px-3 py-10 sm:px-4 sm:py-20">
         <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600" />
       </div>
     );
@@ -430,8 +430,8 @@ export default function JobPost() {
     const limitOver = subscriptionUsage?.hasSubscription && !subscriptionUsage?.canPost;
 
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-20">
-        <div className="max-w-lg w-full bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
+      <div className="flex min-h-screen items-center justify-center bg-gray-50 px-3 py-10 sm:px-4 sm:py-20">
+        <div className="w-full max-w-lg rounded-lg border border-gray-200 bg-white p-5 text-center shadow-sm sm:p-8">
           <div className="w-16 h-16 mx-auto mb-5 rounded-2xl bg-teal-50 flex items-center justify-center">
             <HiOutlineInformationCircle className="h-9 w-9 text-teal-700" />
           </div>
@@ -458,11 +458,11 @@ export default function JobPost() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 sm:py-8">
+    <div className="min-h-screen bg-gray-50 py-4 sm:py-8">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 sm:px-8 py-6">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-6 sm:px-8">
             <h1 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
               <GiDiamondRing className="text-yellow-300" />
               Post a New Job
@@ -471,7 +471,7 @@ export default function JobPost() {
           </div>
 
           {/* Progress Steps */}
-          <div className="bg-gray-50 px-6 sm:px-8 py-4 border-b border-gray-200">
+          <div className="border-b border-gray-200 bg-gray-50 px-4 py-4 sm:px-8">
             <div className="flex items-center gap-2">
               <div className="flex items-center">
                 <span className="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-semibold">1</span>
@@ -538,7 +538,7 @@ export default function JobPost() {
           )}
 
           {/* Form */}
-          <form onSubmit={formik.handleSubmit} className="p-6 sm:p-8">
+          <form onSubmit={formik.handleSubmit} className="p-4 sm:p-8">
             {/* Job Title */}
             <div className="mb-5 relative" ref={suggestionRef}>
               <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">
@@ -714,7 +714,7 @@ export default function JobPost() {
                 Salary Details <span className="text-red-500">*</span>
               </label>
               <div className="border-b border-gray-200 mb-3">
-                <nav className="flex -mb-px space-x-4 sm:space-x-6">
+                <nav className="-mb-px flex flex-wrap gap-x-4 gap-y-2 sm:gap-x-6">
                   {['monthly', 'hourly', 'perPiece', 'contract'].map((type) => (
                     <button
                       key={type}
@@ -730,7 +730,7 @@ export default function JobPost() {
                   ))}
                 </nav>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
                   <label className="block text-xs text-gray-500 mb-1">
                     Minimum {activeSalaryType === 'perPiece' ? 'Per Piece' : activeSalaryType} (₹)

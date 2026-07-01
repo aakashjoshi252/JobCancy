@@ -31,6 +31,7 @@ const PageNotFound = lazy(() => import("./pages/common/page404/Page404.jsx"));
 const NotificationsPage = lazy(() => import("./pages/common/notifications/NotificationsPage.jsx"));
 const Profile = lazy(() => import("./pages/common/profile/Profile.jsx"));
 const EditProfile = lazy(() => import("./pages/common/profile/edit/EditProfile.jsx"));
+const AccountSecurity = lazy(() => import("./pages/common/security/AccountSecurity.jsx"));
 const CompanyAboutCard = lazy(() => import("./pages/common/jobs/companyDetails/CompanyCard.jsx"));
 const Companies = lazy(() => import("./components/companyCard/Companies.jsx"));
 const FAQ = lazy(() => import("./pages/common/faq/FAQ.jsx"));
@@ -87,6 +88,7 @@ const ApplicationManagement = lazy(() => import("./pages/admin/ApplicationManage
 const AdminReports = lazy(() => import("./pages/admin/Reports.jsx"));
 const AdminSubscriptions = lazy(() => import("./pages/admin/Subscriptions.jsx"));
 const JobProfessions = lazy(() => import("./pages/admin/JobProfessions.jsx"));
+const AdminLoginActivity = lazy(() => import("./pages/admin/LoginActivity.jsx"));
 const BlogManagement = lazy(() => import("./pages/admin/BlogManagement.jsx"));
 const AdminBlogCreate = lazy(() => import("./pages/admin/BlogCreate.jsx"));
 const AdminBlogEdit = lazy(() => import("./pages/admin/BlogEdit.jsx"));
@@ -136,6 +138,8 @@ const routes = createBrowserRouter([
       { path: "messages", element: redirect("/chat") },
       { path: "notification", element: redirect("/notifications") },
       { path: "notifications", element: protectedPage(NotificationsPage) },
+      { path: "security", element: protectedPage(AccountSecurity) },
+      { path: "security/login-history", element: protectedPage(AccountSecurity) },
       { path: "profile", element: protectedPage(Profile) },
       { path: "profile/edit/:userId", element: protectedPage(EditProfile) },
       { path: "settings", element: protectedPage(Settings) },
@@ -188,6 +192,8 @@ const routes = createBrowserRouter([
       { path: "chat", element: page(ChatPage) },
       { path: "messages", element: redirect("/recruiter/chat") },
       { path: "notifications", element: page(NotificationsPage) },
+      { path: "security", element: page(AccountSecurity) },
+      { path: "security/login-history", element: page(AccountSecurity) },
       { path: "blogs", element: page(CompanyBlogList) },
       { path: "blogs/create", element: page(CreateBlog) },
       { path: "blogs/edit/:blogId", element: page(EditBlog) },
@@ -238,6 +244,8 @@ const routes = createBrowserRouter([
       { path: "chat", element: page(ChatPage) },
       { path: "messages", element: redirect("/candidate/chat") },
       { path: "notifications", element: page(NotificationsPage) },
+      { path: "security", element: page(AccountSecurity) },
+      { path: "security/login-history", element: page(AccountSecurity) },
     ],
   },
   {
@@ -254,6 +262,7 @@ const routes = createBrowserRouter([
       { path: "jobs", element: page(JobManagement) },
       { path: "applications", element: page(ApplicationManagement) },
       { path: "subscriptions", element: page(AdminSubscriptions) },
+      { path: "login-activity", element: page(AdminLoginActivity) },
       { path: "reports", element: page(AdminReports) },
       { path: "blogs", element: page(BlogManagement) },
       { path: "blogs/create", element: page(AdminBlogCreate) },
@@ -262,6 +271,8 @@ const routes = createBrowserRouter([
       { path: "analytics", element: page(Analytics) },
       { path: "profile", element: page(Profile) },
       { path: "profile/edit/:userId", element: page(EditProfile) },
+      { path: "security", element: page(AccountSecurity) },
+      { path: "security/login-history", element: page(AccountSecurity) },
       { path: "settings", element: page(Settings) },
     ],
   },

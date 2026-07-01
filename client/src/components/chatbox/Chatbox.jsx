@@ -561,7 +561,7 @@ const ChatBox = ({ chat, onBack }) => {
       {/* Input Area */}
       <form
         onSubmit={sendMessage}
-        className="flex-shrink-0 border-t border-gray-200 bg-white px-3 py-3 shadow-lg sm:px-6 sm:py-4"
+        className="sticky bottom-0 z-20 flex-shrink-0 border-t border-gray-200 bg-white px-3 py-3 shadow-lg sm:px-6 sm:py-4"
       >
         <div className="flex min-w-0 items-end gap-2">
           <input

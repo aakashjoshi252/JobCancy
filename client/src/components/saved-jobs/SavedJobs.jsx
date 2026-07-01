@@ -215,8 +215,8 @@ export default function SavedJobs() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Stats Bar */}
-        <div className="bg-white rounded-xl shadow-sm p-4 mb-6 flex flex-wrap justify-between items-center gap-4">
-          <div className="flex items-center gap-4">
+        <div className="mb-6 flex flex-col gap-4 rounded-lg bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap items-center gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-gray-800">{savedJobs.length}</div>
               <div className="text-xs text-gray-500">Total Saved</div>
@@ -250,8 +250,8 @@ export default function SavedJobs() {
 
         {/* Filters and Search */}
         <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
-          <div className="flex flex-wrap gap-4 items-center justify-between">
-            <div className="flex-1 min-w-[200px]">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="min-w-0 flex-1">
               <input
                 type="text"
                 placeholder="Search saved jobs..."
@@ -261,7 +261,7 @@ export default function SavedJobs() {
               />
             </div>
             
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
               <select
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
@@ -474,7 +474,7 @@ function SavedJobListItem({ job, selected, onSelect, onRemove, onView, onApply, 
 
   return (
     <div className={`bg-white rounded-xl shadow-sm hover:shadow-md transition-all border ${selected ? 'border-red-500 ring-2 ring-red-200' : 'border-gray-200'} p-4`}>
-      <div className="flex flex-wrap items-start gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-start">
         {/* Checkbox */}
         <input
           type="checkbox"
@@ -485,7 +485,7 @@ function SavedJobListItem({ job, selected, onSelect, onRemove, onView, onApply, 
         
         {/* Job Info */}
         <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap justify-between items-start gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
             <h3 
               onClick={onView}
               className="text-lg font-semibold text-gray-800 hover:text-red-600 cursor-pointer"
@@ -536,7 +536,7 @@ function SavedJobListItem({ job, selected, onSelect, onRemove, onView, onApply, 
         
         {/* Actions */}
         {!isExpired && !job.applied && (
-          <div className="flex gap-2">
+          <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
             <button
               onClick={onShare}
               className="px-3 py-1 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors text-sm flex items-center gap-1"

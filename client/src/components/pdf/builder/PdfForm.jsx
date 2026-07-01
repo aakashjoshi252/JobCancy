@@ -360,12 +360,12 @@ const ResumeForm = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <div className="max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-[#FFF7F3]">
+      <div className="mx-auto max-w-[1500px] p-0">
         
         {/* HEADER */}
-        <header className="text-center mb-6 sm:mb-8 p-4 sm:p-8 bg-gradient-to-r from-blue-600 via-blue-700 to-purple-700 rounded-2xl text-white shadow-xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-black/10"></div>
+        <header className="relative mb-5 overflow-hidden rounded-lg border border-[#E9D5FF] bg-[linear-gradient(135deg,#6B21A8,#8B5CF6)] p-4 text-center text-white shadow-sm sm:p-6">
+          <div className="absolute inset-0 bg-black/0"></div>
           <div className="relative z-10">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-3">
               <FileText className="w-8 h-8 sm:w-10 sm:h-10" />
@@ -373,7 +373,7 @@ const ResumeForm = () => {
                 Jewelry Professional Resume Studio
               </h1>
             </div>
-            <p className="text-blue-100 text-sm sm:text-lg">
+            <p className="text-white/85 text-sm sm:text-lg">
               Create your professional jewelry industry resume instantly
             </p>
           </div>
@@ -398,21 +398,21 @@ const ResumeForm = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-4 sm:gap-8">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(24rem,34rem)]">
           
           {/* ================= FORM SECTION ================= */}
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+          <div className="overflow-hidden rounded-lg border border-[#E5E7EB] bg-white shadow-sm">
             {/* Tabs */}
-            <div className="border-b border-gray-200 bg-gray-50">
+            <div className="border-b border-[#E5E7EB] bg-[#FFFBFA]">
               <div className="flex overflow-x-auto">
                 {tabs.map((tab) => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`px-6 py-4 text-sm font-medium transition-all duration-200 flex items-center gap-2 whitespace-nowrap ${
+                    className={`flex min-h-[52px] items-center gap-2 whitespace-nowrap px-4 text-sm font-semibold transition-all duration-200 sm:px-6 ${
                       activeTab === tab.id
-                        ? "text-blue-600 border-b-2 border-blue-600 bg-white"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                        ? "text-[#6B21A8] border-b-2 border-[#6B21A8] bg-white"
+                        : "text-[#6B7280] hover:text-[#1F2937] hover:bg-[#FFF7F3]"
                     }`}
                   >
                     {tab.icon}
@@ -422,7 +422,7 @@ const ResumeForm = () => {
               </div>
             </div>
 
-            <div className="p-4 sm:p-6 max-h-none lg:max-h-[calc(100vh-200px)] overflow-y-auto">
+            <div className="max-h-none overflow-y-auto p-4 sm:p-6 lg:max-h-[calc(100dvh-210px)]">
               {/* Basic Information Tab */}
               {activeTab === "basic" && (
                 <div className="space-y-4">
@@ -644,7 +644,7 @@ const ResumeForm = () => {
                     <h3 className="text-lg font-semibold text-gray-800">Work Experience</h3>
                     <button
                       onClick={() => setShowExperienceForm(!showExperienceForm)}
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all text-sm"
+                      className="flex min-h-[44px] items-center gap-2 rounded-lg bg-[#6B21A8] px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-[#581C87]"
                     >
                       <Plus className="w-4 h-4" />
                       Add Experience
@@ -719,7 +719,7 @@ const ResumeForm = () => {
                     <h3 className="text-lg font-semibold text-gray-800">Education</h3>
                     <button
                       onClick={() => setShowEducationForm(!showEducationForm)}
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all text-sm"
+                      className="flex min-h-[44px] items-center gap-2 rounded-lg bg-[#6B21A8] px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-[#581C87]"
                     >
                       <Plus className="w-4 h-4" />
                       Add Education
@@ -786,7 +786,7 @@ const ResumeForm = () => {
                     <h3 className="text-lg font-semibold text-gray-800">Certifications</h3>
                     <button
                       onClick={() => setShowCertificationForm(!showCertificationForm)}
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all text-sm"
+                      className="flex min-h-[44px] items-center gap-2 rounded-lg bg-[#6B21A8] px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-[#581C87]"
                     >
                       <Plus className="w-4 h-4" />
                       Add Certification
@@ -865,7 +865,7 @@ const ResumeForm = () => {
                     <h3 className="text-lg font-semibold text-gray-800">Portfolio Items</h3>
                     <button
                       onClick={() => setShowPortfolioForm(!showPortfolioForm)}
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all text-sm"
+                      className="flex min-h-[44px] items-center gap-2 rounded-lg bg-[#6B21A8] px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-[#581C87]"
                     >
                       <Plus className="w-4 h-4" />
                       Add Portfolio Item
@@ -943,7 +943,7 @@ const ResumeForm = () => {
                 <button
                   onClick={handleGenerate}
                   disabled={isGenerating}
-                  className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-semibold flex items-center justify-center gap-2 hover:shadow-lg transition-all hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                  className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-lg bg-[linear-gradient(135deg,#6B21A8,#8B5CF6)] py-4 font-bold text-white transition-all hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {isGenerating ? (
                     <>
@@ -962,8 +962,8 @@ const ResumeForm = () => {
           </div>
 
           {/* ================= PREVIEW SECTION ================= */}
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden sticky top-8 h-fit">
-            <div className="bg-gradient-to-r from-blue-600 to-purple-700 px-6 py-4">
+          <div className="overflow-hidden rounded-lg border border-[#E5E7EB] bg-white shadow-sm lg:sticky lg:top-24 lg:h-fit">
+            <div className="bg-[linear-gradient(135deg,#6B21A8,#8B5CF6)] px-6 py-4">
               <h2 className="text-white text-xl font-semibold flex items-center gap-2">
                 <Eye className="w-5 h-5" />
                 Live Preview
@@ -972,16 +972,16 @@ const ResumeForm = () => {
             
             <div
               ref={resumeRef}
-              className="bg-white overflow-y-auto max-h-[calc(100vh-200px)]"
+              className="bg-white overflow-y-auto lg:max-h-[calc(100dvh-210px)]"
             >
               <div className="grid grid-cols-1 md:grid-cols-[280px_1fr]">
                 
                 {/* SIDEBAR */}
-                <div className="bg-gradient-to-b from-gray-900 to-gray-800 text-white p-6">
+                <div className="bg-[linear-gradient(180deg,#581C87,#1F2937)] text-white p-6">
                   <h2 className="text-white text-2xl font-bold mb-1 break-words">
                     {form.fullName || <span className="text-gray-400 italic">Your Name</span>}
                   </h2>
-                  <p className="text-blue-300 text-sm font-medium mb-4 pb-4 border-b border-gray-700">
+                  <p className="text-[#E9D5FF] text-sm font-medium mb-4 pb-4 border-b border-white/15">
                     {form.jobTitle || <span className="text-gray-400 italic">Job Title</span>}
                   </p>
 

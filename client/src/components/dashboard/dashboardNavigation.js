@@ -10,6 +10,7 @@ import {
   MessageSquare,
   Newspaper,
   Settings,
+  ShieldCheck,
   SquarePen,
   UserRoundSearch,
   UsersRound,
@@ -61,6 +62,7 @@ export const getDashboardNavigation = ({ role, company, t }) => {
       { label: translate(t, "admin:blogs", "Blogs"), href: "/admin/blogs", icon: Newspaper },
       { label: translate(t, "admin:applications", "Applications"), href: "/admin/applications", icon: ClipboardList },
       { label: translate(t, "admin:subscriptions", "Subscriptions"), href: "/admin/subscriptions", icon: CreditCard },
+      { label: translate(t, "admin:loginActivity", "Login Activity"), href: "/admin/login-activity", icon: ShieldCheck },
       { label: translate(t, "admin:reports", "Reports"), href: "/admin/reports", icon: FileChartColumnIncreasing },
       { label: translate(t, "admin:settings", "Settings"), href: "/admin/settings", icon: Settings },
     ];
@@ -81,6 +83,7 @@ export const getDashboardNavigation = ({ role, company, t }) => {
       { label: translate(t, "recruiter:interviews", "Interviews"), href: "/recruiter/interview-scheduler", icon: CalendarClock },
       { label: translate(t, "recruiter:blogs", "Blogs"), href: "/recruiter/blogs", icon: Newspaper },
       { label: translate(t, "recruiter:messages", "Messages"), href: "/recruiter/chat", icon: MessageSquare },
+      { label: translate(t, "recruiter:security", "Security"), href: "/recruiter/security", icon: ShieldCheck },
       { label: translate(t, "recruiter:settings", "Settings"), href: "/recruiter/settings", icon: Settings },
     ];
   }
@@ -92,6 +95,7 @@ export const getDashboardNavigation = ({ role, company, t }) => {
     { label: translate(t, "candidate:savedJobs", "Saved Jobs"), href: "/candidate/saved-jobs", icon: Heart },
     { label: translate(t, "candidate:profile", "Resume/Profile"), href: "/candidate/profile", icon: FileUser },
     { label: translate(t, "candidate:messages", "Messages"), href: "/candidate/chat", icon: MessageSquare },
+    { label: translate(t, "candidate:security", "Security"), href: "/candidate/security", icon: ShieldCheck },
     { label: translate(t, "candidate:settings", "Settings"), href: "/candidate/settings", icon: Settings },
   ];
 };

@@ -80,20 +80,21 @@ html[dir="rtl"] .marquee {
 }
 
 :root {
-  --jc-primary: #5d0f51;
-  --jc-primary-deep: #3f0b38;
-  --jc-primary-soft: #7a0e67;
-  --jc-lavender: #ead8f7;
+  --jc-primary: #6b21a8;
+  --jc-primary-deep: #581c87;
+  --jc-primary-soft: #8b5cf6;
+  --jc-soft-purple: #a78bfa;
+  --jc-lavender: #e9d5ff;
   --jc-lilac: #f7eef9;
-  --jc-blush: #ffe7e0;
-  --jc-cream: #fffaf7;
+  --jc-blush: #fde8e4;
+  --jc-cream: #fff7f3;
   --jc-surface: #ffffff;
-  --jc-ink: #261723;
-  --jc-muted: #7b6575;
-  --jc-border: #f0dce8;
-  --jc-ring: rgb(122 14 103 / 0.16);
-  --jc-shadow: 0 18px 45px -30px rgb(93 15 81 / 0.42);
-  --jc-shadow-strong: 0 24px 60px -36px rgb(93 15 81 / 0.58);
+  --jc-ink: #1f2937;
+  --jc-muted: #6b7280;
+  --jc-border: #e5e7eb;
+  --jc-ring: rgb(139 92 246 / 0.18);
+  --jc-shadow: 0 18px 45px -30px rgb(107 33 168 / 0.42);
+  --jc-shadow-strong: 0 24px 60px -36px rgb(107 33 168 / 0.58);
 }
 
 .font-serif {

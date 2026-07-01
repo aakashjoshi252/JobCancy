@@ -131,8 +131,8 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="bg-white w-full max-w-md shadow-xl rounded-2xl p-8">
+    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-3 py-6 sm:px-4">
+      <div className="w-full max-w-md rounded-lg bg-white p-5 shadow-xl sm:p-8">
         <div className="mb-5 flex justify-end">
           <LanguageSwitcher compact />
         </div>
