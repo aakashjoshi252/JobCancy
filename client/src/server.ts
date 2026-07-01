@@ -21,7 +21,7 @@ app.use(
 app.use('/api', (_req: Request, res: Response) => {
   res.status(502).json({
     success: false,
-    message: 'SSR server does not proxy API requests. Use Nginx or the Node API server for /api.'
+    message: 'SSR server does not proxy API requests. Use the Node API server or your hosting proxy for /api.'
   });
 });
 

@@ -13,7 +13,7 @@ export default function Layout() {
     location.pathname === '/messages';
 
   return (
-    <div className="min-h-screen overflow-x-hidden flex flex-col bg-gray-100">
+    <div className="jc-soft-page min-h-screen overflow-x-hidden flex flex-col">
       <LocalizedMeta />
 
       {/* HEADER */}

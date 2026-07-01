@@ -43,13 +43,13 @@ export default function Profile() {
   };
 
   return (
-    <div className="mx-auto mt-4 max-w-4xl px-3 sm:mt-10 sm:px-4">
-      <div className="relative rounded-2xl border border-gray-100 bg-white p-4 shadow-xl sm:p-8">
+    <div className="jc-soft-page min-h-screen px-3 py-4 sm:px-4 sm:py-10">
+      <div className="jc-panel relative mx-auto max-w-4xl p-4 sm:p-8">
 
         {/* EDIT PROFILE BUTTON */}
         <button
           onClick={() => navigate(profileEditPath)}
-          className="mb-5 inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white shadow-md transition hover:bg-blue-700 hover:shadow-lg sm:absolute sm:right-6 sm:top-6 sm:mb-0 sm:w-auto"
+          className="mb-5 inline-flex w-full items-center justify-center rounded-lg bg-[#5d0f51] px-5 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-[#3f0b38] hover:shadow-lg sm:absolute sm:right-6 sm:top-6 sm:mb-0 sm:w-auto"
         >
           Edit Profile
         </button>
@@ -157,7 +157,7 @@ export default function Profile() {
                 <p className="text-red-500 mb-3">Company profile not found.</p>
                 <button
                   onClick={() => navigate("/recruiter/company/registration")}
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+                  className="rounded-lg bg-[#5d0f51] px-6 py-2 text-white transition hover:bg-[#3f0b38]"
                 >
                   Register Company
                 </button>
@@ -319,7 +319,7 @@ export default function Profile() {
                 <p className="text-gray-600 mb-3">No resume found.</p>
                 <button
                   onClick={() => navigate("/candidate/create-resume")}
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+                  className="rounded-lg bg-[#5d0f51] px-6 py-2 text-white transition hover:bg-[#3f0b38]"
                 >
                   Create Resume
                 </button>
@@ -411,12 +411,12 @@ function ProfileField({ label, value, icon, isLink = false, isLongText = false }
           href={value.startsWith("http") ? value : `https://${value}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-3 bg-gray-50 rounded-lg border text-blue-600 hover:text-blue-700 hover:underline break-all"
+          className="break-all rounded-lg border border-[#f0dce8] bg-[#fff7fb] p-3 text-[#5d0f51] hover:text-[#3f0b38] hover:underline"
         >
           {value}
         </a>
       ) : (
-        <p className={`p-3 bg-gray-50 rounded-lg border text-gray-900 ${isLongText ? 'whitespace-pre-wrap' : 'break-words'}`}>
+        <p className={`rounded-lg border border-[#f0dce8] bg-[#fff7fb] p-3 text-[#261723] ${isLongText ? 'whitespace-pre-wrap' : 'break-words'}`}>
           {value}
         </p>
       )}
@@ -426,21 +426,21 @@ function ProfileField({ label, value, icon, isLink = false, isLongText = false }
 
 function ProfileSkeleton() {
   return (
-    <div className="mx-auto mt-10 max-w-4xl animate-pulse px-4">
-      <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-xl sm:p-8">
+    <div className="jc-soft-page min-h-screen px-4 py-10">
+      <div className="jc-panel mx-auto max-w-4xl animate-pulse p-6 sm:p-8">
         <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-center">
-          <div className="h-28 w-28 rounded-full bg-gray-200" />
+          <div className="h-28 w-28 rounded-full bg-[#f0dce8]" />
           <div className="flex-1 space-y-3">
-            <div className="h-7 w-48 rounded bg-gray-200" />
-            <div className="h-4 w-64 max-w-full rounded bg-gray-100" />
-            <div className="h-6 w-28 rounded-full bg-blue-100" />
+            <div className="h-7 w-48 rounded bg-[#f0dce8]" />
+            <div className="h-4 w-64 max-w-full rounded bg-[#f5e8ef]" />
+            <div className="h-6 w-28 rounded-full bg-[#f7eef9]" />
           </div>
         </div>
         <div className="grid gap-5 md:grid-cols-2">
           {[1, 2, 3, 4].map((item) => (
             <div key={item} className="space-y-2">
-              <div className="h-3 w-20 rounded bg-gray-100" />
-              <div className="h-14 rounded-lg bg-gray-100" />
+              <div className="h-3 w-20 rounded bg-[#f5e8ef]" />
+              <div className="h-14 rounded-lg bg-[#f5e8ef]" />
             </div>
           ))}
         </div>

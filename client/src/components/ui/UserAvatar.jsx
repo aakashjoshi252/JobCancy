@@ -17,7 +17,7 @@ export default function UserAvatar({
 
   return (
     <span
-      className={`inline-flex shrink-0 overflow-hidden rounded-full bg-blue-600 text-white ${className}`}
+      className={`inline-flex shrink-0 overflow-hidden rounded-full bg-[#5d0f51] text-white ${className}`}
       title={user?.username || user?.email || "User"}
     >
       {imageUrl && !brokenImage ? (
@@ -31,7 +31,7 @@ export default function UserAvatar({
         />
       ) : (
         <span
-          className={`flex h-full w-full items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 font-semibold ${fallbackClassName}`}
+          className={`flex h-full w-full items-center justify-center bg-gradient-to-br from-[#5d0f51] to-[#3f0b38] font-semibold ${fallbackClassName}`}
         >
           {getUserInitials(user)}
         </span>

@@ -43,7 +43,7 @@ Use this before every business launch or production redeploy.
 
 - Run `node scripts/create-indexes.js` against production MongoDB before launch.
 - Confirm paginated list pages load quickly for jobs, users, applications, blogs, and subscriptions.
-- Confirm static assets are cached by the frontend host or Nginx.
+- Confirm static assets are cached by the frontend host or CDN.
 - Confirm Cloudinary credentials are present for profile, company, blog, and chat assets.
 - Confirm Socket.IO works over websocket behind the deployed reverse proxy.
 
@@ -77,23 +77,19 @@ API_AUDIT_BASE_URL=https://your-api-domain npm run audit:api
 - Backend build command: `npm ci --omit=dev`
 - Backend start command: `npm start`
 - Backend health check path: `/health`
+- Backend environment: set `NODE_ENV`, `PORT`, `MONGODB_URI`, `JWT_SECRET`, Cloudinary, Razorpay, SMTP, and CORS URL variables in Render.
 - Frontend root directory: `client`
 - Frontend build command: `npm ci && npm run build`
 - Frontend publish directory: `dist`
 - Frontend rewrite: `/* -> /index.html`
+- Frontend environment: set `VITE_API_URL`, `VITE_SOCKET_URL`, `VITE_RAZORPAY_KEY_ID`, `VITE_SUPPORT_EMAIL`, and `VITE_DEBUG_MODE=false` in Render.
 
-## 7. Docker
+## 7. External Services
 
-- Copy `.env.example` to `.env`.
-- Replace every placeholder secret.
-- Keep `VITE_API_URL=/api/v1` for same-origin Nginx deployments.
-- Run:
-
-```bash
-docker compose build
-docker compose up -d
-docker compose ps
-```
+- MongoDB Atlas: create a production cluster, allow Render outbound access, create a strong database user, and set `MONGODB_URI` to the Atlas connection string.
+- Cloudinary: set `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET`.
+- Razorpay: set `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, and `RAZORPAY_WEBHOOK_SECRET`; point the webhook to `/api/v1/subscription/webhook`.
+- SMTP: set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, and `SMTP_PASS`, or the supported `EMAIL_USER` and `EMAIL_PASS` fallback values.
 
 ## 8. Launch Smoke Test
 

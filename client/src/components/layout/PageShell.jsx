@@ -24,8 +24,8 @@ export function PageHeader({ eyebrow, title, description, actions, meta, classNa
             {eyebrow}
           </p>
         )}
-        <h1 className="text-2xl font-bold text-gray-950 sm:text-3xl">{title}</h1>
-        {description && <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">{description}</p>}
+        <h1 className="font-serif text-2xl font-bold text-[#261723] sm:text-3xl">{title}</h1>
+        {description && <p className="mt-2 max-w-3xl text-sm leading-6 text-[#7b6575]">{description}</p>}
         {meta && <div className="mt-3 flex flex-wrap items-center gap-2">{meta}</div>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}

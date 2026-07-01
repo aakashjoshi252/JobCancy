@@ -101,10 +101,10 @@ export default function CandidateHome() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="jc-soft-page flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-emerald-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 font-medium">Loading your dashboard...</p>
+          <div className="mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-4 border-[#f0dce8] border-t-[#5d0f51]"></div>
+          <p className="font-medium text-[#7b6575]">Loading your dashboard...</p>
         </div>
       </div>
     );
@@ -116,16 +116,16 @@ export default function CandidateHome() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="jc-soft-page min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#1A3D63] to-[#4A7FA7] text-white">
+      <div className="bg-[#4c0e42] text-white">
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h1 className="text-3xl font-bold mb-2">
                 Welcome back, {user?.username || 'Candidate'}!
               </h1>
-              <p className="text-emerald-100">Your job search journey continues</p>
+              <p className="text-[#f4dcec]">Your job search journey continues</p>
             </div>
 
             <div className="flex flex-wrap gap-3">
@@ -147,7 +147,7 @@ export default function CandidateHome() {
 
               <button
                 onClick={() => navigate("/candidate/resume")}
-                className="px-5 py-2.5 rounded-lg bg-white text-emerald-600 hover:bg-emerald-50 transition font-semibold flex items-center gap-2 shadow-lg"
+                className="flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 font-semibold text-[#5d0f51] shadow-lg transition hover:bg-[#fff7fb]"
               >
                 <HiDocumentText className="text-xl" />
                 My Resume
@@ -263,28 +263,28 @@ export default function CandidateHome() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Success Rate */}
-            <div className="bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-xl shadow-lg p-6 text-white">
+            <div className="rounded-lg bg-[#4c0e42] p-6 text-white shadow-lg">
               <h3 className="text-lg font-bold mb-2">Success Rate</h3>
-              <p className="text-emerald-100 text-sm mb-6">Your application success metrics</p>
+              <p className="mb-6 text-sm text-[#f4dcec]">Your application success metrics</p>
 
               <div className="space-y-4">
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-emerald-100 text-sm">Success Rate</span>
+                    <span className="text-sm text-[#f4dcec]">Success Rate</span>
                     <span className="font-bold text-2xl">{successRate}%</span>
                   </div>
-                  <div className="w-full bg-emerald-900/50 rounded-full h-3">
+                  <div className="h-3 w-full rounded-full bg-white/20">
                     <div className="bg-white h-3 rounded-full transition-all" style={{ width: `${successRate}%` }} />
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-emerald-500/30 grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 border-t border-white/20 pt-4">
                   <div>
-                    <div className="text-sm text-emerald-100 mb-1">Applied</div>
+                    <div className="mb-1 text-sm text-[#f4dcec]">Applied</div>
                     <div className="text-2xl font-bold">{totalApplications}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-emerald-100 mb-1">Selected</div>
+                    <div className="mb-1 text-sm text-[#f4dcec]">Selected</div>
                     <div className="text-2xl font-bold">{stats?.selected || 0}</div>
                   </div>
                 </div>
@@ -303,9 +303,9 @@ export default function CandidateHome() {
             </div>
 
             {/* Tips */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+            <div className="rounded-lg border border-[#f0dce8] bg-[#fff7fb] p-6">
               <div className="flex items-start gap-3">
-                <HiLightBulb className="text-2xl text-blue-600 flex-shrink-0" />
+                <HiLightBulb className="flex-shrink-0 text-2xl text-[#5d0f51]" />
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">Pro Tip</h4>
                   <p className="text-sm text-gray-600">
@@ -332,22 +332,14 @@ export default function CandidateHome() {
   );
 }
 
-function StatCard({ title, value, icon, color }) {
-  const colorClasses = {
-    blue: "from-blue-500 to-blue-600",
-    yellow: "from-yellow-500 to-yellow-600",
-    purple: "from-purple-500 to-purple-600",
-    green: "from-green-500 to-green-600",
-    red: "from-red-500 to-red-600",
-  };
-
+function StatCard({ title, value, icon }) {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition">
-      <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${colorClasses[color]} flex items-center justify-center text-2xl text-white mb-3 shadow-lg`}>
+    <div className="jc-panel p-5 transition hover:border-[#d5a6c7]">
+      <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-[#f7eef9] text-2xl text-[#5d0f51]">
         {icon}
       </div>
-      <div className="text-3xl font-bold text-gray-900">{value}</div>
-      <div className="text-sm text-gray-600 font-medium mt-1">{title}</div>
+      <div className="text-3xl font-bold text-[#261723]">{value}</div>
+      <div className="mt-1 text-sm font-medium text-[#7b6575]">{title}</div>
     </div>
   );
 }
@@ -389,7 +381,7 @@ function ApplicationRow({ application, navigate }) {
             e.stopPropagation();
             if (job?._id) navigate(`/jobs/${job._id}`);
           }}
-          className="ml-4 px-4 py-2 text-sm font-medium text-emerald-600 hover:bg-emerald-50 rounded-lg transition"
+          className="ml-4 rounded-lg px-4 py-2 text-sm font-semibold text-[#5d0f51] transition hover:bg-[#fff7fb]"
         >
           View
         </button>
@@ -402,11 +394,11 @@ function QuickActionButton({ icon, label, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition text-left group"
+      className="group flex w-full items-center gap-3 rounded-lg p-3 text-left transition hover:bg-[#fff7fb]"
     >
-      <span className="text-2xl text-gray-600 group-hover:text-gray-900">{icon}</span>
-      <span className="font-medium text-gray-700 group-hover:text-gray-900">{label}</span>
-      <HiChevronRight className="ml-auto text-gray-400 group-hover:text-gray-600" />
+      <span className="text-2xl text-[#7b6575] group-hover:text-[#5d0f51]">{icon}</span>
+      <span className="font-medium text-[#4b3444] group-hover:text-[#261723]">{label}</span>
+      <HiChevronRight className="ml-auto text-[#b697ad] group-hover:text-[#5d0f51]" />
     </button>
   );
 }
@@ -427,7 +419,7 @@ function ProgressBar({ label, value, total, color }) {
         <span className="text-sm text-gray-600">{label}</span>
         <span className="text-sm font-semibold text-gray-900">{value} ({percentage}%)</span>
       </div>
-      <div className="w-full bg-gray-200 rounded-full h-2">
+      <div className="h-2 w-full rounded-full bg-[#f0dce8]">
         <div className={`${colorClasses[color]} h-2 rounded-full transition-all`} style={{ width: `${percentage}%` }} />
       </div>
     </div>

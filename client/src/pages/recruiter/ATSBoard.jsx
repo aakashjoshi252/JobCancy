@@ -141,11 +141,11 @@ const ATSBoard = () => {
   // No Jobs Created Yet
   if (!loading && jobs.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="jc-soft-page min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-12 text-center">
-            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Briefcase className="w-10 h-10 text-gray-400" />
+          <div className="jc-panel p-8 text-center sm:p-12">
+            <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-[#f7eef9]">
+              <Briefcase className="h-10 w-10 text-[#5d0f51]" />
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">No Jobs Created Yet</h2>
             <p className="text-sm text-gray-500 mb-6 max-w-md mx-auto">
@@ -153,7 +153,7 @@ const ATSBoard = () => {
             </p>
             <button 
               onClick={() => navigate('/recruiter/company/jobpost')}
-              className="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium shadow-sm"
+              className="rounded-lg bg-[#5d0f51] px-5 py-2.5 font-medium text-white shadow-sm transition hover:bg-[#3f0b38]"
             >
               Create Your First Job
             </button>
@@ -166,9 +166,9 @@ const ATSBoard = () => {
   // Error State
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="jc-soft-page min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-12 text-center">
+          <div className="jc-panel p-8 text-center sm:p-12">
             <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <AlertCircle className="w-10 h-10 text-red-500" />
             </div>
@@ -176,7 +176,7 @@ const ATSBoard = () => {
             <p className="text-sm text-gray-500 mb-6 max-w-md mx-auto">{error}</p>
             <button 
               onClick={() => window.location.reload()}
-              className="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium shadow-sm"
+              className="rounded-lg bg-[#5d0f51] px-5 py-2.5 font-medium text-white shadow-sm transition hover:bg-[#3f0b38]"
             >
               Try Again
             </button>
@@ -194,29 +194,29 @@ const ATSBoard = () => {
   if (!loading && selectedJob && hasNoApplications) {
     const currentJob = jobs.find(job => job._id === selectedJob);
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="jc-soft-page min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-lg mb-6">
+          <div className="mb-6 rounded-lg bg-[#4c0e42] shadow-lg">
             <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                   <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Application Tracking System</h1>
-                  <p className="text-blue-100 text-sm">Manage and track candidate applications</p>
+                  <p className="text-sm text-[#f4dcec]">Manage and track candidate applications</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Job Filter */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+          <div className="jc-panel mb-6 p-4">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div className="flex items-center gap-3 flex-wrap">
                 <label className="text-sm font-medium text-gray-700">Filter by Job:</label>
                 <select
                   value={selectedJob}
                   onChange={(e) => setSelectedJob(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                  className="rounded-lg border border-[#ead8e3] bg-[#fffdfb] px-3 py-2 text-sm focus:border-[#7a0e67] focus:ring-2 focus:ring-[#efd5e8]"
                 >
                   {jobs.map((job) => (
                     <option key={job._id} value={job._id}>
@@ -229,7 +229,7 @@ const ATSBoard = () => {
           </div>
 
           {/* Empty State */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-12 text-center">
+          <div className="jc-panel p-8 text-center sm:p-12">
             <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Inbox className="w-10 h-10 text-gray-400" />
             </div>
@@ -248,29 +248,29 @@ const ATSBoard = () => {
 
   // Main Board View
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="jc-soft-page min-h-screen">
       <div className="max-w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-lg mb-6">
+        <div className="mb-6 rounded-lg bg-[#4c0e42] shadow-lg">
           <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Application Tracking System</h1>
-                <p className="text-blue-100 text-sm">Drag and drop to manage candidate status</p>
+                <p className="text-sm text-[#f4dcec]">Drag and drop to manage candidate status</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Job Filter Bar */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+        <div className="jc-panel mb-6 p-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="flex items-center gap-3 flex-wrap">
               <label className="text-sm font-medium text-gray-700">Filter by Job:</label>
               <select
                 value={selectedJob}
                 onChange={(e) => setSelectedJob(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                className="rounded-lg border border-[#ead8e3] bg-[#fffdfb] px-3 py-2 text-sm focus:border-[#7a0e67] focus:ring-2 focus:ring-[#efd5e8]"
               >
                 {jobs.map((job) => (
                   <option key={job._id} value={job._id}>
@@ -282,7 +282,7 @@ const ATSBoard = () => {
             
             {/* Total Applications Badge */}
             <div className="flex items-center gap-2">
-              <span className="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg text-sm font-medium">
+              <span className="rounded-lg bg-[#f7eef9] px-3 py-1.5 text-sm font-medium text-[#5d0f51]">
                 Total: {totalApplications} applications
               </span>
             </div>
@@ -294,15 +294,15 @@ const ATSBoard = () => {
           <div className="flex gap-4 overflow-x-auto pb-6 min-h-[calc(100vh-300px)]">
             {columns.map((column) => (
               <div key={column.id} className="flex-shrink-0 w-80">
-                <div className={`bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden`}>
+                <div className="overflow-hidden rounded-lg border border-[#f0dce8] bg-white shadow-sm">
                   {/* Column Header */}
-                  <div className={`p-4 border-b border-gray-200 ${column.bgColor}`}>
+                  <div className={`border-b border-[#f0dce8] p-4 ${column.bgColor}`}>
                     <div className="flex items-center justify-between">
                       <h3 className="font-bold text-gray-900">
                         <span className="mr-2">{column.icon}</span>
                         {column.title}
                       </h3>
-                      <span className="text-xs font-semibold text-gray-600 bg-white px-2 py-1 rounded-full shadow-sm">
+                      <span className="rounded-full bg-white px-2 py-1 text-xs font-semibold text-[#7b6575] shadow-sm">
                         {board?.[column.id]?.length || 0}
                       </span>
                     </div>
@@ -315,7 +315,7 @@ const ATSBoard = () => {
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                         className={`p-3 min-h-[500px] transition-colors ${
-                          snapshot.isDraggingOver ? 'bg-blue-50' : ''
+                          snapshot.isDraggingOver ? 'bg-[#fff7fb]' : ''
                         }`}
                       >
                         <div className="space-y-3">
@@ -337,7 +337,7 @@ const ATSBoard = () => {
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}
-                                  className={`bg-white rounded-lg border border-gray-200 cursor-move hover:shadow-md transition-all ${
+                                  className={`cursor-move rounded-lg border border-[#f0dce8] bg-white transition-all hover:border-[#d5a6c7] hover:shadow-md ${
                                     snapshot.isDragging ? 'rotate-1 scale-105 shadow-lg' : ''
                                   }`}
                                   onClick={() => setSelectedApplication(application)}
@@ -381,7 +381,7 @@ const ATSBoard = () => {
                                     <div className="flex gap-2 pt-3 border-t border-gray-100">
                                       {application.resumeId && (
                                         <button
-                                          className="flex-1 text-center px-3 py-1.5 bg-blue-50 text-blue-600 text-xs rounded-lg hover:bg-blue-100 transition"
+                                          className="flex-1 rounded-lg bg-[#f7eef9] px-3 py-1.5 text-center text-xs text-[#5d0f51] transition hover:bg-[#efe0f2]"
                                           onClick={(e) => {
                                             e.stopPropagation();
                                             window.open(application.resumeId, '_blank');
@@ -425,10 +425,10 @@ const ATSBoard = () => {
             onClick={() => setSelectedApplication(null)}
           >
             <div
-              className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white shadow-xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="sticky top-0 bg-white border-b border-gray-200 rounded-t-xl px-6 py-4 flex items-start justify-between">
+              <div className="sticky top-0 flex items-start justify-between rounded-t-lg border-b border-[#f0dce8] bg-white px-6 py-4">
                 <div>
                   <h2 className="text-lg sm:text-xl font-bold text-gray-900">
                     {selectedApplication.candidate?.username || 'Unknown Candidate'}
@@ -540,7 +540,7 @@ const ATSBoard = () => {
                   onClick={() => {
                     setSelectedApplication(null);
                   }}
-                  className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium shadow-sm"
+                  className="rounded-lg bg-[#5d0f51] px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-[#3f0b38]"
                 >
                   <MessageSquare className="w-4 h-4 inline mr-2" />
                   Message Candidate
@@ -557,8 +557,8 @@ const ATSBoard = () => {
 // ATS Skeleton - Matching Dashboard Skeleton
 function ATSSkeleton() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 h-32 sm:h-40 animate-pulse"></div>
+    <div className="jc-soft-page min-h-screen">
+      <div className="h-32 animate-pulse bg-[#4c0e42] sm:h-40"></div>
       <div className="max-w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 -mt-10 sm:-mt-12">
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6 animate-pulse">
           <div className="h-10 bg-gray-200 rounded w-64"></div>

@@ -29,7 +29,7 @@ export default function Sidebar({ role, company, isOpen, onClose, onLogoutReques
       {isOpen && (
         <button
           type="button"
-          className="fixed inset-0 z-40 bg-gray-950/45 backdrop-blur-[1px] lg:hidden"
+          className="fixed inset-0 z-40 bg-[#2d1028]/45 backdrop-blur-[1px] lg:hidden"
           onClick={onClose}
           aria-label={t("sidebar.closeMenu")}
         />
@@ -37,14 +37,14 @@ export default function Sidebar({ role, company, isOpen, onClose, onLogoutReques
 
       <aside
         className={[
-          "fixed inset-y-0 start-0 z-50 flex w-72 flex-col border-e border-gray-800 bg-gray-950 text-white shadow-2xl transition-transform duration-300 lg:translate-x-0",
+          "fixed inset-y-0 start-0 z-50 flex w-72 flex-col border-e border-[#48113f] bg-[#310a2b] text-white shadow-2xl transition-transform duration-300 lg:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full rtl:translate-x-full",
         ].join(" ")}
       >
         <div className="flex h-20 items-center justify-between border-b border-white/10 px-5">
           <Link to={getDashboardHome(role)} onClick={onClose} className="min-w-0">
-            <span className="block text-xs font-semibold uppercase text-blue-300">{t("sidebar.brand")}</span>
-            <span className="block truncate text-xl font-semibold text-white">{getRoleLabel(role, t)}</span>
+            <span className="block text-xs font-semibold uppercase text-[#f2cfe5]">{t("sidebar.brand")}</span>
+            <span className="block truncate font-serif text-xl font-semibold text-white">{getRoleLabel(role, t)}</span>
           </Link>
           <button
             type="button"
@@ -69,7 +69,7 @@ export default function Sidebar({ role, company, isOpen, onClose, onLogoutReques
                 className={[
                   "flex min-h-11 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition",
                   active
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-950/40"
+                    ? "bg-white text-[#5d0f51] shadow-lg shadow-[#160512]/30"
                     : "text-gray-300 hover:bg-white/10 hover:text-white",
                 ].join(" ")}
               >
@@ -91,7 +91,7 @@ export default function Sidebar({ role, company, isOpen, onClose, onLogoutReques
               <span className="block truncate text-sm font-semibold text-white">
                 {user?.username || user?.email || t("common.profile")}
               </span>
-              <span className="block truncate text-xs capitalize text-gray-300">{t(`roles.${role}`, { defaultValue: role })}</span>
+              <span className="block truncate text-xs capitalize text-[#e7c8dd]">{t(`roles.${role}`, { defaultValue: role })}</span>
             </span>
           </Link>
           <div className="rounded-lg border border-white/10 bg-white/5 p-1 sm:hidden">

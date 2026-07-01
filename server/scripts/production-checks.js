@@ -112,7 +112,12 @@ class ProductionChecker {
     this.check('Email service configured (optional)', () => {
       const smtpHost = this.getEnvValue('SMTP_HOST');
       const smtpUser = this.getEnvValue('SMTP_USER');
-      if (!smtpHost || !smtpUser) return 'warning';
+      const smtpPass = this.getEnvValue('SMTP_PASS');
+      const emailUser = this.getEnvValue('EMAIL_USER');
+      const emailPass = this.getEnvValue('EMAIL_PASS');
+      const hasSmtpAuth = smtpHost && smtpUser && smtpPass;
+      const hasEmailFallback = emailUser && emailPass;
+      if (!hasSmtpAuth && !hasEmailFallback) return 'warning';
       return true;
     });
 

@@ -1,6 +1,6 @@
 const variants = {
-  neutral: "bg-gray-100 text-gray-700 ring-gray-200",
-  primary: "bg-blue-50 text-blue-700 ring-blue-200",
+  neutral: "bg-[#fff7fb] text-[#725b6b] ring-[#ead8e3]",
+  primary: "bg-[#f7eef9] text-[#5d0f51] ring-[#d8b6d0]",
   success: "bg-emerald-50 text-emerald-700 ring-emerald-200",
   warning: "bg-amber-50 text-amber-700 ring-amber-200",
   danger: "bg-red-50 text-red-700 ring-red-200",

@@ -35,18 +35,18 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="jc-soft-page flex min-h-screen items-center justify-center">
+        <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#f0dce8] border-t-[#5d0f51]"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
+    <div className="jc-soft-page min-h-screen p-4 sm:p-6">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">JewelCancy Admin Dashboard</h1>
-        <p className="text-gray-600 mt-2">Manage your platform from one place</p>
+        <h1 className="font-serif text-2xl font-bold text-[#261723] sm:text-3xl">JewelCancy Admin Dashboard</h1>
+        <p className="mt-2 text-[#7b6575]">Manage your platform from one place</p>
       </div>
 
       {/* Statistics Grid */}
@@ -54,7 +54,7 @@ const AdminDashboard = () => {
         {/* Users Card */}
         <Link
           to="/admin/users"
-          className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow"
+          className="jc-panel p-4 transition hover:border-[#d5a6c7] sm:p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-blue-100 rounded-lg">
@@ -75,7 +75,7 @@ const AdminDashboard = () => {
         {/* Companies Card */}
         <Link
           to="/admin/companies"
-          className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow"
+          className="jc-panel p-4 transition hover:border-[#d5a6c7] sm:p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-green-100 rounded-lg">
@@ -101,7 +101,7 @@ const AdminDashboard = () => {
         {/* Jobs Card */}
         <Link
           to="/admin/jobs"
-          className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow"
+          className="jc-panel p-4 transition hover:border-[#d5a6c7] sm:p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-purple-100 rounded-lg">
@@ -127,7 +127,7 @@ const AdminDashboard = () => {
         {/* Applications Card */}
         <Link
           to="/admin/applications"
-          className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow"
+          className="jc-panel p-4 transition hover:border-[#d5a6c7] sm:p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-orange-100 rounded-lg">
@@ -149,7 +149,7 @@ const AdminDashboard = () => {
       {/* Quick Actions */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Users */}
-        <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+        <div className="jc-panel p-4 sm:p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-900">Recent Users</h2>
             <Link
@@ -189,7 +189,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Recent Companies */}
-        <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+        <div className="jc-panel p-4 sm:p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-900">Recent Companies</h2>
             <Link
@@ -225,17 +225,17 @@ const AdminDashboard = () => {
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">
-        <Link to="/admin/reports" className="rounded-lg bg-gray-900 p-5 text-white shadow-md transition hover:bg-gray-800">
+        <Link to="/admin/reports" className="rounded-lg bg-[#4c0e42] p-5 text-white shadow-md transition hover:bg-[#3f0b38]">
           <BarChart3 className="mb-3 h-6 w-6" />
           <p className="font-semibold">Generate Reports</p>
           <p className="mt-1 text-sm text-gray-300">PDF, CSV, Excel, and saved snapshots.</p>
         </Link>
-        <Link to="/admin/applications" className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition hover:border-blue-300">
+        <Link to="/admin/applications" className="jc-panel p-5 transition hover:border-[#d5a6c7]">
           <FileText className="mb-3 h-6 w-6 text-blue-600" />
           <p className="font-semibold text-gray-900">Inspect Applications</p>
           <p className="mt-1 text-sm text-gray-500">Track candidate pipeline status platform-wide.</p>
         </Link>
-        <Link to="/admin/professions" className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition hover:border-blue-300">
+        <Link to="/admin/professions" className="jc-panel p-5 transition hover:border-[#d5a6c7]">
           <Briefcase className="mb-3 h-6 w-6 text-blue-600" />
           <p className="font-semibold text-gray-900">Profession Coverage</p>
           <p className="mt-1 text-sm text-gray-500">Review active job taxonomy counts.</p>

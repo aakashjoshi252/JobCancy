@@ -48,7 +48,7 @@ The active Angular entrypoints are `src/main.ts`, `src/main.server.ts`, `src/ser
 - Blogs: blog listing/detail services and Angular blog page shells.
 - Subscription, interview, resume, dashboard, and admin: typed service layers and guarded route shells that preserve backend endpoints.
 - Layout: public and dashboard standalone layouts with lazy child routes for guest, candidate, recruiter, and admin areas.
-- Deployment: Angular production build, SSR output, PWA config, Nginx static serving, Dockerfile, and Compose frontend build updates.
+- Deployment: Angular production build, SSR output, PWA config, static hosting, and Node/npm deployment notes.
 
 ## Verification
 
@@ -68,7 +68,7 @@ The active Angular entrypoints are `src/main.ts`, `src/main.server.ts`, `src/ser
 - [x] Add JWT, refresh-token placeholder, loading, and auth-error interceptors.
 - [x] Add route guards for guest/auth/role flows.
 - [x] Add SSR, hydration, PWA, Tailwind, Material, PrimeNG, charts dependencies, and ngx-translate.
-- [x] Update Docker/Nginx/Compose for Angular output.
+- [x] Update static hosting and Node/npm deployment notes for Angular output.
 - [x] Add smoke test and verify build/lint/test.
 - [ ] Convert each legacy JSX screen to full pixel/interaction parity Angular components.
 - [ ] Expand component, guard, service, and API test coverage per feature.

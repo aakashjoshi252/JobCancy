@@ -67,7 +67,7 @@ export default function DashboardLayout({ role }) {
   }, [dispatch, resolvedRole, resume, user?._id]);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-gray-100 text-gray-950">
+    <div className="jc-soft-page min-h-screen overflow-x-hidden text-[#261723]">
       <LocalizedMeta />
       <Sidebar
         role={resolvedRole}

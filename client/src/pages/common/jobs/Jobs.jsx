@@ -55,13 +55,6 @@ const POPULAR_SEARCHES = [
   "Polisher", "Quality Control", "Sales Executive", "Production Manager"
 ];
 
-const COLOR_MAP = {
-  blue: "text-blue-400",
-  purple: "text-purple-400",
-  green: "text-green-400",
-  yellow: "text-yellow-400"
-};
-
 // Utility functions
 const getDaysAgo = (date) => {
   if (!date) return 0;
@@ -289,26 +282,25 @@ const filteredJobs = useMemo(() => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Header */}
-      <div className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-          <div className="text-center mb-8 animate-fadeIn">
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-3 mb-4">
-              <GiDiamondRing className="text-4xl sm:text-5xl text-yellow-300 animate-pulse" />
-              <h1 className="font-serif text-2xl sm:text-4xl font-bold text-white leading-tight">
-                {t("heroTitle", { defaultValue: "Find Your Dream Jewellery-Industry Job" })}
-              </h1>
-            </div>
-            <p className="text-blue-200 text-sm sm:text-lg flex justify-center items-center gap-2">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+    <div className="jc-soft-page min-h-screen">
+      <div className="mx-auto max-w-7xl px-4 py-7 sm:px-6 lg:px-8">
+        <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="inline-flex items-center gap-2 rounded-full border border-[#ead8e3] bg-white px-3 py-1.5 text-xs font-bold uppercase text-[#7a0e67]">
+              <GiDiamondRing className="h-4 w-4" />
+              Jewellery hiring marketplace
+            </p>
+            <h1 className="mt-3 font-serif text-3xl font-bold text-[#261723] sm:text-4xl">
+              {t("heroTitle", { defaultValue: "Find Your Dream Jewellery-Industry Job" })}
+            </h1>
+            <p className="mt-2 text-sm text-[#7b6575]">
               {t("activeJobs", {
                 count: filteredJobs.length,
                 defaultValue: "{{count}} active jobs in Jewellery-Craftsmanship",
               })}
             </p>
             {isCandidateFeed && user?.jobProfession && (
-              <p className="mt-3 inline-flex rounded-full bg-white/15 px-3 py-1 text-sm text-blue-50">
+              <p className="mt-3 inline-flex rounded-full bg-[#f7eef9] px-3 py-1 text-sm font-semibold text-[#5d0f51]">
                 {t("candidate:matchingProfession", {
                   profession: translateProfession(user.jobProfession, t),
                   defaultValue: `Matching your selected profession: ${translateProfession(user.jobProfession, t)}`,
@@ -316,96 +308,126 @@ const filteredJobs = useMemo(() => {
               </p>
             )}
           </div>
-
-          {/* Search Section */}
-          <SearchSection
-            filters={filters}
-            onFilterChange={updateFilter}
-            onSalaryRangeChange={updateSalaryRange}
-            showFilters={showFilters}
-            onToggleFilters={() => setShowFilters(!showFilters)}
-            onReset={resetFilters}
-            activeFilterCount={getActiveFilterCount()}
-            lockedProfession={isCandidateFeed}
-            canSearchCompany={isAuthenticated}
-            t={t}
-          />
-
-          {/* Popular Searches */}
-          <PopularSearches 
-            searches={POPULAR_SEARCHES}
-            onSearch={handlePopularSearch}
-            t={t}
-          />
+          <PopularSearches searches={POPULAR_SEARCHES.slice(0, 5)} onSearch={handlePopularSearch} t={t} />
         </div>
-      </div>
 
-      {/* Results Count */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-        <p className="text-gray-600">
-          {t("showingJobs", {
-            shown: paginatedJobs.length,
-            total: filteredJobs.length,
-            defaultValue: "Showing {{shown}} of {{total}} jobs",
-          })}
-        </p>
-      </div>
+        <div className="grid gap-5 lg:grid-cols-[280px_minmax(0,1fr)_260px]">
+          <aside className="lg:sticky lg:top-24 lg:h-fit">
+            <SearchSection
+              filters={filters}
+              onFilterChange={updateFilter}
+              onSalaryRangeChange={updateSalaryRange}
+              showFilters={showFilters}
+              onToggleFilters={() => setShowFilters(!showFilters)}
+              onReset={resetFilters}
+              activeFilterCount={getActiveFilterCount()}
+              lockedProfession={isCandidateFeed}
+              canSearchCompany={isAuthenticated}
+              t={t}
+            />
+          </aside>
 
-      {/* Job Cards Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 pb-12">
-        {loading ? (
-          <JobSkeletonGrid />
-        ) : loadError ? (
-          <ErrorState onRetry={() => {
-            if (isCandidateFeed) candidateJobsQuery.refetch();
-            else publicJobsQuery.refetch();
-          }} />
-        ) : paginatedJobs.length === 0 ? (
-          <EmptyState onReset={resetFilters} />
-        ) : (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {paginatedJobs.map((job, index) => {
-  const jobData = job._doc || job;
-  const jobId = jobData._id || jobData.id || index;
-
-  return (
-    <JobCard
-      key={jobId}
-      job={jobData}
-      formatSalary={formatSalaryDisplay}
-      onClick={() => navigate(`/jobs/${jobId}`)}
-      t={t}
-      isAuthenticated={isAuthenticated}
-      onApply={(event) => {
-        event.stopPropagation();
-        if (!isAuthenticated) {
-          navigate("/login", { state: { from: `/jobs/${jobId}` } });
-          return;
-        }
-        navigate(`/jobs/${jobId}`);
-      }}
-    />
-  );
-})}
+          <main className="min-w-0">
+            <div className="jc-panel mb-4 flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h2 className="text-lg font-bold text-[#261723]">
+                  {t("jobs", { defaultValue: "Jobs" })} ({filteredJobs.length})
+                </h2>
+                <p className="text-sm text-[#7b6575]">
+                  {t("showingJobs", {
+                    shown: paginatedJobs.length,
+                    total: filteredJobs.length,
+                    defaultValue: "Showing {{shown}} of {{total}} jobs",
+                  })}
+                </p>
+              </div>
+              <select className="h-10 w-full rounded-lg border border-[#ead8e3] bg-white px-3 text-sm text-[#4b3444] sm:w-auto">
+                <option>Sort by Latest</option>
+              </select>
             </div>
 
-            {totalPages > 1 && (
-              <div className="mt-10">
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={setCurrentPage}
-                />
-              </div>
+            {loading ? (
+              <JobSkeletonGrid />
+            ) : loadError ? (
+              <ErrorState onRetry={() => {
+                if (isCandidateFeed) candidateJobsQuery.refetch();
+                else publicJobsQuery.refetch();
+              }} />
+            ) : paginatedJobs.length === 0 ? (
+              <EmptyState onReset={resetFilters} />
+            ) : (
+              <>
+                <div className="space-y-4">
+                  {paginatedJobs.map((job, index) => {
+                    const jobData = job._doc || job;
+                    const jobId = jobData._id || jobData.id || index;
+
+                    return (
+                      <JobCard
+                        key={jobId}
+                        job={jobData}
+                        formatSalary={formatSalaryDisplay}
+                        onClick={() => navigate(`/jobs/${jobId}`)}
+                        t={t}
+                        isAuthenticated={isAuthenticated}
+                        onApply={(event) => {
+                          event.stopPropagation();
+                          if (!isAuthenticated) {
+                            navigate("/login", { state: { from: `/jobs/${jobId}` } });
+                            return;
+                          }
+                          navigate(`/jobs/${jobId}`);
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+
+                {totalPages > 1 && (
+                  <div className="mt-8">
+                    <Pagination
+                      currentPage={currentPage}
+                      totalPages={totalPages}
+                      onPageChange={setCurrentPage}
+                    />
+                  </div>
+                )}
+              </>
             )}
-          </>
-        )}
+          </main>
+
+          <aside className="space-y-4 lg:sticky lg:top-24 lg:h-fit">
+            <div className="jc-panel p-5">
+              <h3 className="text-sm font-bold text-[#261723]">About JewelCancy</h3>
+              <div className="mt-4 flex items-center gap-3">
+                <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-[#ead8e3] bg-[#fff7fb] text-[#5d0f51]">
+                  <GiDiamondRing className="h-6 w-6" />
+                </span>
+                <div>
+                  <p className="font-semibold text-[#261723]">Specialized jewelry jobs</p>
+                  <p className="text-xs text-[#7b6575]">India focused talent network</p>
+                </div>
+              </div>
+              <ul className="mt-5 space-y-3 text-sm text-[#5f4a59]">
+                {["Profile complete", "Verified recruiters", "Resume upload", "Direct application"].map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-[#7a0e67]" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                onClick={() => navigate(isAuthenticated ? "/profile" : "/register")}
+                className="mt-5 w-full rounded-lg border border-[#d9bdcf] bg-white px-4 py-2 text-sm font-semibold text-[#5d0f51] transition hover:bg-[#fff7fb]"
+              >
+                Improve Profile
+              </button>
+            </div>
+            <StatsFooter jobs={jobs} t={t} compact />
+          </aside>
+        </div>
       </div>
-
-      {/* Stats Footer */}
-      <StatsFooter jobs={jobs} t={t} />
-
     </div>
   );
 }
@@ -414,53 +436,65 @@ const filteredJobs = useMemo(() => {
 
 function SearchSection({ filters, onFilterChange, onSalaryRangeChange, showFilters, onToggleFilters, onReset, activeFilterCount, lockedProfession, canSearchCompany, t }) {
   return (
-    <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-white/20">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-        <div className="md:col-span-5 relative">
-          <HiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl" />
+    <div className="jc-panel p-4">
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <div>
+          <h2 className="text-sm font-bold text-[#261723]">
+            {t("searchJobs", { defaultValue: "Search Jobs" })}
+          </h2>
+          <p className="text-xs text-[#7b6575]">
+            {t("refineResults", { defaultValue: "Refine by role, place, skills and salary" })}
+          </p>
+        </div>
+        {activeFilterCount > 0 && (
+          <span className="rounded-full bg-[#f7eef9] px-2.5 py-1 text-xs font-bold text-[#5d0f51]">
+            {activeFilterCount}
+          </span>
+        )}
+      </div>
+
+      <div className="space-y-3">
+        <div className="relative">
+          <HiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9b8394] text-lg" />
           <input
             type="text"
             placeholder={t("searchJobs", { defaultValue: "Search by job title, profession, skills..." })}
             value={filters.searchQuery}
             onChange={(e) => onFilterChange('searchQuery', e.target.value)}
-            className="w-full pl-12 pr-4 py-4 bg-white text-gray-900 rounded-xl focus:ring-4 focus:ring-blue-300 outline-none transition-shadow"
+            className="h-11 w-full rounded-lg border border-[#ead8e3] bg-[#fffdfb] pl-10 pr-3 text-sm text-[#261723] outline-none transition focus:border-[#7a0e67] focus:ring-4 focus:ring-[#efd5e8]"
           />
         </div>
 
-        <div className="md:col-span-4 relative">
-          <HiLocationMarker className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl" />
+        <div className="relative">
+          <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9b8394] text-lg" />
           <input
             type="text"
             placeholder={t("locationPlaceholder", { defaultValue: "Location (e.g., Mumbai, Jaipur)" })}
             value={filters.location}
             onChange={(e) => onFilterChange('location', e.target.value)}
-            className="w-full pl-12 pr-4 py-4 bg-white text-gray-900 rounded-xl focus:ring-4 focus:ring-blue-300 outline-none transition-shadow"
+            className="h-11 w-full rounded-lg border border-[#ead8e3] bg-[#fffdfb] pl-10 pr-3 text-sm text-[#261723] outline-none transition focus:border-[#7a0e67] focus:ring-4 focus:ring-[#efd5e8]"
           />
         </div>
 
-        <div className="md:col-span-3 flex flex-col sm:flex-row gap-3">
+        <div className="grid grid-cols-2 gap-2">
           <button
+            type="button"
             onClick={onToggleFilters}
-            className="flex-1 bg-white/20 hover:bg-white/30 text-white py-4 rounded-xl transition-all font-medium flex items-center justify-center gap-3 backdrop-blur-lg border border-white/30 group"
+            className="flex h-10 items-center justify-center gap-2 rounded-lg bg-[#5d0f51] px-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#3f0b38]"
           >
-            <HiFilter className={`text-xl transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+            <HiFilter className={`text-base transition-transform ${showFilters ? 'rotate-180' : ''}`} />
             {t("filters")}
-            {activeFilterCount > 0 && (
-              <span className="bg-yellow-400 text-blue-900 px-2 py-0.5 rounded-full text-xs font-bold animate-pulse">
-                {activeFilterCount}
-              </span>
-            )}
           </button>
           <button
+            type="button"
             onClick={onReset}
-            className="px-6 py-4 sm:py-0 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-all font-medium backdrop-blur-lg border border-white/30"
+            className="h-10 rounded-lg border border-[#d9bdcf] bg-white px-3 text-sm font-semibold text-[#5d0f51] transition hover:bg-[#fff7fb]"
           >
             {t("actions.reset", { ns: "common" })}
           </button>
         </div>
       </div>
 
-      {/* Advanced Filters */}
       {showFilters && (
         <AdvancedFilters
           filters={filters}
@@ -472,7 +506,6 @@ function SearchSection({ filters, onFilterChange, onSalaryRangeChange, showFilte
         />
       )}
 
-      {/* Active Search Tags */}
       {activeFilterCount > 0 && (
         <ActiveFilters
           filters={filters}
@@ -487,8 +520,8 @@ function SearchSection({ filters, onFilterChange, onSalaryRangeChange, showFilte
 
 function AdvancedFilters({ filters, onFilterChange, onSalaryRangeChange, lockedProfession, canSearchCompany, t }) {
   return (
-    <div className="mt-6 pt-6 border-t border-white/20 animate-slideDown">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="mt-4 space-y-3 border-t border-[#f0dce8] pt-4 animate-slideDown">
+      <div className="space-y-3">
         <FilterSelect
           label={t("jobProfession")}
           value={filters.profession}
@@ -522,7 +555,7 @@ function AdvancedFilters({ filters, onFilterChange, onSalaryRangeChange, lockedP
         />
       </div>
 
-      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="space-y-3">
         <FilterInput
           label={t("fields.companyName", { ns: "common" })}
           placeholder={canSearchCompany ? t("companyPlaceholder", { defaultValue: "Search by company" }) : "Login to search by company"}
@@ -538,25 +571,24 @@ function AdvancedFilters({ filters, onFilterChange, onSalaryRangeChange, lockedP
         />
       </div>
 
-      {/* Salary Range Filter */}
-      <div className="mt-4">
-        <label className="block text-sm font-medium text-blue-100 mb-2">
+      <div>
+        <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-[#7b6575]">
           {t("salaryRange", { defaultValue: "Salary Range (₹)" })}
         </label>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-2">
           <input
             type="number"
             placeholder={t("min", { defaultValue: "Min" })}
             value={filters.salaryRange.min}
             onChange={(e) => onSalaryRangeChange('min', e.target.value)}
-            className="w-full px-4 py-3 bg-white text-gray-900 rounded-xl focus:ring-4 focus:ring-blue-300 outline-none"
+            className="h-10 w-full rounded-lg border border-[#ead8e3] bg-[#fffdfb] px-3 text-sm text-[#261723] outline-none transition focus:border-[#7a0e67] focus:ring-4 focus:ring-[#efd5e8]"
           />
           <input
             type="number"
             placeholder={t("max", { defaultValue: "Max" })}
             value={filters.salaryRange.max}
             onChange={(e) => onSalaryRangeChange('max', e.target.value)}
-            className="w-full px-4 py-3 bg-white text-gray-900 rounded-xl focus:ring-4 focus:ring-blue-300 outline-none"
+            className="h-10 w-full rounded-lg border border-[#ead8e3] bg-[#fffdfb] px-3 text-sm text-[#261723] outline-none transition focus:border-[#7a0e67] focus:ring-4 focus:ring-[#efd5e8]"
           />
         </div>
       </div>
@@ -567,12 +599,12 @@ function AdvancedFilters({ filters, onFilterChange, onSalaryRangeChange, lockedP
 function FilterSelect({ label, value, onChange, options, disabled = false }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-blue-100 mb-2">{label}</label>
+      <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-[#7b6575]">{label}</label>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
         disabled={disabled}
-        className="w-full px-4 py-3 bg-white text-gray-900 rounded-xl focus:ring-4 focus:ring-blue-300 outline-none cursor-pointer hover:shadow-md transition-shadow disabled:cursor-not-allowed disabled:bg-blue-50"
+        className="h-10 w-full cursor-pointer rounded-lg border border-[#ead8e3] bg-[#fffdfb] px-3 text-sm text-[#261723] outline-none transition focus:border-[#7a0e67] focus:ring-4 focus:ring-[#efd5e8] disabled:cursor-not-allowed disabled:bg-[#f8f1f5] disabled:text-[#9b8394]"
       >
         {options.map(opt => (
           <option key={opt.value || opt} value={opt.value || opt}>
@@ -587,14 +619,14 @@ function FilterSelect({ label, value, onChange, options, disabled = false }) {
 function FilterInput({ label, value, onChange, placeholder, disabled = false }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-blue-100 mb-2">{label}</label>
+      <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-[#7b6575]">{label}</label>
       <input
         type="text"
         value={value}
         placeholder={placeholder}
         disabled={disabled}
         onChange={(event) => onChange(event.target.value)}
-        className="w-full px-4 py-3 bg-white text-gray-900 rounded-xl focus:ring-4 focus:ring-blue-300 outline-none disabled:cursor-not-allowed disabled:bg-blue-50 disabled:text-gray-500"
+        className="h-10 w-full rounded-lg border border-[#ead8e3] bg-[#fffdfb] px-3 text-sm text-[#261723] outline-none transition focus:border-[#7a0e67] focus:ring-4 focus:ring-[#efd5e8] disabled:cursor-not-allowed disabled:bg-[#f8f1f5] disabled:text-[#9b8394]"
       />
     </div>
   );
@@ -611,20 +643,19 @@ function ActiveFilters({ filters, onFilterChange, onReset, t }) {
     { show: filters.empType !== "All Types", icon: HiBriefcase, value: filters.empType, onClear: () => onFilterChange('empType', "All Types") },
   ];
 
-  const colors = ['bg-blue-600', 'bg-purple-600', 'bg-green-600', 'bg-orange-600'];
-
   return (
-    <div className="mt-4 flex flex-wrap gap-2 animate-fadeIn">
+    <div className="mt-4 flex flex-wrap gap-2 border-t border-[#f0dce8] pt-4 animate-fadeIn">
       {filterTags.map((tag, idx) => tag.show && (
-        <span key={idx} className={`inline-flex items-center gap-2 px-3 py-1.5 ${colors[idx % colors.length]} text-white rounded-full text-sm transition-all hover:scale-105`}>
+        <span key={idx} className="inline-flex items-center gap-2 rounded-full border border-[#e6cfe0] bg-[#f7eef9] px-3 py-1.5 text-xs font-semibold text-[#5d0f51] transition hover:border-[#d5a6c7]">
           <tag.icon className="text-xs" />
           {tag.value}
-          <HiX className="cursor-pointer hover:text-gray-200 transition-colors" onClick={tag.onClear} />
+          <HiX className="cursor-pointer text-[#7a0e67] transition-colors hover:text-[#3f0b38]" onClick={tag.onClear} />
         </span>
       ))}
       <button
+        type="button"
         onClick={onReset}
-        className="text-sm text-blue-200 hover:text-white underline transition-colors"
+        className="text-xs font-semibold text-[#7a0e67] underline decoration-[#d9bdcf] underline-offset-4 transition hover:text-[#3f0b38]"
       >
         Clear all
       </button>
@@ -634,17 +665,18 @@ function ActiveFilters({ filters, onFilterChange, onReset, t }) {
 
 function PopularSearches({ searches, onSearch, t }) {
   return (
-    <div className="mt-6 text-center">
-      <p className="text-blue-200 mb-3 text-sm flex items-center justify-center gap-2">
-        <HiSparkles className="text-yellow-300" />
+    <div className="mt-4">
+      <p className="mb-3 flex items-center gap-2 text-sm font-semibold text-[#5d0f51]">
+        <HiSparkles className="text-[#a34c83]" />
         Popular searches
       </p>
-      <div className="flex flex-wrap justify-center gap-2">
+      <div className="flex flex-wrap gap-2">
         {searches.map((item, i) => (
           <button
             key={i}
+            type="button"
             onClick={() => onSearch(item)}
-          className="bg-blue-700/50 hover:bg-blue-600 text-white px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm transition-all border border-blue-400 hover:scale-105"
+            className="rounded-full border border-[#e6cfe0] bg-white px-3 py-1.5 text-xs font-semibold text-[#5d0f51] transition hover:border-[#d5a6c7] hover:bg-[#fff7fb]"
           >
             {translateProfession(item, t)}
           </button>
@@ -661,100 +693,107 @@ function JobCard({ job, formatSalary, onClick, onApply, isAuthenticated, t }) {
   const expiryDate = getJobExpiryDate(job);
 
   return (
-    <div 
+    <article
       onClick={onClick}
-      className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer group hover:-translate-y-1"
+      className="jc-panel group cursor-pointer p-4 transition duration-200 hover:-translate-y-0.5 hover:border-[#d5a6c7] hover:shadow-[0_24px_50px_-36px_rgba(93,15,81,0.45)]"
     >
-      <div className="p-6">
-        <div className="flex justify-between items-start mb-3">
-          <h2 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-            {job.title}
-          </h2>
-          {isExpired && (
-            <span className="text-xs px-2 py-1 bg-red-100 text-red-600 rounded-full animate-pulse">
-              Expired
-            </span>
-          )}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-[#ead8e3] bg-[#fff7fb] text-[#5d0f51]">
+          <GiDiamondRing className="h-6 w-6" />
         </div>
 
-        <p className="text-sm text-gray-500 mb-3">{companyName}</p>
-
-        <div className="mb-3">
-          <span className="inline-block px-3 py-1 bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 rounded-full text-xs font-medium">
-            {job.jobProfession ? translateProfession(job.jobProfession, t) : t("common.notSpecified", { ns: "common" })}
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
-          <InfoCard icon={<HiLocationMarker />} text={job.jobLocation} />
-          <InfoCard icon={<HiBriefcase />} text={job.empType} />
-          <InfoCard icon={<HiAcademicCap />} text={job.experience} />
-          <InfoCard icon={<HiClock />} text={`${job.openings} openings`} />
-        </div>
-
-        {salaryParts.length > 0 && (
-          <div className="mb-4 p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl">
-            <div className="flex items-center gap-2 text-blue-700 mb-1">
-              <HiCurrencyDollar />
-              <span className="text-sm font-medium">Salary:</span>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+            <div className="min-w-0">
+              <h2 className="truncate text-base font-bold text-[#261723] transition group-hover:text-[#5d0f51] sm:text-lg">
+                {job.title}
+              </h2>
+              <p className="mt-1 text-sm text-[#7b6575]">{companyName}</p>
             </div>
-            <div className="space-y-1">
-              {salaryParts.slice(0, 2).map((part, idx) => (
-                <div key={idx} className="flex justify-between items-center text-sm">
-                  <span className="text-gray-600">{part.label}:</span>
-                  <span className="font-semibold text-blue-600">{part.range}</span>
-                </div>
-              ))}
-              {salaryParts.length > 2 && (
-                <p className="text-xs text-gray-500">+{salaryParts.length - 2} more</p>
+            <div className="flex shrink-0 flex-wrap items-center gap-2">
+              {isExpired && (
+                <span className="rounded-full bg-red-50 px-2.5 py-1 text-xs font-semibold text-red-600">
+                  Expired
+                </span>
               )}
+              <span className="rounded-full border border-[#e6cfe0] bg-[#f7eef9] px-3 py-1 text-xs font-semibold text-[#5d0f51]">
+                {job.jobProfession ? translateProfession(job.jobProfession, t) : t("common.notSpecified", { ns: "common" })}
+              </span>
             </div>
           </div>
-        )}
 
-        {job.skills?.length > 0 && (
-          <div className="mb-4">
-            <div className="flex flex-wrap gap-1">
+          <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            <InfoCard icon={<HiLocationMarker />} text={job.jobLocation} />
+            <InfoCard icon={<HiBriefcase />} text={job.empType} />
+            <InfoCard icon={<HiAcademicCap />} text={job.experience} />
+            <InfoCard icon={<HiClock />} text={`${job.openings || 0} openings`} />
+          </div>
+
+          {salaryParts.length > 0 && (
+            <div className="mt-3 rounded-lg border border-[#f0dce8] bg-[#fffaf7] p-3">
+              <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#5d0f51]">
+                <HiCurrencyDollar />
+                <span>Salary</span>
+              </div>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {salaryParts.slice(0, 2).map((part, idx) => (
+                  <div key={idx} className="flex items-center justify-between gap-3 text-sm">
+                    <span className="text-[#7b6575]">{part.label}</span>
+                    <span className="font-semibold text-[#261723]">{part.range}</span>
+                  </div>
+                ))}
+                {salaryParts.length > 2 && (
+                  <p className="text-xs font-semibold text-[#7a0e67]">+{salaryParts.length - 2} more</p>
+                )}
+              </div>
+            </div>
+          )}
+
+          {job.skills?.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-2">
               {job.skills.slice(0, 3).map((skill, idx) => (
-                <span key={idx} className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
+                <span key={idx} className="rounded-full bg-[#f8f1f5] px-2.5 py-1 text-xs font-medium text-[#6f5668]">
                   {skill}
                 </span>
               ))}
               {job.skills.length > 3 && (
-                <span className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
+                <span className="rounded-full bg-[#f8f1f5] px-2.5 py-1 text-xs font-medium text-[#6f5668]">
                   +{job.skills.length - 3}
                 </span>
               )}
             </div>
-          </div>
-        )}
-
-        <div className="flex items-center justify-between gap-3">
-          <div className="text-xs text-gray-500 flex items-center gap-1">
-            <HiClock />
-            Posted {getDaysAgo(job.createdAt)} days ago
-          </div>
-          {expiryDate && (
-            <div className={`text-xs ${isExpired ? "text-red-600" : "text-gray-500"}`}>
-              Expires {new Date(expiryDate).toLocaleDateString()}
-            </div>
           )}
+
+          <div className="mt-4 flex flex-col gap-3 border-t border-[#f0dce8] pt-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#7b6575]">
+              <span className="flex items-center gap-1">
+                <HiClock />
+                Posted {getDaysAgo(job.createdAt)} days ago
+              </span>
+              {expiryDate && (
+                <span className={isExpired ? "text-red-600" : "text-[#7b6575]"}>
+                  Expires {new Date(expiryDate).toLocaleDateString()}
+                </span>
+              )}
+            </div>
+            <button
+              type="button"
+              onClick={onApply}
+              disabled={isExpired}
+              className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${
+                isExpired
+                  ? "cursor-not-allowed bg-[#eee4ea] text-[#9b8394]"
+                  : isAuthenticated
+                    ? "bg-[#5d0f51] text-white hover:bg-[#3f0b38]"
+                    : "border border-[#d9bdcf] bg-white text-[#5d0f51] hover:bg-[#fff7fb]"
+              }`}
+            >
+              {isExpired ? "Expired" : isAuthenticated ? "View / Apply" : "Login to Apply"}
+            </button>
+          </div>
         </div>
-        <button
-          onClick={onApply}
-          disabled={isExpired}
-          className={`mt-4 w-full rounded-lg px-4 py-2 text-sm font-semibold transition ${
-            isExpired
-              ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-              : isAuthenticated
-                ? "bg-blue-600 text-white hover:bg-blue-700"
-                : "bg-amber-500 text-white hover:bg-amber-600"
-          }`}
-        >
-          {isExpired ? "Expired" : isAuthenticated ? "View / Apply" : "Login to Apply"}
-        </button>
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -762,14 +801,14 @@ function InfoCard({ icon, text }) {
   if (!text) return null;
   
   return (
-    <div className="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 p-2 rounded-lg hover:bg-gray-100 transition-colors">
-      <span className="text-gray-500">{icon}</span>
+    <div className="flex min-w-0 items-center gap-2 rounded-lg bg-[#fff7fb] p-2 text-sm text-[#6f5668] transition-colors">
+      <span className="shrink-0 text-[#7a0e67]">{icon}</span>
       <span className="truncate">{text}</span>
     </div>
   );
 }
 
-function StatsFooter({ jobs, t }) {
+function StatsFooter({ jobs, t, compact = false }) {
   const stats = [
     { value: jobs.length, label: t("totalJobs", { defaultValue: "Total Jobs" }), icon: <HiBriefcase />, color: "blue" },
     { value: jobs.filter(j => j.jobProfession).length, label: t("jewelleryRoles", { defaultValue: "Jewellery Roles" }), icon: <GiDiamondRing />, color: "purple" },
@@ -777,8 +816,29 @@ function StatsFooter({ jobs, t }) {
     { value: jobs.filter(j => j.empType === "Remote").length, label: t("remoteJobs", { defaultValue: "Remote Jobs" }), icon: <HiLocationMarker />, color: "yellow" }
   ];
 
+  if (compact) {
+    return (
+      <div className="jc-panel p-5">
+        <h3 className="text-sm font-bold text-[#261723]">Hiring snapshot</h3>
+        <div className="mt-4 space-y-3">
+          {stats.map((stat, idx) => (
+            <div key={idx} className="flex items-center justify-between rounded-lg bg-[#fff7fb] px-3 py-2">
+              <div className="flex min-w-0 items-center gap-2">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-[#5d0f51]">
+                  {stat.icon}
+                </span>
+                <span className="truncate text-xs font-semibold text-[#7b6575]">{stat.label}</span>
+              </div>
+              <span className="text-sm font-bold text-[#261723]">{stat.value}+</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-gray-700 to-blue-800 text-black py-12">
+    <div className="rounded-lg border border-[#f0dce8] bg-[#4c0e42] py-10 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {stats.map((stat, idx) => (
@@ -790,14 +850,14 @@ function StatsFooter({ jobs, t }) {
   );
 }
 
-function StatCard({ value, label, icon, color }) {
+function StatCard({ value, label, icon }) {
   return (
     <div className="text-center group">
-      <div className={`text-4xl font-bold ${COLOR_MAP[color]} mb-2 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center gap-2`}>
+      <div className="mb-2 flex items-center justify-center gap-2 text-3xl font-bold text-white transition-transform duration-300 group-hover:scale-105">
         {icon}
         {value}+
       </div>
-      <p className="text-gray-300 text-sm font-medium uppercase tracking-wider group-hover:text-white transition-colors">
+      <p className="text-sm font-medium uppercase tracking-wider text-[#f4dcec] transition-colors group-hover:text-white">
         {label}
       </p>
     </div>
@@ -807,15 +867,16 @@ function StatCard({ value, label, icon, color }) {
 function EmptyState({ onReset }) {
   const { t } = useTranslation(["jobs", "common"]);
   return (
-    <div className="text-center py-16 bg-white rounded-2xl shadow-lg border border-gray-200">
-      <GiDiamondRing className="text-6xl text-gray-300 mx-auto mb-4 animate-pulse" />
-      <h3 className="text-2xl font-bold text-gray-800 mb-2">{t("noJobs")}</h3>
-      <p className="text-gray-600 mb-8 max-w-md mx-auto">
+    <div className="jc-panel px-5 py-14 text-center">
+      <GiDiamondRing className="mx-auto mb-4 text-5xl text-[#d4b7cd]" />
+      <h3 className="mb-2 text-2xl font-bold text-[#261723]">{t("noJobs")}</h3>
+      <p className="mx-auto mb-8 max-w-md text-[#7b6575]">
         {t("noJobsHint", { defaultValue: "We couldn't find any jobs matching your criteria. Try adjusting your filters or search query." })}
       </p>
       <button
+        type="button"
         onClick={onReset}
-        className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+        className="rounded-lg bg-[#5d0f51] px-8 py-3 font-semibold text-white shadow-sm transition hover:bg-[#3f0b38]"
       >
         {t("common.clearFilters", { ns: "common" })}
       </button>
@@ -826,14 +887,15 @@ function EmptyState({ onReset }) {
 function ErrorState({ onRetry }) {
   const { t } = useTranslation(["jobs", "common", "errors"]);
   return (
-    <div className="text-center py-16 bg-white rounded-2xl shadow-lg border border-red-100">
-      <h3 className="text-2xl font-bold text-gray-800 mb-2">{t("jobsLoadError", { defaultValue: "Jobs could not load" })}</h3>
-      <p className="text-gray-600 mb-8 max-w-md mx-auto">
+    <div className="jc-panel border-red-100 px-5 py-14 text-center">
+      <h3 className="mb-2 text-2xl font-bold text-[#261723]">{t("jobsLoadError", { defaultValue: "Jobs could not load" })}</h3>
+      <p className="mx-auto mb-8 max-w-md text-[#7b6575]">
         {t("jobsLoadErrorHint", { defaultValue: "The jobs service did not respond successfully. Try again before changing your filters." })}
       </p>
       <button
+        type="button"
         onClick={onRetry}
-        className="px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all font-medium"
+        className="rounded-lg bg-[#5d0f51] px-8 py-3 font-semibold text-white transition hover:bg-[#3f0b38]"
       >
         {t("common.retry", { ns: "common" })}
       </button>
@@ -843,17 +905,22 @@ function ErrorState({ onRetry }) {
 
 function JobSkeletonGrid() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {[1, 2, 3, 4, 5, 6].map((i) => (
-        <div key={i} className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 animate-pulse">
-          <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
-          <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-          <div className="h-4 bg-gray-200 rounded w-5/6 mb-4"></div>
-          <div className="grid grid-cols-2 gap-2 mb-4">
-            <div className="h-10 bg-gray-200 rounded"></div>
-            <div className="h-10 bg-gray-200 rounded"></div>
+    <div className="space-y-4">
+      {[1, 2, 3, 4].map((i) => (
+        <div key={i} className="jc-panel animate-pulse p-4">
+          <div className="flex gap-4">
+            <div className="h-12 w-12 rounded-lg bg-[#f0dce8]" />
+            <div className="flex-1">
+              <div className="mb-3 h-5 w-1/2 rounded bg-[#f0dce8]" />
+              <div className="mb-4 h-4 w-1/3 rounded bg-[#f5e8ef]" />
+              <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
+                <div className="h-9 rounded bg-[#f5e8ef]" />
+                <div className="h-9 rounded bg-[#f5e8ef]" />
+                <div className="h-9 rounded bg-[#f5e8ef]" />
+                <div className="h-9 rounded bg-[#f5e8ef]" />
+              </div>
+            </div>
           </div>
-          <div className="h-10 bg-gray-200 rounded"></div>
         </div>
       ))}
     </div>

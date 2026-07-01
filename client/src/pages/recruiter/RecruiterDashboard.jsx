@@ -246,10 +246,10 @@ export default function RecruiterDashboard() {
   // Show loading state while auth is loading
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="jc-soft-page flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading your dashboard...</p>
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-[#f0dce8] border-t-[#5d0f51]"></div>
+          <p className="text-[#7b6575]">Loading your dashboard...</p>
         </div>
       </div>
     );
@@ -258,14 +258,14 @@ export default function RecruiterDashboard() {
   // Show error state
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md text-center">
+      <div className="jc-soft-page flex min-h-screen items-center justify-center">
+        <div className="jc-panel max-w-md p-8 text-center">
           <div className="text-red-500 text-5xl mb-4">⚠️</div>
           <h2 className="text-xl font-bold text-gray-900 mb-2">Error Loading Dashboard</h2>
           <p className="text-gray-600 mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            className="rounded-lg bg-[#5d0f51] px-4 py-2 text-white transition hover:bg-[#3f0b38]"
           >
             Retry
           </button>
@@ -292,11 +292,11 @@ export default function RecruiterDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="jc-soft-page min-h-screen">
       {/* Header */}
 
       <div className="relative top-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white mb-4 rounded-lg shadow-lg">
+      <div className="mb-4 rounded-lg bg-[#4c0e42] text-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
@@ -333,7 +333,7 @@ export default function RecruiterDashboard() {
 
               <button
                 onClick={() => navigate("/recruiter/pdf-builder")}
-                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition-all duration-200 font-semibold flex items-center gap-2 text-sm shadow-md hover:shadow-lg"
+                className="flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-white/20 hover:shadow-lg"
               >
                 <HiOutlineDocumentText className="text-lg" />
                 <span>Resume Builder</span>
@@ -341,7 +341,7 @@ export default function RecruiterDashboard() {
 
               <button
                 onClick={() => navigate("/recruiter/company/jobpost")}
-                className="px-4 py-2 rounded-lg bg-white text-blue-600 hover:bg-blue-50 transition font-medium flex items-center gap-2 shadow-lg text-sm"
+                className="flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-medium text-[#5d0f51] shadow-lg transition hover:bg-[#fff7fb]"
               >
                 <HiPlus className="text-lg" />
                 <span className="hidden sm:inline">Post Job</span>
@@ -657,26 +657,19 @@ export default function RecruiterDashboard() {
 }
 
 // Stat Card Component
-function StatCard({ title, value, subValue, icon, color }) {
-  const colorClasses = {
-    blue: "from-blue-500 to-blue-600",
-    purple: "from-purple-500 to-purple-600",
-    green: "from-green-500 to-green-600",
-    orange: "from-orange-500 to-orange-600",
-  };
-
+function StatCard({ title, value, subValue, icon }) {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 sm:p-4 hover:shadow-md transition">
+    <div className="jc-panel p-3 transition hover:border-[#d5a6c7] sm:p-4">
       <div className="flex items-start justify-between mb-2">
-        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ${colorClasses[color]} flex items-center justify-center text-white shadow-sm`}>
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#f7eef9] text-[#5d0f51] sm:h-10 sm:w-10">
           <span className="text-base sm:text-lg">{icon}</span>
         </div>
       </div>
-      <div className="text-lg sm:text-xl font-bold text-gray-900 mb-0.5">{value}</div>
-      <div className="text-xs text-gray-600 font-medium">{title}</div>
+      <div className="mb-0.5 text-lg font-bold text-[#261723] sm:text-xl">{value}</div>
+      <div className="text-xs font-medium text-[#7b6575]">{title}</div>
       {subValue && (
-        <div className="mt-2 pt-2 border-t border-gray-100">
-          <span className="text-xs text-gray-500">{subValue}</span>
+        <div className="mt-2 border-t border-[#f0dce8] pt-2">
+          <span className="text-xs text-[#7b6575]">{subValue}</span>
         </div>
       )}
     </div>
@@ -695,29 +688,23 @@ function FunnelCard({ label, value, color }) {
   };
 
   return (
-    <div className={`bg-white rounded-lg shadow-sm border-l-4 ${colorClasses[color]} border border-gray-200 p-2 sm:p-3`}>
-      <p className="text-xs text-gray-600 mb-1">{label}</p>
-      <p className="text-base sm:text-lg font-bold text-gray-900">{value || 0}</p>
+    <div className={`rounded-lg border border-[#f0dce8] border-l-4 bg-white p-2 shadow-sm ${colorClasses[color]} sm:p-3`}>
+      <p className="mb-1 text-xs text-[#7b6575]">{label}</p>
+      <p className="text-base font-bold text-[#261723] sm:text-lg">{value || 0}</p>
     </div>
   );
 }
 
 // Quick Action Card Component
-function QuickActionCard({ title, description, icon, color, onClick, linkText }) {
-  const colorClasses = {
-    blue: "from-blue-500 to-blue-600",
-    green: "from-green-500 to-green-600",
-    purple: "from-purple-500 to-purple-600",
-  };
-
+function QuickActionCard({ title, description, icon, onClick, linkText }) {
   return (
     <button
       onClick={onClick}
-      className={`bg-gradient-to-br ${colorClasses[color]} text-white rounded-lg shadow-sm p-4 sm:p-6 hover:shadow-md transition-all hover:scale-[1.02] text-left w-full`}
+      className="jc-panel w-full p-4 text-left transition-all hover:-translate-y-0.5 hover:border-[#d5a6c7] sm:p-6"
     >
-      <div className="mb-2 sm:mb-3">{icon}</div>
-      <h3 className="text-base sm:text-lg font-semibold mb-1">{title}</h3>
-      <p className="text-white/80 text-xs sm:text-sm mb-2 sm:mb-3">{description}</p>
+      <div className="mb-2 text-2xl text-[#5d0f51] sm:mb-3">{icon}</div>
+      <h3 className="mb-1 text-base font-semibold text-[#261723] sm:text-lg">{title}</h3>
+      <p className="mb-2 text-xs text-[#7b6575] sm:mb-3 sm:text-sm">{description}</p>
       <span className="text-xs sm:text-sm font-medium">{linkText} →</span>
     </button>
   );
@@ -729,7 +716,7 @@ function SubscriptionStatusCard({ subscriptionSummary, navigate }) {
 
   if (!activeSubscription) {
     return (
-      <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 sm:p-5">
+      <div className="mb-6 rounded-lg border border-[#f0d2ba] bg-[#fff7ed] p-4 sm:p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-base font-bold text-amber-900">Subscription required</h2>
@@ -738,7 +725,7 @@ function SubscriptionStatusCard({ subscriptionSummary, navigate }) {
           <button
             type="button"
             onClick={() => navigate("/recruiter/subscription/plans")}
-            className="inline-flex items-center justify-center rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700"
+            className="inline-flex items-center justify-center rounded-lg bg-[#5d0f51] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3f0b38]"
           >
             View Plans
           </button>
@@ -748,13 +735,13 @@ function SubscriptionStatusCard({ subscriptionSummary, navigate }) {
   }
 
   return (
-    <div className="mb-6 rounded-xl border border-teal-200 bg-teal-50 p-4 sm:p-5">
+    <div className="mb-6 rounded-lg border border-[#e6cfe0] bg-[#f7eef9] p-4 sm:p-5">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="text-base font-bold text-teal-950">
+          <h2 className="text-base font-bold text-[#261723]">
             Active plan: {activeSubscription.planId?.planName || activeSubscription.planSnapshot?.planName || "Subscription"}
           </h2>
-          <p className="mt-1 text-sm text-teal-800">
+          <p className="mt-1 text-sm text-[#7b6575]">
             {usage?.isUnlimited
               ? `Unlimited posts until ${new Date(activeSubscription.endDate).toLocaleDateString("en-IN")}`
               : `${usage?.remainingPosts || 0} posts remaining this month`}
@@ -764,14 +751,14 @@ function SubscriptionStatusCard({ subscriptionSummary, navigate }) {
           <button
             type="button"
             onClick={() => navigate("/recruiter/subscription/details")}
-            className="inline-flex items-center justify-center rounded-lg border border-teal-300 bg-white px-4 py-2 text-sm font-semibold text-teal-800 hover:bg-teal-100"
+            className="inline-flex items-center justify-center rounded-lg border border-[#d9bdcf] bg-white px-4 py-2 text-sm font-semibold text-[#5d0f51] hover:bg-[#fff7fb]"
           >
             Details
           </button>
           <button
             type="button"
             onClick={() => navigate("/recruiter/subscription/history")}
-            className="inline-flex items-center justify-center rounded-lg bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-800"
+            className="inline-flex items-center justify-center rounded-lg bg-[#5d0f51] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3f0b38]"
           >
             Billing History
           </button>
@@ -786,11 +773,11 @@ function QuickActionMenuItem({ icon, label, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="w-full flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg hover:bg-gray-50 transition text-left group"
+      className="group flex w-full items-center gap-2 rounded-lg p-2 text-left transition hover:bg-[#fff7fb] sm:gap-3 sm:p-3"
     >
-      <span className="text-base sm:text-lg text-gray-600 group-hover:text-gray-900">{icon}</span>
-      <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-gray-900 flex-1">{label}</span>
-      <HiChevronRight className="text-gray-400 group-hover:text-gray-600 text-sm" />
+      <span className="text-base text-[#7b6575] group-hover:text-[#5d0f51] sm:text-lg">{icon}</span>
+      <span className="flex-1 text-xs font-medium text-[#4b3444] group-hover:text-[#261723] sm:text-sm">{label}</span>
+      <HiChevronRight className="text-sm text-[#b697ad] group-hover:text-[#5d0f51]" />
     </button>
   );
 }
@@ -803,7 +790,7 @@ function JobRow({ job, navigate, formatSalary }) {
 
   return (
     <div
-      className="p-3 sm:p-4 hover:bg-gray-50 transition cursor-pointer"
+      className="cursor-pointer p-3 transition hover:bg-[#fff7fb] sm:p-4"
       onClick={() => navigate(`/recruiter/company/postedjobs/edit/${job._id}`)}
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
@@ -840,7 +827,7 @@ function JobRow({ job, navigate, formatSalary }) {
             e.stopPropagation();
             navigate(`/recruiter/company/postedjobs/edit/${job._id}`);
           }}
-          className="px-3 py-1.5 text-xs font-medium text-blue-600 hover:bg-blue-50 rounded-lg transition self-start sm:self-center"
+          className="self-start rounded-lg px-3 py-1.5 text-xs font-semibold text-[#5d0f51] transition hover:bg-[#fff7fb] sm:self-center"
         >
           Edit
         </button>
@@ -858,7 +845,7 @@ function EmptyState({ icon, title, description, actionText, action }) {
       <p className="text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6">{description}</p>
       <button
         onClick={action}
-        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium text-xs sm:text-sm inline-flex items-center gap-2"
+        className="inline-flex items-center gap-2 rounded-lg bg-[#5d0f51] px-4 py-2 text-xs font-medium text-white transition hover:bg-[#3f0b38] sm:text-sm"
       >
         <HiPlus />
         {actionText}
@@ -870,8 +857,8 @@ function EmptyState({ icon, title, description, actionText, action }) {
 // Skeleton Loader
 function DashboardSkeleton() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 h-32 sm:h-40 animate-pulse"></div>
+    <div className="jc-soft-page min-h-screen">
+      <div className="h-32 animate-pulse bg-[#4c0e42] sm:h-40"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 -mt-10 sm:-mt-12">
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
           {[1, 2, 3, 4].map((i) => (

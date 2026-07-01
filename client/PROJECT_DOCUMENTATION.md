@@ -1252,7 +1252,6 @@ Recommended platforms:
 - Render Web Service
 - Railway
 - VPS/PM2
-- Docker
 
 Backend start command:
 
